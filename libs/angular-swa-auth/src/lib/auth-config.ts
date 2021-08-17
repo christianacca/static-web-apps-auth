@@ -21,6 +21,9 @@ export class AuthConfig {
     identityProviderSelectorType?: Type<IdentityProviderSelectorService>;
     /**
      * Trigger login flow when there is an unauthorized response from the api. Defaults to `true`
+     *
+     * Set this to false if you do not have a backend api and/or you don't use angular HttpClient. That way you
+     * reduce your bundle size as you won't take a dependency on the angular `HttpClientModule`
      */
     loginOnUnauthorizedApiRequests = true;
     /**

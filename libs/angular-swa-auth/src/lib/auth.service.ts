@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable, of, Subject} from "rxjs";
+import {defer, Observable, of, Subject} from "rxjs";
 import {ClientPrincipal} from './client-principal';
 import {first, map, mergeMap, shareReplay, tap} from "rxjs/operators";
 import {AuthConfig} from './auth-config';
@@ -95,13 +94,11 @@ export class AuthService {
   private currentIdp$: Observable<string | undefined>;
 
   constructor(
-    private httpClient: HttpClient,
     private config: AuthConfig,
     private storage: StorageService,
     private idpSelectorService: IdentityProviderSelectorService) {
 
-    this.userLoaded$ = this.httpClient.get<AuthResponseData>('/.auth/me').pipe(
-      map(resp => resp.clientPrincipal),
+    this.userLoaded$ = defer(() => this.getAuthenticatedUser()).pipe(
       tap(user => {
         if (user) {
           this.publishAuthenticatedSuccessEvents(user);
@@ -194,6 +191,14 @@ export class AuthService {
     this.sessionEvents.next(AuthEvent.purge(user));
 
     return true;
+  }
+
+  protected getAuthenticatedUser(): Promise<ClientPrincipal | null> | Observable<ClientPrincipal | null> {
+    // note: we're using fetch api rather than angular `HttpClient` so that an app is not forced to take a
+    // dependency on `HttpClientModule` which it might not need
+    return fetch('/.auth/me')
+      .then(resp => resp.json())
+      .then((data: AuthResponseData) => data.clientPrincipal);
   }
 
   protected redirectToIdentityProvider(url: string) {
