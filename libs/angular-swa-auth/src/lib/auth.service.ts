@@ -67,12 +67,6 @@ export class AuthService {
    */
   readonly identityProviders = this.config.identityProviders;
 
-  protected sessionEvents = new Subject<AuthEvent>();
-  /**
-   * Authentication session events as they occur
-   */
-  sessionEvents$ = this.sessionEvents.asObservable();
-
   /**
    * Return whether the user is authenticated.
    *
@@ -81,6 +75,12 @@ export class AuthService {
    *
    */
   isAuthenticated$: Observable<boolean>;
+
+  protected sessionEvents = new Subject<AuthEvent>();
+  /**
+   * Authentication session events as they occur
+   */
+  sessionEvents$ = this.sessionEvents.asObservable();
 
   /**
    * An event that will emit user details is fetched from the api. The value emitted will
