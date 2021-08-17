@@ -28,10 +28,10 @@
   },
   "projects": {
     "angular-swa-auth-demo": {
-      "tags": []
+      "tags": ["angular"]
     },
     "angular-swa-auth-demo-e2e": {
-      "tags": [],
+      "tags": ["angular"],
       "implicitDependencies": ["angular-swa-auth-demo"]
     }
   }

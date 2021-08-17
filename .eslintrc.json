@@ -13,8 +13,16 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "angular",
+                "onlyDependOnLibsWithTags": ["angular", "pojo"]
+              },
+              {
+                "sourceTag": "react",
+                "onlyDependOnLibsWithTags": ["react", "pojo"]
+              },
+              {
+                "sourceTag": "pojo",
+                "onlyDependOnLibsWithTags": ["pojo"]
               }
             ]
           }
