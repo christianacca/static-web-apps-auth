@@ -8,17 +8,16 @@ import {IdentityProviderSelectorService} from './identity-provider-selector.serv
 @NgModule()
 export class AngularSwaAuthModule {
   static forRoot(config?: Partial<AuthConfig>): ModuleWithProviders<AngularSwaAuthModule> {
-    const idpSelectorProvider = config?.identityProviderSelectorType != null ? [
-      { provide: IdentityProviderSelectorService, useClass: config.identityProviderSelectorType }
-    ] : [];
+    const finalConfigs = config ? AuthConfig.defaults.with(config) : AuthConfig.defaults;
+    const idpSelectorProvider = finalConfigs.identityProviderSelectorType != null ?
+      [ { provide: IdentityProviderSelectorService, useClass: finalConfigs.identityProviderSelectorType } ] : [];
+    const autoLoginInterceptorProvider = finalConfigs.loginOnUnauthorizedApiRequests ?
+      [{ provide: HTTP_INTERCEPTORS, useClass: AutoLoginHttpInterceptor, multi: true }] : [];
     const providers = [
-      { provide: HTTP_INTERCEPTORS, useClass: AutoLoginHttpInterceptor, multi: true },
+      autoLoginInterceptorProvider,
       authEventInitializerProvider,
       idpSelectorProvider,
-      config ? [{
-        provide: AuthConfig,
-        useValue: AuthConfig.defaults.with(config)
-      }] : []
+      { provide: AuthConfig, useValue: finalConfigs }
     ];
     return {
       ngModule: AngularSwaAuthModule,
