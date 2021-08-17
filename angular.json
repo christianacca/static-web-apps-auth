@@ -46,7 +46,15 @@
               "apps/angular-swa-auth-demo/src/favicon.ico",
               "apps/angular-swa-auth-demo/src/assets"
             ],
-            "styles": ["apps/angular-swa-auth-demo/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["./node_modules"]
+            },
+            "styles": [
+              "node_modules/bulma/css/bulma.min.css",
+              "node_modules/bulma/bulma.sass",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "apps/angular-swa-auth-demo/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -68,6 +76,10 @@
                 {
                   "replace": "apps/angular-swa-auth-demo/src/environments/environment.ts",
                   "with": "apps/angular-swa-auth-demo/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/build-specific/index.ts",
+                  "with": "src/app/build-specific/index.prod.ts"
                 }
               ],
               "outputHashing": "all"
