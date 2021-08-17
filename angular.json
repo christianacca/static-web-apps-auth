@@ -1,6 +1,31 @@
 {
   "version": 1,
   "projects": {
+    "angular-swa-auth": {
+      "projectType": "library",
+      "root": "libs/angular-swa-auth",
+      "sourceRoot": "libs/angular-swa-auth/src",
+      "prefix": "swa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/angular-swa-auth"],
+          "options": {
+            "jestConfig": "libs/angular-swa-auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular-swa-auth/src/**/*.ts",
+              "libs/angular-swa-auth/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "angular-swa-auth-demo": {
       "projectType": "application",
       "root": "apps/angular-swa-auth-demo",

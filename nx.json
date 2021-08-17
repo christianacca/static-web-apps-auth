@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "angular-swa-auth": {
+      "tags": ["scope:angular"]
+    },
     "angular-swa-auth-demo": {
       "tags": ["angular"]
     },
