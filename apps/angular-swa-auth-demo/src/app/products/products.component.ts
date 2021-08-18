@@ -81,16 +81,16 @@ export class ProductsComponent implements OnInit {
   }
 
   enableAddMode() {
-    this.selected = <any>{};
+    this.selected = <never>{};
   }
 
-  async getProducts() {
+  getProducts() {
     this.errorMessage = undefined;
     this.productService.getAll().subscribe(
-      _ => {
+      () => {
         /*.. do nothing for success.. */
       },
-      (error: any) => (this.errorMessage = 'Unauthorized')
+      () => (this.errorMessage = 'Unauthorized')
     );
     this.clear();
   }

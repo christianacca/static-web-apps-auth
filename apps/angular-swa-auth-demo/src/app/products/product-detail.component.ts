@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  EventEmitter,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
 import { Product } from '../core';
 
@@ -91,7 +83,7 @@ export class ProductDetailComponent implements OnChanges {
   addMode = false;
   editingProduct!: Product;
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(/*changes: SimpleChanges*/) {
     if (this.product && this.product.id) {
       this.editingProduct = { ...this.product };
       this.addMode = false;

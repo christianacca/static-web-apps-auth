@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { defaultDataServiceConfig } from './config';
 import { entityConfig } from './entity-metadata';
 

@@ -1,5 +1,5 @@
-import { IdentityProviderInfo, managedIdentityProviders } from './identity-provider';
 import { Injectable, Type } from '@angular/core';
+import { IdentityProviderInfo, managedIdentityProviders } from './identity-provider';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
 
 /**

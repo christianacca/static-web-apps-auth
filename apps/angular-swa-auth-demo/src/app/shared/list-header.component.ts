@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list-header',
@@ -16,12 +16,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     </div>
   `
 })
-export class ListHeaderComponent implements OnInit {
+export class ListHeaderComponent {
   @Input() title = '';
   @Output() add = new EventEmitter();
   @Output() refresh = new EventEmitter();
-
-  ngOnInit() {}
 
   handleAdd() {
     this.add.emit();

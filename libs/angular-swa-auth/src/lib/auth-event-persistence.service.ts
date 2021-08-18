@@ -1,9 +1,9 @@
 import { ErrorHandler, Injectable, OnDestroy } from '@angular/core';
-import { AuthService } from './auth.service';
-import { catchError, concatMap } from 'rxjs/operators';
 import { EMPTY, Observable, Subscription } from 'rxjs';
-import { AuthEvent } from './auth-event';
+import { catchError, concatMap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
+import { AuthEvent } from './auth-event';
+import { AuthService } from './auth.service';
 import { ClientPrincipal } from './client-principal';
 
 type AuthEventPayload = Pick<AuthEvent, 'type'> & Pick<ClientPrincipal, 'userId' | 'identityProvider'>;

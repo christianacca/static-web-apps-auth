@@ -2,7 +2,7 @@
   "projectType": "application",
   "root": "apps/angular-swa-auth-demo",
   "sourceRoot": "apps/angular-swa-auth-demo/src",
-  "prefix": "ccacca",
+  "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",

@@ -2,8 +2,8 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { EMPTY, from, Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 import { AuthConfig } from './auth-config';
+import { AuthService } from './auth.service';
 
 /**
  * Trigger login flow when there is an unauthorized response from the api

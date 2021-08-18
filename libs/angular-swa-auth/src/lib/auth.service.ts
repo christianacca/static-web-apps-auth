@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { defer, Observable, of, Subject } from 'rxjs';
-import { ClientPrincipal } from './client-principal';
 import { first, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
 import { AuthEvent } from './auth-event';
-import { StorageService } from './storage.service';
+import { ClientPrincipal } from './client-principal';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
+import { StorageService } from './storage.service';
 
 interface AuthResponseData {
   clientPrincipal: ClientPrincipal | null;

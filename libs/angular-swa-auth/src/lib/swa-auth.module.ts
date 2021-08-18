@@ -1,8 +1,8 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AutoLoginHttpInterceptor } from './auto-login-http-interceptor.service';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { AuthConfig } from './auth-config';
 import { authEventInitializerProvider } from './auth-event-initializer.provider';
+import { AutoLoginHttpInterceptor } from './auto-login-http-interceptor.service';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
 
 @NgModule()

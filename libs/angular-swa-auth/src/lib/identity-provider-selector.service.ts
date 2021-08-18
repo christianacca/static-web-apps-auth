@@ -1,6 +1,6 @@
 import { forwardRef, Injectable } from '@angular/core';
-import { AuthConfig } from './auth-config';
 import { Observable, of } from 'rxjs';
+import { AuthConfig } from './auth-config';
 
 /**
  * Selects the identity provider that should be logged in with
