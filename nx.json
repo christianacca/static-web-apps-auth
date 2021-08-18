@@ -26,16 +26,5 @@
       }
     ]
   },
-  "projects": {
-    "angular-swa-auth": {
-      "tags": ["scope:angular"]
-    },
-    "angular-swa-auth-demo": {
-      "tags": ["angular"]
-    },
-    "angular-swa-auth-demo-e2e": {
-      "tags": ["angular"],
-      "implicitDependencies": ["angular-swa-auth-demo"]
-    }
-  }
+  "projects": {}
 }

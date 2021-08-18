@@ -1,0 +1,101 @@
+{
+  "projectType": "application",
+  "root": "apps/angular-swa-auth-demo",
+  "sourceRoot": "apps/angular-swa-auth-demo/src",
+  "prefix": "ccacca",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular-swa-auth-demo",
+        "index": "apps/angular-swa-auth-demo/src/index.html",
+        "main": "apps/angular-swa-auth-demo/src/main.ts",
+        "polyfills": "apps/angular-swa-auth-demo/src/polyfills.ts",
+        "tsConfig": "apps/angular-swa-auth-demo/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/angular-swa-auth-demo/src/favicon.ico", "apps/angular-swa-auth-demo/src/assets"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["./node_modules"]
+        },
+        "styles": [
+          "node_modules/bulma/css/bulma.min.css",
+          "node_modules/bulma/bulma.sass",
+          "node_modules/font-awesome/css/font-awesome.css",
+          "apps/angular-swa-auth-demo/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "sourceMap": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/angular-swa-auth-demo/src/environments/environment.ts",
+              "with": "apps/angular-swa-auth-demo/src/environments/environment.prod.ts"
+            },
+            {
+              "replace": "apps/angular-swa-auth-demo/src/app/build-specific/index.ts",
+              "with": "apps/angular-swa-auth-demo/src/app/build-specific/index.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "angular-swa-auth-demo:build:production"
+        },
+        "development": {
+          "browserTarget": "angular-swa-auth-demo:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "angular-swa-auth-demo:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/angular-swa-auth-demo/src/**/*.ts", "apps/angular-swa-auth-demo/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/angular-swa-auth-demo"],
+      "options": {
+        "jestConfig": "apps/angular-swa-auth-demo/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["angular"]
+}
