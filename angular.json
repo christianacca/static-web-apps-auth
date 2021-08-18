@@ -1,14 +1,14 @@
 {
-  "version": 1,
+  "version": 2,
   "projects": {
     "angular-swa-auth": {
       "projectType": "library",
       "root": "libs/angular-swa-auth",
       "sourceRoot": "libs/angular-swa-auth/src",
       "prefix": "swa",
-      "architect": {
+      "targets": {
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/angular-swa-auth"],
           "options": {
             "jestConfig": "libs/angular-swa-auth/jest.config.js",
@@ -16,12 +16,9 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/angular-swa-auth/src/**/*.ts",
-              "libs/angular-swa-auth/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/angular-swa-auth/src/**/*.ts", "libs/angular-swa-auth/src/**/*.html"]
           }
         }
       }
@@ -31,9 +28,9 @@
       "root": "apps/angular-swa-auth-demo",
       "sourceRoot": "apps/angular-swa-auth-demo/src",
       "prefix": "ccacca",
-      "architect": {
+      "targets": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "executor": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/angular-swa-auth-demo",
@@ -42,10 +39,7 @@
             "polyfills": "apps/angular-swa-auth-demo/src/polyfills.ts",
             "tsConfig": "apps/angular-swa-auth-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/angular-swa-auth-demo/src/favicon.ico",
-              "apps/angular-swa-auth-demo/src/assets"
-            ],
+            "assets": ["apps/angular-swa-auth-demo/src/favicon.ico", "apps/angular-swa-auth-demo/src/assets"],
             "stylePreprocessorOptions": {
               "includePaths": ["./node_modules"]
             },
@@ -96,7 +90,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "executor": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "angular-swa-auth-demo:build:production"
@@ -108,22 +102,19 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "executor": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "angular-swa-auth-demo:build"
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/angular-swa-auth-demo/src/**/*.ts",
-              "apps/angular-swa-auth-demo/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/angular-swa-auth-demo/src/**/*.ts", "apps/angular-swa-auth-demo/src/**/*.html"]
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/angular-swa-auth-demo"],
           "options": {
             "jestConfig": "apps/angular-swa-auth-demo/jest.config.js",
@@ -136,9 +127,9 @@
       "root": "apps/angular-swa-auth-demo-e2e",
       "sourceRoot": "apps/angular-swa-auth-demo-e2e/src",
       "projectType": "application",
-      "architect": {
+      "targets": {
         "e2e": {
-          "builder": "@nrwl/cypress:cypress",
+          "executor": "@nrwl/cypress:cypress",
           "options": {
             "cypressConfig": "apps/angular-swa-auth-demo-e2e/cypress.json",
             "tsConfig": "apps/angular-swa-auth-demo-e2e/tsconfig.e2e.json",
@@ -151,7 +142,7 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/angular-swa-auth-demo-e2e/**/*.{js,ts}"]
           }
@@ -162,7 +153,7 @@
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
-  "schematics": {
+  "generators": {
     "@nrwl/angular": {
       "application": {
         "linter": "eslint"
