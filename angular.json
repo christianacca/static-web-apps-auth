@@ -78,8 +78,8 @@
                   "with": "apps/angular-swa-auth-demo/src/environments/environment.prod.ts"
                 },
                 {
-                  "replace": "src/app/build-specific/index.ts",
-                  "with": "src/app/build-specific/index.prod.ts"
+                  "replace": "apps/angular-swa-auth-demo/src/app/build-specific/index.ts",
+                  "with": "apps/angular-swa-auth-demo/src/app/build-specific/index.prod.ts"
                 }
               ],
               "outputHashing": "all"
