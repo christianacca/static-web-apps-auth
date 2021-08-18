@@ -76,6 +76,26 @@
       },
       "defaultConfiguration": "development"
     },
+    "serve-swa": {
+      "builder": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "swa start http://localhost:4200 --run \"npm start\" --api ./api --swa-config-location ./apps/angular-swa-auth-demo/dev"
+          }
+        ]
+      }
+    },
+    "stats": {
+      "builder": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx build angular-swa-auth-demo --prod --named-chunks && source-map-explorer dist/apps/angular-swa-auth-demo/*.js"
+          }
+        ]
+      }
+    },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
