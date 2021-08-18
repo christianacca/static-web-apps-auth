@@ -9,7 +9,7 @@ import {AppStoreModule} from './store/store.module';
 import {AboutComponent} from './about.component';
 import {externalModules} from './build-specific';
 import {declarations} from './core';
-import {AngularSwaAuthModule} from "@ccacca/angular-swa-auth";
+import {SwaAuthModule} from "@ccacca/angular-swa-auth";
 
 @NgModule({
   declarations: [AppComponent, AboutComponent, declarations],
@@ -19,7 +19,7 @@ import {AngularSwaAuthModule} from "@ccacca/angular-swa-auth";
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     AppStoreModule,
     externalModules,
-    AngularSwaAuthModule.forRoot({
+    SwaAuthModule.forRoot({
       loginOnUnauthorizedApiRequests: false
     })
   ],

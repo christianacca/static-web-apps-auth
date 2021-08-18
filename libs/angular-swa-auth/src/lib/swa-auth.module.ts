@@ -6,8 +6,8 @@ import {authEventInitializerProvider} from './auth-event-initializer.provider';
 import {IdentityProviderSelectorService} from './identity-provider-selector.service';
 
 @NgModule()
-export class AngularSwaAuthModule {
-  static forRoot(config?: Partial<AuthConfig>): ModuleWithProviders<AngularSwaAuthModule> {
+export class SwaAuthModule {
+  static forRoot(config?: Partial<AuthConfig>): ModuleWithProviders<SwaAuthModule> {
     const finalConfigs = config ? AuthConfig.defaults.with(config) : AuthConfig.defaults;
     const idpSelectorProvider = finalConfigs.identityProviderSelectorType != null ?
       [ { provide: IdentityProviderSelectorService, useClass: finalConfigs.identityProviderSelectorType } ] : [];
@@ -20,7 +20,7 @@ export class AngularSwaAuthModule {
       { provide: AuthConfig, useValue: finalConfigs }
     ];
     return {
-      ngModule: AngularSwaAuthModule,
+      ngModule: SwaAuthModule,
       providers
     };
   }

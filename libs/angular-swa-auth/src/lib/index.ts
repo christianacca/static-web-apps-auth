@@ -1,4 +1,4 @@
-export * from './angular-swa-auth.module';
+export * from './swa-auth.module';
 export * from './auth.service';
 export * from './auth.guard';
 export * from './identity-provider';
