@@ -98,7 +98,8 @@ export class AuthService {
     private storage: StorageService,
     private idpSelectorService: IdentityProviderSelectorService) {
 
-    this.userLoaded$ = defer(() => this.getAuthenticatedUser()).pipe(
+    this.userLoaded$ = defer(() => this.httpGet<AuthResponseData>('/.auth/me')).pipe(
+      map(resp => resp.clientPrincipal),
       tap(user => {
         if (user) {
           this.publishAuthenticatedSuccessEvents(user);
@@ -193,12 +194,10 @@ export class AuthService {
     return true;
   }
 
-  protected getAuthenticatedUser(): Promise<ClientPrincipal | null> | Observable<ClientPrincipal | null> {
+  protected httpGet<T>(url: string): Promise<T> | Observable<T> {
     // note: we're using fetch api rather than angular `HttpClient` so that an app is not forced to take a
     // dependency on `HttpClientModule` which it might not need
-    return fetch('/.auth/me')
-      .then(resp => resp.json())
-      .then((data: AuthResponseData) => data.clientPrincipal);
+    return fetch(url).then(resp => resp.json());
   }
 
   protected redirectToIdentityProvider(url: string) {
