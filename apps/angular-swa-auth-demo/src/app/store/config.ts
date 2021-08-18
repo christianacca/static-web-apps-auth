@@ -10,7 +10,7 @@ export const defaultDataServiceConfig: DefaultDataServiceConfig = {
     Product: {
       // You must specify the root as part of the resource URL.
       entityResourceUrl: `${root}/products/`,
-      collectionResourceUrl: `${root}/products/`,
-    },
-  },
+      collectionResourceUrl: `${root}/products/`
+    }
+  }
 };

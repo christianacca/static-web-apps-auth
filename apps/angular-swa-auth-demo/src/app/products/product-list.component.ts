@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from '../core';
 
 @Component({
@@ -13,19 +7,11 @@ import { Product } from '../core';
     <div *ngIf="errorMessage">
       {{ errorMessage }}
     </div>
-    <div *ngIf="!products?.length && !errorMessage">
-      Loading data ...
-    </div>
+    <div *ngIf="!products?.length && !errorMessage">Loading data ...</div>
     <ul class="list">
-      <li
-        role="presentation"
-        *ngFor="let product of products; trackBy: trackByProduct; let i = index"
-      >
+      <li role="presentation" *ngFor="let product of products; trackBy: trackByProduct; let i = index">
         <div class="card">
-          <app-card-content
-            [name]="product.name"
-            [description]="product.description"
-          ></app-card-content>
+          <app-card-content [name]="product.name" [description]="product.description"></app-card-content>
           <footer class="card-footer">
             <app-button-footer
               class="card-footer-item"
@@ -48,7 +34,7 @@ import { Product } from '../core';
       </li>
     </ul>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent {
   @Input() errorMessage?: string;

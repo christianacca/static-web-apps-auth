@@ -6,12 +6,7 @@ import { CardContentComponent } from './card-content.component';
 import { ButtonFooterComponent } from './button-footer.component';
 import { ModalComponent } from './modal.component';
 
-const components = [
-  ButtonFooterComponent,
-  CardContentComponent,
-  ListHeaderComponent,
-  ModalComponent
-];
+const components = [ButtonFooterComponent, CardContentComponent, ListHeaderComponent, ModalComponent];
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],

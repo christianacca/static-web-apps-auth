@@ -1,10 +1,10 @@
-import {ErrorHandler, Injectable, OnDestroy} from '@angular/core';
-import {AuthService} from './auth.service';
-import {catchError, concatMap} from 'rxjs/operators';
-import {EMPTY, Observable, Subscription} from "rxjs";
-import {AuthEvent} from './auth-event';
-import {AuthConfig} from './auth-config';
-import {ClientPrincipal} from './client-principal';
+import { ErrorHandler, Injectable, OnDestroy } from '@angular/core';
+import { AuthService } from './auth.service';
+import { catchError, concatMap } from 'rxjs/operators';
+import { EMPTY, Observable, Subscription } from 'rxjs';
+import { AuthEvent } from './auth-event';
+import { AuthConfig } from './auth-config';
+import { ClientPrincipal } from './client-principal';
 
 type AuthEventPayload = Pick<AuthEvent, 'type'> & Pick<ClientPrincipal, 'userId' | 'identityProvider'>;
 
@@ -15,19 +15,19 @@ type AuthEventPayload = Pick<AuthEvent, 'type'> & Pick<ClientPrincipal, 'userId'
   providedIn: 'root'
 })
 export class AuthEventPersistenceService implements OnDestroy {
-
   private subscription = new Subscription();
-  private saves$: Observable<any>
+  private saves$: Observable<any>;
 
   constructor(authService: AuthService, errorHandler: ErrorHandler, private config: AuthConfig) {
-
     this.saves$ = authService.sessionEvents$.pipe(
-      concatMap(evt => this.sendEvent(evt).pipe(
-        catchError(err => {
-          errorHandler.handleError(err);
-          return EMPTY;
-        })
-      ))
+      concatMap(evt =>
+        this.sendEvent(evt).pipe(
+          catchError(err => {
+            errorHandler.handleError(err);
+            return EMPTY;
+          })
+        )
+      )
     );
   }
 
@@ -38,7 +38,7 @@ export class AuthEventPersistenceService implements OnDestroy {
   /**
    * Send the event to the api. The default implementation is send event using the `navigator.sendBeacon`
    */
-  protected sendEvent(evt: AuthEvent) : Observable<void> {
+  protected sendEvent(evt: AuthEvent): Observable<void> {
     const payload = this.prepareEventPayload(evt);
     // `sendBeacon` is a more reliable way of ensuring the http request is made even when app page is unloaded
     navigator.sendBeacon(this.config.sessionEventsApiUrl, JSON.stringify(payload));
@@ -53,8 +53,11 @@ export class AuthEventPersistenceService implements OnDestroy {
    *
    */
   protected prepareEventPayload(evt: AuthEvent): AuthEventPayload {
-    const { user: { userId, identityProvider}, type } = evt;
-    return {userId, identityProvider, type };
+    const {
+      user: { userId, identityProvider },
+      type
+    } = evt;
+    return { userId, identityProvider, type };
   }
 
   ngOnDestroy(): void {

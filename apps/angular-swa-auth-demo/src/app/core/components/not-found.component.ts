@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
         <span class="title">These aren't the bits you're looking for</span>
       </div>
     </div>
-  `,
+  `
 })
 export class NotFoundComponent {}

@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {defer, Observable, of, Subject} from "rxjs";
-import {ClientPrincipal} from './client-principal';
-import {first, map, mergeMap, shareReplay, tap} from "rxjs/operators";
-import {AuthConfig} from './auth-config';
-import {AuthEvent} from './auth-event';
-import {StorageService} from './storage.service';
-import {IdentityProviderSelectorService} from './identity-provider-selector.service';
+import { Injectable } from '@angular/core';
+import { defer, Observable, of, Subject } from 'rxjs';
+import { ClientPrincipal } from './client-principal';
+import { first, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
+import { AuthConfig } from './auth-config';
+import { AuthEvent } from './auth-event';
+import { StorageService } from './storage.service';
+import { IdentityProviderSelectorService } from './identity-provider-selector.service';
 
 interface AuthResponseData {
   clientPrincipal: ClientPrincipal | null;
@@ -60,7 +60,6 @@ const signingUpFlagKey = `${storageKeyPrefix}_signing_up`;
   providedIn: 'root'
 })
 export class AuthService {
-
   /**
    * The identity providers available to login with.
    * Note: This is just a convenient alias of `AuthConfig.identityProviders`
@@ -96,8 +95,8 @@ export class AuthService {
   constructor(
     private config: AuthConfig,
     private storage: StorageService,
-    private idpSelectorService: IdentityProviderSelectorService) {
-
+    private idpSelectorService: IdentityProviderSelectorService
+  ) {
     this.userLoaded$ = defer(() => this.httpGet<AuthResponseData>('/.auth/me')).pipe(
       map(resp => resp.clientPrincipal),
       tap(user => {
@@ -141,8 +140,8 @@ export class AuthService {
    * @param options The options that control the login behaviour
    * @returns {boolean} false when the identity provider to login with is not selected, true otherwise
    */
-  async login(options: LoginOptions = {}) : Promise<boolean> {
-    const idp = options.identityProvider ?? await this.selectIdentityProvider().toPromise();
+  async login(options: LoginOptions = {}): Promise<boolean> {
+    const idp = options.identityProvider ?? (await this.selectIdentityProvider().toPromise());
 
     if (!idp) {
       return false;
@@ -166,7 +165,9 @@ export class AuthService {
    */
   async logout(redirectUrl?: string): Promise<boolean> {
     const user = await this.userLoaded$.toPromise();
-    if (!user) { return false; }
+    if (!user) {
+      return false;
+    }
 
     const idpUrl = `${window.location.origin}/.auth/logout`;
     this.redirectToIdentityProvider(redirectUrl ? `${idpUrl}?post_logout_redirect_uri=${redirectUrl}` : idpUrl);
@@ -184,7 +185,9 @@ export class AuthService {
    */
   async purge(options: PurgeOptions = {}): Promise<boolean> {
     const user = await this.userLoaded$.toPromise();
-    if (!user) { return false; }
+    if (!user) {
+      return false;
+    }
 
     const host = options.globally ? 'identity.azurestaticapps.net' : window.location.origin;
     this.redirectToIdentityProvider(`${host}/.auth/purge/${user.identityProvider}`);
@@ -209,7 +212,7 @@ export class AuthService {
   }
 
   protected popSigningUpFlag() {
-    return !!this.storage.popItem(signingUpFlagKey)
+    return !!this.storage.popItem(signingUpFlagKey);
   }
 
   private publishAuthenticatedSuccessEvents(user: ClientPrincipal) {
@@ -220,8 +223,6 @@ export class AuthService {
   }
 
   private selectIdentityProvider(): Observable<string | undefined> {
-    return this.currentIdp$.pipe(
-      mergeMap(idp => idp ? of(idp) : this.idpSelectorService.selectIdentityProvider())
-    );
+    return this.currentIdp$.pipe(mergeMap(idp => (idp ? of(idp) : this.idpSelectorService.selectIdentityProvider())));
   }
 }

@@ -5,20 +5,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   template: `
     <div class="content-title-group">
       <a router-link="/">
-        <h2 class="title">{{title}}</h2>
+        <h2 class="title">{{ title }}</h2>
       </a>
-      <button
-        class="button add-button"
-        (click)="handleAdd()"
-        aria-label="add"
-      >
+      <button class="button add-button" (click)="handleAdd()" aria-label="add">
         <i class="fas fa-plus" aria-hidden="true"></i>
       </button>
-      <button
-        class="button refresh-button"
-        (click)="handleRefresh()"
-        aria-label="refresh"
-      >
+      <button class="button refresh-button" (click)="handleRefresh()" aria-label="refresh">
         <i class="fas fa-sync" aria-hidden="true"></i>
       </button>
     </div>

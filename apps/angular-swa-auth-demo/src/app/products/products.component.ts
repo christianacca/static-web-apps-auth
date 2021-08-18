@@ -7,11 +7,7 @@ import { ProductService } from './product.service';
   selector: 'app-products',
   template: `
     <div class="content-container">
-      <app-list-header
-        title="Products"
-        (add)="enableAddMode()"
-        (refresh)="getProducts()"
-      ></app-list-header>
+      <app-list-header title="Products" (add)="enableAddMode()" (refresh)="getProducts()"></app-list-header>
       <div class="columns is-multiline is-variable">
         <div class="column is-8" *ngIf="products$ | async as products">
           <app-product-list
@@ -38,7 +34,7 @@ import { ProductService } from './product.service';
         (handleYes)="deleteProduct()"
       ></app-modal>
     </div>
-  `,
+  `
 })
 export class ProductsComponent implements OnInit {
   errorMessage?: string;
@@ -57,7 +53,7 @@ export class ProductsComponent implements OnInit {
   }
 
   add(product: Product) {
-    this.productService.add(product, {isOptimistic: false});
+    this.productService.add(product, { isOptimistic: false });
   }
 
   askToDelete(product: Product) {
@@ -79,9 +75,7 @@ export class ProductsComponent implements OnInit {
   deleteProduct() {
     this.closeModal();
     if (this.productToDelete?.id) {
-      this.productService
-        .delete(this.productToDelete.id)
-        .subscribe(() => (this.productToDelete = null));
+      this.productService.delete(this.productToDelete.id).subscribe(() => (this.productToDelete = null));
     }
     this.clear();
   }
@@ -93,10 +87,10 @@ export class ProductsComponent implements OnInit {
   async getProducts() {
     this.errorMessage = undefined;
     this.productService.getAll().subscribe(
-      (_) => {
+      _ => {
         /*.. do nothing for success.. */
       },
-      (error: any) => (this.errorMessage = 'Unauthorized'),
+      (error: any) => (this.errorMessage = 'Unauthorized')
     );
     this.clear();
   }

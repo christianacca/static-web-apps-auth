@@ -9,17 +9,13 @@ import { ProductsComponent } from './products.component';
 const routes: Routes = [
   {
     path: '',
-    component: ProductsComponent,
-  },
+    component: ProductsComponent
+  }
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
   exports: [RouterModule, ProductsComponent],
-  declarations: [
-    ProductsComponent,
-    ProductListComponent,
-    ProductDetailComponent,
-  ],
+  declarations: [ProductsComponent, ProductListComponent, ProductDetailComponent]
 })
 export class ProductsModule {}

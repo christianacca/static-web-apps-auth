@@ -5,7 +5,7 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { Product } from '../core';
@@ -23,9 +23,7 @@ import { Product } from '../core';
       <div class="card-content">
         <div class="content">
           <div class="field" *ngIf="editingProduct.id">
-            <label class="label" for="id">
-              id
-            </label>
+            <label class="label" for="id"> id </label>
             <input
               name="id"
               class="input"
@@ -36,21 +34,11 @@ import { Product } from '../core';
             />
           </div>
           <div class="field">
-            <label class="label" for="name">
-              name
-            </label>
-            <input
-              name="name"
-              class="input"
-              type="text"
-              [(ngModel)]="editingProduct.name"
-              placeholder="Oranges"
-            />
+            <label class="label" for="name"> name </label>
+            <input name="name" class="input" type="text" [(ngModel)]="editingProduct.name" placeholder="Oranges" />
           </div>
           <div class="field">
-            <label class="label" for="description">
-              description
-            </label>
+            <label class="label" for="description"> description </label>
             <input
               name="description"
               class="input"
@@ -60,9 +48,7 @@ import { Product } from '../core';
             />
           </div>
           <div class="field">
-            <label class="label" for="quantity">
-              quantity
-            </label>
+            <label class="label" for="quantity"> quantity </label>
             <input
               name="quantity"
               class="input"
@@ -95,7 +81,7 @@ import { Product } from '../core';
       </footer>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent implements OnChanges {
   @Input() product!: Product;
@@ -114,7 +100,7 @@ export class ProductDetailComponent implements OnChanges {
         id: undefined,
         name: '',
         description: '',
-        quantity: 1,
+        quantity: 1
       };
       this.addMode = true;
     }

@@ -6,13 +6,7 @@ import { defaultDataServiceConfig } from './config';
 import { entityConfig } from './entity-metadata';
 
 @NgModule({
-  imports: [
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityConfig)
-  ],
-  providers: [
-    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
-  ]
+  imports: [StoreModule.forRoot({}), EffectsModule.forRoot([]), EntityDataModule.forRoot(entityConfig)],
+  providers: [{ provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }]
 })
 export class AppStoreModule {}

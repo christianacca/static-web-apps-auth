@@ -1,6 +1,6 @@
-import {forwardRef, Injectable} from '@angular/core';
-import {AuthConfig} from './auth-config';
-import {Observable, of} from 'rxjs';
+import { forwardRef, Injectable } from '@angular/core';
+import { AuthConfig } from './auth-config';
+import { Observable, of } from 'rxjs';
 
 /**
  * Selects the identity provider that should be logged in with
@@ -22,8 +22,7 @@ export abstract class IdentityProviderSelectorService {
  */
 @Injectable()
 export class FirstIdentityProviderSelectorService implements IdentityProviderSelectorService {
-
-  constructor(private config: AuthConfig) { }
+  constructor(private config: AuthConfig) {}
 
   selectIdentityProvider(): Observable<string | undefined> {
     return of(this.config.identityProviders[0]?.id);

@@ -4,7 +4,7 @@ import { AuthEventPersistenceService } from './auth-event-persistence.service';
 
 const startEventPersistence = (eventPersistanceService: AuthEventPersistenceService, authConfig: AuthConfig) => () => {
   if (authConfig.sendSessionEventsToApi) {
-    eventPersistanceService.start();  
+    eventPersistanceService.start();
   }
 };
 
