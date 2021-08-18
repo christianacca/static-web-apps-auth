@@ -10,6 +10,7 @@ import {AboutComponent} from './about.component';
 import {externalModules} from './build-specific';
 import {declarations} from './core';
 import {SwaAuthModule} from "@ccacca/angular-swa-auth";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [AppComponent, AboutComponent, declarations],
@@ -20,7 +21,7 @@ import {SwaAuthModule} from "@ccacca/angular-swa-auth";
     AppStoreModule,
     externalModules,
     SwaAuthModule.forRoot({
-      loginOnUnauthorizedApiRequests: false
+      apiUrl: environment.API
     })
   ],
   providers: [],

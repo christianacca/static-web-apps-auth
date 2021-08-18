@@ -9,6 +9,12 @@ import {IdentityProviderSelectorService} from "./identity-provider-selector.serv
     providedIn: 'root'
 })
 export class AuthConfig {
+
+    /**
+     * The relative url path of this app's functions api (defaults to `api`)
+     */
+    apiUrl = 'api'
+
     /**
      * The identity providers available to login with. Defaults to the list of managed idp
      * @see {managedIdentityProviders}
