@@ -61,6 +61,7 @@
     "@angular/cli": "~12.1.0",
     "@angular/compiler-cli": "^12.1.0",
     "@angular/language-service": "^12.1.0",
+    "@azure/static-web-apps-cli": "^0.6.1",
     "@nrwl/cli": "12.7.1",
     "@nrwl/cypress": "12.7.1",
     "@nrwl/eslint-plugin-nx": "12.7.1",
