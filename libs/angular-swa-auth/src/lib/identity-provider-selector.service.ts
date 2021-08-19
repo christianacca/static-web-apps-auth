@@ -3,7 +3,31 @@ import { Observable, of } from 'rxjs';
 import { AuthConfig } from './auth-config';
 
 /**
- * Selects the identity provider that should be logged in with
+ * Selects the identity provider that should be logged in with.
+ * Register your own instance of this class if you do not want to use default service
+ * (`FirstIdentityProviderSelectorService`)
+ * * @example
+ * ```ts
+ * // identity-provider-prompt.service.ts
+ * @Injectable()
+ * export class IdentityProviderPromptService implements IdentityProviderSelectorService {
+ *
+ *   constructor(private config: AuthConfig) { }
+ *
+ *   selectIdentityProvider(): Observable<string | undefined> {
+ *     const idp = this.config.identityProviders[0];
+ *     const ok = idp && confirm(`Sign-in with ${idp.name}`);
+ *     return of(ok ? idp.id : undefined);
+ *   }
+ * }
+ *
+ * // app.module.ts...
+ * imports: [
+ *   AuthModule.forRoot({
+ *     identityProviderSelectorType: IdentityProviderPromptService
+ *   })
+ * ]
+ * ```
  */
 @Injectable({
   providedIn: 'root',

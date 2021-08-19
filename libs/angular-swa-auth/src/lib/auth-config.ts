@@ -9,15 +9,19 @@ import { IdentityProviderSelectorService } from './identity-provider-selector.se
   providedIn: 'root'
 })
 export class AuthConfig {
+  /**
+   * An instance of the default configuration for the library
+   */
   static defaults = new AuthConfig();
 
   /**
-   * The relative url path of this app's functions api (defaults to `api`)
+   * The relative url path of this app's functions api
    */
   apiUrl = 'api';
 
   /**
-   * The identity providers available to login with. Defaults to the list of managed idp
+   * The identity providers available to login with. Defaults to the list of managed idp provided by azure
+   * static web apps service
    * @see {managedIdentityProviders}
    */
   identityProviders: IdentityProviderInfo[] = Object.values(managedIdentityProviders);
@@ -27,21 +31,22 @@ export class AuthConfig {
    */
   identityProviderSelectorType?: Type<IdentityProviderSelectorService>;
   /**
-   * Trigger login flow when there is an unauthorized response from the api. Defaults to `true`
-   *
-   * Set this to false if you do not have a backend api and/or you don't use angular HttpClient. That way you
-   * reduce your bundle size as you won't take a dependency on the angular `HttpClientModule`
+   * Trigger login flow when there is an unauthorized response from your functions app api.
    */
   loginOnUnauthorizedApiRequests = true;
   /**
-   * Api endpoint to send authentication session events
+   * The relative url of your functions app api endpoint to send the authentication session events
    */
   sessionEventsApiUrl = '/api/authevents';
   /**
-   * Send authentication session events to api? Defaults to `false`
+   * Send authentication session events to your functions app api?
    */
   sendSessionEventsToApi = false;
 
+  /**
+   * Return a clone of the current instance overriding the current fields using the `values` supplied
+   * @param values Override values
+   */
   with(values: Partial<AuthConfig>) {
     return {
       ...this,

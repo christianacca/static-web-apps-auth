@@ -5,6 +5,16 @@ import { authEventInitializerProvider } from './auth-event-initializer.provider'
 import { AutoLoginHttpInterceptor } from './auto-login-http-interceptor.service';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
 
+/**
+ * Library module
+ * @example
+ *  * // app.module.ts...
+ * imports: [
+ *   AuthModule.forRoot({
+ *     // overrides to the default configuration here
+ *   })
+ * ]
+ */
 @NgModule()
 export class SwaAuthModule {
   static forRoot(config?: Partial<AuthConfig>): ModuleWithProviders<SwaAuthModule> {

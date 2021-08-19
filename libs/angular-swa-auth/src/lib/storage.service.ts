@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Abstracts browser sessionStorage api so that it can be replaced as necessary
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -8,6 +11,10 @@ export class StorageService {
     window.sessionStorage.setItem(key, value);
   }
 
+  /**
+   * Remove the entry associated with the `key` and return it's value
+   * @param key
+   */
   popItem(key: string): string | null {
     const value = this.getItem(key);
     this.removeItem(key);

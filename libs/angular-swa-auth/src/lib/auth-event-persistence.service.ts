@@ -9,7 +9,7 @@ import { ClientPrincipal } from './client-principal';
 type AuthEventPayload = Pick<AuthEvent, 'type'> & Pick<ClientPrincipal, 'userId' | 'identityProvider'>;
 
 /**
- * Send authentication session events to the api
+ * Send authentication session events to your functions app api
  */
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,9 @@ export class AuthEventPersistenceService implements OnDestroy {
     );
   }
 
+  /**
+   * Start listening to the events to send them to the api
+   */
   start() {
     this.subscription.add(this.saves$.subscribe());
   }
@@ -48,8 +51,9 @@ export class AuthEventPersistenceService implements OnDestroy {
   /**
    * Override this method if you need to prepare the modify the data sent to the api.
    *
-   * By default the `userId` and `identityProvider` fields to represent the user be sent be sent for GDPR/PII reasons.
-   * Note: the cookie containing all the `ClientPrincipal` fields will be available also
+   * By default only the `userId` and `identityProvider` fields to represent the user be sent be sent for GDPR/PII
+   * reasons.
+   * Note: the the cookie containing all the `ClientPrincipal` fields will be available also to the api function
    *
    */
   protected prepareEventPayload(evt: AuthEvent): AuthEventPayload {

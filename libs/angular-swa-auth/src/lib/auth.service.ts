@@ -179,6 +179,7 @@ export class AuthService {
 
   /**
    * Purge user consent information stored at the identity provider for the currently authenticated user.
+   * This is a no-op when the user is not already authenticated.
    * IMPORTANT: this will redirect the browser, landing back at the base url for the application
    * @param options The options that control the purge behaviour
    * @returns {boolean} false when the user is authenticated, true otherwise
@@ -197,12 +198,21 @@ export class AuthService {
     return true;
   }
 
+  /**
+   * Http implementation to perform a GET request to fetch json. The default implementation uses the
+   * `fetch` browser api
+   * @param url the url of http json endpoint
+   */
   protected httpGet<T>(url: string): Promise<T> | Observable<T> {
     // note: we're using fetch api rather than angular `HttpClient` so that an app is not forced to take a
     // dependency on `HttpClientModule` which it might not need
     return fetch(url).then(resp => resp.json());
   }
 
+  /**
+   * Initiate the browser redirect to azure static web apps auth html endpoints
+   * @param url The full url of the auth html endpoint to redirect the browser to
+   */
   protected redirectToIdentityProvider(url: string) {
     window.location.href = url;
   }
