@@ -9,6 +9,8 @@ import { IdentityProviderSelectorService } from './identity-provider-selector.se
   providedIn: 'root'
 })
 export class AuthConfig {
+  static defaults = new AuthConfig();
+
   /**
    * The relative url path of this app's functions api (defaults to `api`)
    */
@@ -47,6 +49,4 @@ export class AuthConfig {
       availableIdentityProviders: values.identityProviders ?? this.identityProviders
     };
   }
-
-  static defaults = new AuthConfig();
 }

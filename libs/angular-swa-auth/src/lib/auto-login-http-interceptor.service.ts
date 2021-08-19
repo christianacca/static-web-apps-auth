@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 export class AutoLoginHttpInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private config: AuthConfig) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (!this.shouldHandle(req)) {
       return next.handle(req);
     }
@@ -37,7 +37,7 @@ export class AutoLoginHttpInterceptor implements HttpInterceptor {
     );
   }
 
-  private shouldHandle(req: HttpRequest<any>) {
+  private shouldHandle(req: HttpRequest<unknown>) {
     return req.url.toLowerCase().startsWith(this.config.apiUrl.toLowerCase());
   }
 }

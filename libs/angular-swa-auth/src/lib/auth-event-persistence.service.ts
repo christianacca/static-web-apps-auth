@@ -16,7 +16,7 @@ type AuthEventPayload = Pick<AuthEvent, 'type'> & Pick<ClientPrincipal, 'userId'
 })
 export class AuthEventPersistenceService implements OnDestroy {
   private subscription = new Subscription();
-  private saves$: Observable<any>;
+  private saves$: Observable<void>;
 
   constructor(authService: AuthService, errorHandler: ErrorHandler, private config: AuthConfig) {
     this.saves$ = authService.sessionEvents$.pipe(
@@ -60,7 +60,7 @@ export class AuthEventPersistenceService implements OnDestroy {
     return { userId, identityProvider, type };
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }
