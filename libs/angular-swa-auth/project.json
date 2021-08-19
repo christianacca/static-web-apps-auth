@@ -17,6 +17,18 @@
       "options": {
         "lintFilePatterns": ["libs/angular-swa-auth/src/**/*.ts", "libs/angular-swa-auth/src/**/*.html"]
       }
+    },
+    "compodoc": {
+      "executor": "@twittwer/compodoc:compodoc",
+      "options": {
+        "tsConfig": "libs/angular-swa-auth/tsconfig.lib.json",
+        "outputPath": "dist/compodoc/angular-swa-auth"
+      },
+      "configurations": {
+        "json": {
+          "exportFormat": "json"
+        }
+      }
     }
   },
   "tags": ["framework:angular"]
