@@ -3,7 +3,9 @@
   "projects": {
     "angular-swa-auth": "libs/angular-swa-auth",
     "angular-swa-auth-demo": "apps/angular-swa-auth-demo",
-    "angular-swa-auth-demo-e2e": "apps/angular-swa-auth-demo-e2e"
+    "angular-swa-auth-demo-e2e": "apps/angular-swa-auth-demo-e2e",
+    "angular-swa-auth-nolib": "apps/angular-swa-auth-nolib",
+    "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e"
   },
   "cli": {
     "defaultCollection": "@nrwl/angular"

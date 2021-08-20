@@ -1,20 +1,20 @@
 {
   "projectType": "application",
-  "root": "apps/angular-swa-auth-demo",
-  "sourceRoot": "apps/angular-swa-auth-demo/src",
+  "root": "apps/angular-swa-auth-nolib",
+  "sourceRoot": "apps/angular-swa-auth-nolib/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/angular-swa-auth-demo",
-        "index": "apps/angular-swa-auth-demo/src/index.html",
-        "main": "apps/angular-swa-auth-demo/src/main.ts",
-        "polyfills": "apps/angular-swa-auth-demo/src/polyfills.ts",
-        "tsConfig": "apps/angular-swa-auth-demo/tsconfig.app.json",
+        "outputPath": "dist/apps/angular-swa-auth-nolib",
+        "index": "apps/angular-swa-auth-nolib/src/index.html",
+        "main": "apps/angular-swa-auth-nolib/src/main.ts",
+        "polyfills": "apps/angular-swa-auth-nolib/src/polyfills.ts",
+        "tsConfig": "apps/angular-swa-auth-nolib/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/angular-swa-auth-demo/src/favicon.ico", "apps/angular-swa-auth-demo/src/assets"],
+        "assets": ["apps/angular-swa-auth-nolib/src/favicon.ico", "apps/angular-swa-auth-nolib/src/assets"],
         "stylePreprocessorOptions": {
           "includePaths": ["./node_modules"]
         },
@@ -22,7 +22,7 @@
           "node_modules/bulma/css/bulma.min.css",
           "node_modules/bulma/bulma.sass",
           "node_modules/font-awesome/css/font-awesome.css",
-          "apps/angular-swa-auth-demo/src/styles.scss"
+          "apps/angular-swa-auth-nolib/src/styles.scss"
         ],
         "scripts": []
       },
@@ -43,12 +43,12 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/angular-swa-auth-demo/src/environments/environment.ts",
-              "with": "apps/angular-swa-auth-demo/src/environments/environment.prod.ts"
+              "replace": "apps/angular-swa-auth-nolib/src/environments/environment.ts",
+              "with": "apps/angular-swa-auth-nolib/src/environments/environment.prod.ts"
             },
             {
-              "replace": "apps/angular-swa-auth-demo/src/app/build-specific/index.ts",
-              "with": "apps/angular-swa-auth-demo/src/app/build-specific/index.prod.ts"
+              "replace": "apps/angular-swa-auth-nolib/src/app/build-specific/index.ts",
+              "with": "apps/angular-swa-auth-nolib/src/app/build-specific/index.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -68,10 +68,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-swa-auth-demo:build:production"
+          "browserTarget": "angular-swa-auth-nolib:build:production"
         },
         "development": {
-          "browserTarget": "angular-swa-auth-demo:build:development"
+          "browserTarget": "angular-swa-auth-nolib:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
       "options": {
         "commands": [
           {
-            "command": "swa start http://localhost:4200 --run \"npm start angular-swa-auth-demo\" --api ./api --swa-config-location ./apps/angular-swa-auth-demo/dev"
+            "command": "swa start http://localhost:4200 --run \"npm start angular-swa-auth-nolib\" --api ./api --swa-config-location ./apps/angular-swa-auth-nolib/dev"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "options": {
         "commands": [
           {
-            "command": "nx build angular-swa-auth-demo --prod --named-chunks && source-map-explorer dist/apps/angular-swa-auth-demo/*.js"
+            "command": "nx build angular-swa-auth-nolib --prod --named-chunks && source-map-explorer dist/apps/angular-swa-auth-nolib/*.js"
           }
         ]
       }
@@ -99,20 +99,20 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-swa-auth-demo:build"
+        "browserTarget": "angular-swa-auth-nolib:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/angular-swa-auth-demo/src/**/*.ts", "apps/angular-swa-auth-demo/src/**/*.html"]
+        "lintFilePatterns": ["apps/angular-swa-auth-nolib/src/**/*.ts", "apps/angular-swa-auth-nolib/src/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/angular-swa-auth-demo"],
+      "outputs": ["coverage/apps/angular-swa-auth-nolib"],
       "options": {
-        "jestConfig": "apps/angular-swa-auth-demo/jest.config.js",
+        "jestConfig": "apps/angular-swa-auth-nolib/jest.config.js",
         "passWithNoTests": true
       }
     }
