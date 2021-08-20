@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ccacca/angular-swa-auth": ["libs/angular-swa-auth/src/index.ts"]
+      "@ccacca/angular-swa-auth": ["libs/angular-swa-auth/src/index.ts"],
+      "@ccacca/demo-app/common-ui": ["libs/demo-app/common-ui/src/index.ts"],
+      "@ccacca/demo-app/products": ["libs/demo-app/products/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

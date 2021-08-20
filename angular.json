@@ -5,7 +5,9 @@
     "angular-swa-auth-demo": "apps/angular-swa-auth-demo",
     "angular-swa-auth-demo-e2e": "apps/angular-swa-auth-demo-e2e",
     "angular-swa-auth-nolib": "apps/angular-swa-auth-nolib",
-    "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e"
+    "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e",
+    "demo-app-common-ui": "libs/demo-app/common-ui",
+    "demo-app-products": "libs/demo-app/products"
   },
   "cli": {
     "defaultCollection": "@nrwl/angular"
