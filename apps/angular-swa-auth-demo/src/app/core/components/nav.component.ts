@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService, ClientPrincipal } from '@ccacca/angular-swa-auth';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -18,34 +19,30 @@ import { AuthService, ClientPrincipal } from '@ccacca/angular-swa-auth';
     <nav class="menu auth">
       <p class="menu-label">Auth</p>
       <div class="menu-list auth">
-        <ng-container *ngIf="!userInfo; else logoutTpl">
-          <ng-container *ngFor="let provider of providers">
-            <a (click)="login(provider.id)">{{ provider.name }}</a>
-          </ng-container>
-        </ng-container>
-        <ng-template #logoutTpl>
+        <ng-container *ngIf="userInfo$ | async as user; else loginTpl">
           <a (click)="logout()">Logout</a>
           <a (click)="purge()">Forget me</a>
+        </ng-container>
+        <ng-template #loginTpl>
+          <a *ngFor="let provider of providers" (click)="login(provider.id)">{{ provider.name }}</a>
         </ng-template>
       </div>
     </nav>
-    <div class="user" *ngIf="userInfo">
+    <div class="user" *ngIf="userInfo$ | async as user">
       <p>Welcome</p>
-      <p>{{ userInfo?.userDetails }}</p>
-      <p>{{ userInfo?.identityProvider }}</p>
+      <p>{{ user.userDetails }}</p>
+      <p>{{ user.identityProvider }}</p>
     </div>
   `
 })
-export class NavComponent implements OnInit {
-  userInfo!: ClientPrincipal | null;
+export class NavComponent {
+  userInfo$: Observable<ClientPrincipal | null>;
   providers = this.authService.identityProviders;
 
   private redirectUrl = '/about';
 
-  constructor(private authService: AuthService) {}
-
-  async ngOnInit() {
-    this.userInfo = await this.authService.userLoaded$.toPromise();
+  constructor(private authService: AuthService) {
+    this.userInfo$ = this.authService.userLoaded$;
   }
 
   login(identityProvider: string) {

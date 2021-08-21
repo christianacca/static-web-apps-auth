@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
           This project is based on the
           <a href="https://github.com/MicrosoftDocs/mslearn-staticwebapp-authentication/tree/main/angular-app"
             >MS official sample app</a
-          >.
+          >. The shopping theme is used throughout the app.
         </p>
         <p>
           It shows an example app that does NOT require the <code>angular-swa-auth</code> helper library to implement
@@ -23,9 +23,6 @@ import { Component } from '@angular/core';
             <a href="https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-nolib">
               Code in GitHub
             </a>
-          </li>
-          <li>
-            <a href="https://angular-swa-auth-nolib.codingdemo.co.uk"> Deployed Demo site </a>
           </li>
         </ul>
       </div>
