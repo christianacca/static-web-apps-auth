@@ -5,28 +5,8 @@
       "allowedRoles": ["authenticated"]
     },
     {
-      "route": "/.auth/login/aad",
-      "statusCode": 401
-    },
-    {
-      "route": "/.auth/login/google",
-      "statusCode": 401
-    },
-    {
-      "route": "/.auth/login/facebook",
-      "statusCode": 401
-    },
-    {
-      "route": "/.auth/login/twitter",
-      "statusCode": 401
-    },
-    {
       "route": "/login",
-      "rewrite": "/.auth/login/github"
-    },
-    {
-      "route": "/logged-out",
-      "rewrite": "/assets/logged-out.html"
+      "rewrite": "/assets/select-idp.html"
     },
     {
       "route": "/sw.js",
