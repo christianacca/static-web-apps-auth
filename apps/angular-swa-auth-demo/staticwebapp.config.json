@@ -5,10 +5,6 @@
       "allowedRoles": ["authenticated"]
     },
     {
-      "route": "/.auth/login/aad",
-      "statusCode": 404
-    },
-    {
       "route": "/sw.js",
       "headers": {
         "Cache-Control": "public, max-age=0, must-revalidate"
