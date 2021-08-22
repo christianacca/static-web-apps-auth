@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthConfig, IdentityProviderInteractiveSelectorService } from '@ccacca/angular-swa-auth';
+import { AuthConfig, IdentityProviderInteractiveSelectorService } from '@christianacca/angular-swa-auth';
 
 @Component({
   selector: 'app-idp-selector-modal',

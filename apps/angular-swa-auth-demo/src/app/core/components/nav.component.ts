@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService, ClientPrincipal } from '@ccacca/angular-swa-auth';
+import { AuthService, ClientPrincipal } from '@christianacca/angular-swa-auth';
 import { Observable } from 'rxjs';
 
 @Component({

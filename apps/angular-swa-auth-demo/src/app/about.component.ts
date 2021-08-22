@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
             </a>
           </li>
           <li>
-            <a href="https://www.npmjs.com/package/@ccacca/angular-swa-auth"> angular-swa-auth library</a>
+            <a href="https://www.npmjs.com/package/@christianacca/angular-swa-auth"> angular-swa-auth library</a>
           </li>
         </ul>
       </div>

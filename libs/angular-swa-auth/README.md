@@ -1,4 +1,4 @@
-# @ccacca/angular-swa-auth
+# @christianacca/angular-swa-auth
 
 Programmatically work with Azure Static Web Apps authentication in an angular app
 
@@ -34,7 +34,7 @@ For all other use cases, this library will likely add value.
 ### 1. Install library
 
    ```bash
-   npm install @ccacca/angular-swa-auth
+   npm install @christianacca/angular-swa-auth
    ```
 
 ### 2. Use library
@@ -44,7 +44,7 @@ For all other use cases, this library will likely add value.
    ```ts
    import { NgModule } from '@angular/core';
    import { BrowserModule } from '@angular/platform-browser';
-   import { SwaAuthModule } from '@ccacca/angular-swa-auth';
+   import { SwaAuthModule } from '@christianacca/angular-swa-auth';
    
    import { AppComponent } from './app.component';
    
@@ -68,7 +68,7 @@ For all other use cases, this library will likely add value.
 
    ```ts
    import { Component } from '@angular/core';
-   import { AuthService, ClientPrincipal } from '@ccacca/angular-swa-auth';
+   import { AuthService, ClientPrincipal } from '@christianacca/angular-swa-auth';
    import { Observable } from 'rxjs';
    
    @Component({
@@ -115,7 +115,7 @@ For all other use cases, this library will likely add value.
    If your app can only be accessed by authenticated users then add the guard to the top level route. EG:
 
    ```ts
-   import { AuthGuard } from '@ccacca/angular-swa-auth';
+   import { AuthGuard } from '@christianacca/angular-swa-auth';
    
    const routes: Route[] = [
      {

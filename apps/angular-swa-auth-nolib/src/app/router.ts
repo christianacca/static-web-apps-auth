@@ -6,7 +6,7 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
   {
     path: 'products',
-    loadChildren: () => import('@ccacca/demo-app/products').then(m => m.ProductsModule)
+    loadChildren: () => import('@christianacca/demo-app/products').then(m => m.ProductsModule)
   },
   { path: 'about', component: AboutComponent },
   { path: '**', component: NotFoundComponent }

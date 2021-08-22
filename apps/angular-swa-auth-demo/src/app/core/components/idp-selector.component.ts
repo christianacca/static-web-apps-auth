@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { IdentityProviderInfo } from '@ccacca/angular-swa-auth';
+import { IdentityProviderInfo } from '@christianacca/angular-swa-auth';
 
 @Component({
   selector: 'app-idp-selector',
