@@ -4,6 +4,22 @@
   "sourceRoot": "libs/angular-swa-auth/src",
   "prefix": "swa",
   "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/angular-swa-auth"],
+      "options": {
+        "project": "libs/angular-swa-auth/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/angular-swa-auth/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/angular-swa-auth/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular-swa-auth"],
