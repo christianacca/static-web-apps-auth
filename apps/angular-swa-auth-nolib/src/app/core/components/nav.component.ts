@@ -18,7 +18,7 @@ import { AuthService, ClientPrincipal } from '../auth';
     <nav class="menu auth">
       <p class="menu-label">Auth</p>
       <div class="menu-list auth">
-        <a href="/.auth/logout/github?post_logout_redirect_uri=/login">Logout</a>
+        <a href="/.auth/logout">Logout</a>
         <a href="/.auth/purge/github">Forget me</a>
       </div>
     </nav>
