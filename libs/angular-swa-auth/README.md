@@ -1,4 +1,4 @@
-# @mri/angular-wfe-proxy-oidc
+# @ccacca/angular-swa-auth
 
 Programmatically work with Azure Static Web Apps authenticated users in an angular application
 
@@ -14,8 +14,8 @@ Programmatically work with Azure Static Web Apps authenticated users in an angul
   - triggers the sign in flow when your functions api returns as unauthenticated (401) response
 - convenient types and values representing the authenticated user and identity providers
 - configure the list of identity providers that should be available to your users to sign in with
-- a simple service that will select the first configured identity provider to authenticate with when the user is not already authenticated
-  - this can be replaced with your own implementation. For example, a service that displays a modal where the user selects the idp
+- [`IdentityProviderInteractiveSelectorService`](https://projects.codingmonster.co.uk/static-web-apps-auth/injectables/IdentityProviderInteractiveSelectorService.html)
+  - utility service that can be used to build a UI to prompt the user to select an identity provider
   
 ## When to use this library?
 
@@ -63,6 +63,9 @@ For all other use cases, this library will likely add value.
 
 2. Implement login/logout/purge
 
+  The following is guidance only. For an alternative, where the user is prompted with a modal
+  to select the identity provider to sign in with see [`IdentityProviderInteractiveSelectorService`](https://projects.codingmonster.co.uk/static-web-apps-auth/injectables/IdentityProviderInteractiveSelectorService.html)
+
    ```ts
    import { Component } from '@angular/core';
    import { AuthService, ClientPrincipal } from '@ccacca/angular-swa-auth';
@@ -83,29 +86,22 @@ For all other use cases, this library will likely add value.
            </ng-template>
          </div>
        </nav>
-       <div class="user" *ngIf="userInfo$ | async as user">
-         <p>Welcome</p>
-         <p>{{ user.userDetails }}</p>
-         <p>{{ user.identityProvider }}</p>
-       </div>
      `
    })
    export class AuthComponent {
      userInfo$: Observable<ClientPrincipal | null>;
      providers = this.authService.identityProviders;
 
-     private redirectUrl = '/home';
-
      constructor(private authService: AuthService) {
        this.userInfo$ = this.authService.userLoaded$;
      }
 
      login(identityProvider: string) {
-       this.authService.login({ identityProvider, redirectUrl: this.redirectUrl });
+       this.authService.login({ identityProvider });
      }
 
      logout() {
-       this.authService.logout(this.redirectUrl);
+       this.authService.logout();
      }
 
      purge() {
@@ -141,6 +137,7 @@ For all other use cases, this library will likely add value.
 
 ## More resources
 
+- Library source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/libs/angular-swa-auth>
 - Library documentation: [projects.codingmonster.co.uk/static-web-apps-auth](https://projects.codingmonster.co.uk/static-web-apps-auth)
 - Full working demo:  
   - deployed site: [angular-swa-auth.codingdemo.co.uk](https://angular-swa-auth.codingdemo.co.uk)

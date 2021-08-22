@@ -21,7 +21,10 @@ export class SwaAuthModule {
     const finalConfigs = config ? AuthConfig.defaults.with(config) : AuthConfig.defaults;
     const idpSelectorProvider =
       finalConfigs.identityProviderSelectorType != null
-        ? [{ provide: IdentityProviderSelectorService, useClass: finalConfigs.identityProviderSelectorType }]
+        ? [
+            finalConfigs.identityProviderSelectorType,
+            { provide: IdentityProviderSelectorService, useExisting: finalConfigs.identityProviderSelectorType }
+          ]
         : [];
     const autoLoginInterceptorProvider = finalConfigs.loginOnUnauthorizedApiRequests
       ? [{ provide: HTTP_INTERCEPTORS, useClass: AutoLoginHttpInterceptor, multi: true }]

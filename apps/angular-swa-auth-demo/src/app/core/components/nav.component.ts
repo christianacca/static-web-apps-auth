@@ -24,7 +24,8 @@ import { Observable } from 'rxjs';
           <a (click)="purge()">Forget me</a>
         </ng-container>
         <ng-template #loginTpl>
-          <a *ngFor="let provider of providers" (click)="login(provider.id)">{{ provider.name }}</a>
+          <a (click)="login()">Login</a>
+          <a (click)="signUp()">Sign Up?</a>
         </ng-template>
       </div>
     </nav>
@@ -37,7 +38,6 @@ import { Observable } from 'rxjs';
 })
 export class NavComponent {
   userInfo$: Observable<ClientPrincipal | null>;
-  providers = this.authService.identityProviders;
 
   private redirectUrl = '/about';
 
@@ -45,8 +45,8 @@ export class NavComponent {
     this.userInfo$ = this.authService.userLoaded$;
   }
 
-  login(identityProvider: string) {
-    this.authService.login({ identityProvider, redirectUrl: this.redirectUrl });
+  login() {
+    this.authService.login({ redirectUrl: this.redirectUrl });
   }
 
   logout() {
@@ -55,5 +55,9 @@ export class NavComponent {
 
   purge() {
     this.authService.purge();
+  }
+
+  signUp() {
+    this.authService.login({ isSignUp: true, redirectUrl: this.redirectUrl });
   }
 }

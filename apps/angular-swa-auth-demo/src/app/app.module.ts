@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { SwaAuthModule } from '@ccacca/angular-swa-auth';
+import { IdentityProviderInteractiveSelectorService, SwaAuthModule } from '@ccacca/angular-swa-auth';
 import { environment } from '../environments/environment';
 import { AboutComponent } from './about.component';
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { AppStoreModule } from './store/store.module';
     AppStoreModule,
     externalModules,
     SwaAuthModule.forRoot({
+      identityProviderSelectorType: IdentityProviderInteractiveSelectorService,
       apiUrl: environment.API
     })
   ],

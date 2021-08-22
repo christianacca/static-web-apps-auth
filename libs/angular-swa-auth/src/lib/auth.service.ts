@@ -141,7 +141,7 @@ export class AuthService {
    * @returns {boolean} false when the identity provider to login with is not selected, true otherwise
    */
   async login(options: LoginOptions = {}): Promise<boolean> {
-    const idp = options.identityProvider ?? (await this.selectIdentityProvider().toPromise());
+    const idp = options.identityProvider ?? (await this.selectIdentityProvider(options).toPromise());
 
     if (!idp) {
       return false;
@@ -232,7 +232,9 @@ export class AuthService {
     }
   }
 
-  private selectIdentityProvider(): Observable<string | undefined> {
-    return this.currentIdp$.pipe(mergeMap(idp => (idp ? of(idp) : this.idpSelectorService.selectIdentityProvider())));
+  private selectIdentityProvider({ isSignUp }: LoginOptions): Observable<string | undefined> {
+    return this.currentIdp$.pipe(
+      mergeMap(idp => (idp ? of(idp) : this.idpSelectorService.selectIdentityProvider({ isSignUp })))
+    );
   }
 }
