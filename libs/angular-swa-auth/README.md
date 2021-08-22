@@ -1,6 +1,6 @@
 # @ccacca/angular-swa-auth
 
-Programmatically work with Azure Static Web Apps authenticated users in an angular application
+Programmatically work with Azure Static Web Apps authentication in an angular app
 
 ## Features
 
