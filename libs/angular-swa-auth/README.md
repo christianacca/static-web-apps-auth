@@ -11,7 +11,7 @@ Programmatically work with Azure Static Web Apps authentication in an angular ap
 - [`AuthGuard`](https://projects.codingmonster.co.uk/static-web-apps-auth/guards/AuthGuard.html)
   - triggers the sign in flow for all or some of the routes in an app when the user is not already authenticated
 - [AutoLoginHttpInterceptor](https://projects.codingmonster.co.uk/static-web-apps-auth/interceptors/AutoLoginHttpInterceptor.html)
-  - triggers the sign in flow when your functions api returns as unauthenticated (401) response
+  - triggers the sign in flow when your functions api return an unauthenticated (401) response
 - convenient types and values representing the authenticated user and identity providers
 - configure the list of identity providers that should be available to your users to sign in with
 - [`IdentityProviderInteractiveSelectorService`](https://projects.codingmonster.co.uk/static-web-apps-auth/injectables/IdentityProviderInteractiveSelectorService.html)
