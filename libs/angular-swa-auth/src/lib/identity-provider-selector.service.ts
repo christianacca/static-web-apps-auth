@@ -12,7 +12,8 @@ export type IdentityProviderSelectionOptions = Pick<LoginOptions, 'isSignUp'>;
  * Selects the identity provider that should be logged in with.
  * Register your own instance of this class if you do not want to use default service
  * (`FirstIdentityProviderSelectorService`)
- * * @example
+ *
+ * @example
  * ```ts
  * // identity-provider-prompt.service.ts
  * @Injectable()
