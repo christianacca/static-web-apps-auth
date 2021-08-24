@@ -2,11 +2,17 @@ import { ErrorHandler, Injectable, OnDestroy } from '@angular/core';
 import { EMPTY, Observable, Subscription } from 'rxjs';
 import { catchError, concatMap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
-import { AuthEvent } from './auth-event';
+import { AuthEvent, AuthEventType } from './auth-event';
 import { AuthService } from './auth.service';
-import { ClientPrincipal } from './client-principal';
 
-type AuthEventPayload = Pick<AuthEvent, 'type'> & Pick<ClientPrincipal, 'userId' | 'identityProvider'>;
+/**
+ * An extract of an `AuthEvent` that will sent to the function app api
+ */
+export interface AuthEventPayload {
+  type: AuthEventType;
+  userId: string;
+  identityProvider: string;
+}
 
 /**
  * Send authentication session events to your functions app api

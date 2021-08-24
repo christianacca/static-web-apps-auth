@@ -37,9 +37,9 @@ For all other use cases, this library will likely add value.
    npm install @christianacca/angular-swa-auth
    ```
 
-### 2. Use library
+### 2. Configure and use library
 
-1. Register imports in app module:
+1. Import library in app module:
 
    ```ts
    import { NgModule } from '@angular/core';
@@ -134,6 +134,20 @@ For all other use cases, this library will likely add value.
      }
    ];
    ```
+   
+4. Optionally send authentication session events to your function app api
+
+  ```ts
+    imports: [
+      BrowserModule,
+      SwaAuthModule.forRoot({
+        sendSessionEventsToApi: true,
+        sessionEventsApiUrl: '/api/authevents' // this is the default if not supplied
+      })
+    ]
+  ```
+
+  **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://projects.codingmonster.co.uk/static-web-apps-auth/interfaces/AuthEventPayload.html)
 
 ## More resources
 
@@ -142,4 +156,7 @@ For all other use cases, this library will likely add value.
 - Full working demo:  
   - deployed site: [angular-swa-auth.codingdemo.co.uk](https://angular-swa-auth.codingdemo.co.uk)
   - source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-demo>
+- Demo app that does NOT use a library to implement simple authentication: 
+  - deployed site: [angular-swa-auth-nolib](https://angular-swa-auth-nolib.codingdemo.co.uk)
+  - source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-nolib>
   

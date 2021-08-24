@@ -5,6 +5,9 @@ export interface IdentityProviderInfo<T extends ManagedIdentityProvider | string
   name: string;
 }
 
+/**
+ * Identity Providers managed by Azure Static Web Apps service
+ */
 export const managedIdentityProviders: Record<
   ManagedIdentityProvider,
   IdentityProviderInfo<ManagedIdentityProvider>

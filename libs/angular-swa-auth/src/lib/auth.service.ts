@@ -7,6 +7,9 @@ import { ClientPrincipal } from './client-principal';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
 import { StorageService } from './storage.service';
 
+/**
+ * @ignore
+ */
 interface AuthResponseData {
   clientPrincipal: ClientPrincipal | null;
 }
@@ -50,7 +53,13 @@ export interface LoginOptions {
   isSignUp?: boolean;
 }
 
+/**
+ * @ignore
+ */
 const storageKeyPrefix = 'angular_swa_auth';
+/**
+ * @ignore
+ */
 const signingUpFlagKey = `${storageKeyPrefix}_signing_up`;
 
 /**
