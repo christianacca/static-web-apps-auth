@@ -7,38 +7,49 @@ import {
 } from './identity-provider-selector.service';
 
 /**
+ * @ignore
+ */
+export interface IdentityProviderPromptContext {
+  selectionOptions: IdentityProviderSelectionOptions;
+  open: boolean;
+}
+
+/**
  * An implementation of `IdentityProviderSelectorService` that orchestrates the UI workflow of showing to the user a
  * list of identity providers to select when logging in or signing up.
  *
  * @example
  * ```ts
  * // your UI prompt component. EG...
+ * import { IdentityProviderInteractiveSelectorService } from '@christianacca/angular-swa-auth';
+ *
  * @Component({
- *  selector: 'app-idp-selector-modal',
- *  template: `
- *    <div class="modal" [ngClass]="{ 'is-active': interactiveService.openPrompt$ | async }">
- *      <div class="modal-background"></div>
- *      <div class="modal-card">
- *        <header class="modal-card-head">
- *          <p class="modal-card-title">{{ interactiveService.selectionOptions.isSignUp ? 'Sign-up' : 'Login' }}</p>
- *        </header>
- *        <app-idp-selector
- *          [providers]="config.identityProviders"
- *          (selected)="interactiveService.selectAndClose($event)"
- *          class="modal-card-body"
- *        ></app-idp-selector>
- *      </div>
- *      <button
- *        class="modal-close"
- *        aria-label="close"
- *        (click)="interactiveService.selectAndClose(undefined)"
- *      ></button>
- *    </div>
- *  `,
- *  changeDetection: ChangeDetectionStrategy.OnPush
+ *   selector: 'app-idp-selector-modal',
+ *   template: `
+ *     <div *ngIf="svc.prompt$ | async as vm" class="modal" [ngClass]="{ 'is-active': vm.open }">
+ *       <div class="modal-background"></div>
+ *       <div class="modal-card">
+ *         <header class="modal-card-head">
+ *           <p class="modal-card-title">{{ vm.selectionOptions.isSignUp ? 'Sign-up' : 'Login' }}</p>
+ *         </header>
+ *         <nav class="menu modal-card-body">
+ *           <p class="menu-label">With:</p>
+ *           <div class="menu-list">
+ *             <a
+ *               *ngFor="let provider of vm.selectionOptions.identityProviders"
+ *               (click)="svc.selectAndClose(provider.id)"
+ *              >{{ provider.name }}</a
+ *             >
+ *           </div>
+ *         </nav>
+ *       </div>
+ *       <button class="modal-close is-large" aria-label="close" (click)="svc.selectAndClose(undefined)"></button>
+ *     </div>
+ *   `,
+ *   changeDetection: ChangeDetectionStrategy.OnPush
  * })
- * export class IdpSelectorModalComponent {
- *  constructor(public config: AuthConfig, public interactiveService: IdentityProviderInteractiveSelectorService) {}
+ *  export class IdpSelectorModalComponent {
+ *   constructor(public svc: IdentityProviderInteractiveSelectorService) {}
  * }
  *
  * // app.component.ts...
@@ -61,17 +72,18 @@ import {
  */
 @Injectable()
 export class IdentityProviderInteractiveSelectorService implements IdentityProviderSelectorService {
-  private openPrompt = new BehaviorSubject<boolean>(false);
+  private prompt = new BehaviorSubject<IdentityProviderPromptContext>({
+    open: false,
+    selectionOptions: {
+      identityProviders: []
+    }
+  });
+
   /**
    * An observable that will emit true/false and should be used to show/hide a prompt asking the user
    * to select from the configured li st of identity providers
    */
-  openPrompt$ = this.openPrompt.asObservable();
-
-  /**
-   * The salient options that were passed to the `AuthService.login` method
-   */
-  selectionOptions: IdentityProviderSelectionOptions = {};
+  prompt$ = this.prompt.asObservable();
 
   private selected = new Subject<string | undefined>();
 
@@ -80,13 +92,12 @@ export class IdentityProviderInteractiveSelectorService implements IdentityProvi
    * @param identityProvider Identity Provider that was selected or `undefined` to indicate the user cancelled the login
    */
   selectAndClose(identityProvider: string | undefined) {
-    this.openPrompt.next(false);
+    this.prompt.next({ ...this.prompt.value, open: false });
     this.selected.next(identityProvider);
   }
 
   selectIdentityProvider(options: IdentityProviderSelectionOptions): Observable<string | undefined> {
-    this.selectionOptions = options;
-    this.openPrompt.next(true);
+    this.prompt.next({ selectionOptions: options, open: true });
     return this.selected.pipe(take(1));
   }
 }

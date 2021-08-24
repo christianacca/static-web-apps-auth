@@ -233,8 +233,12 @@ export class AuthService {
   }
 
   private selectIdentityProvider({ isSignUp }: LoginOptions): Observable<string | undefined> {
+    const options = {
+      isSignUp,
+      identityProviders: this.identityProviders
+    };
     return this.currentIdp$.pipe(
-      mergeMap(idp => (idp ? of(idp) : this.idpSelectorService.selectIdentityProvider({ isSignUp })))
+      mergeMap(idp => (idp ? of(idp) : this.idpSelectorService.selectIdentityProvider(options)))
     );
   }
 }

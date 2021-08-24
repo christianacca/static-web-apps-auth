@@ -1,12 +1,13 @@
 import { forwardRef, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthConfig } from './auth-config';
 import { LoginOptions } from './auth.service';
 import { FirstIdentityProviderSelectorService } from './first-identity-provider-selector.service';
 
 /**
  * Options that are useful to present in any prompt displayed to the user when required to select an identity provider
  */
-export type IdentityProviderSelectionOptions = Pick<LoginOptions, 'isSignUp'>;
+export type IdentityProviderSelectionOptions = Pick<LoginOptions, 'isSignUp'> & Pick<AuthConfig, 'identityProviders'>;
 
 /**
  * Selects the identity provider that should be logged in with.
