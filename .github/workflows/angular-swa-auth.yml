@@ -32,4 +32,3 @@ jobs:
           package: ./dist/libs/angular-swa-auth/package.json
           access: public
           check-version: true
-          dry-run: true
