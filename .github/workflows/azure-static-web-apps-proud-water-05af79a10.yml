@@ -1,4 +1,4 @@
-name: angular-swa-auth-nolib.codingdemo.co.uk CI/CD
+name: nolib demo CI/CD
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: docs.angular-swa-auth.codingdemo.co.uk CI/CD
+name: angular-swa-auth docs CI/CD
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: angular-swa-auth CI/CD
+name: angular-swa-auth lib CI/CD
 
 # Controls when the workflow will run
 on:
