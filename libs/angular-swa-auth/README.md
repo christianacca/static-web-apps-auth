@@ -64,8 +64,8 @@ For all other use cases, this library will likely add value.
 
 2. Implement login/logout/purge
 
-  The following is guidance only. For an alternative, where the user is prompted with a modal
-  to select the identity provider to sign in with see [`IdentityProviderInteractiveSelectorService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
+   The following is guidance only. For an alternative, where the user is prompted with a modal
+   to select the identity provider to sign in with see [`IdentityProviderInteractiveSelectorService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
 
    ```ts
    import { Component } from '@angular/core';
@@ -138,17 +138,17 @@ For all other use cases, this library will likely add value.
    
 4. Optionally send authentication session events to your function app api
 
-  ```ts
-    imports: [
-      BrowserModule,
-      SwaAuthModule.forRoot({
-        sendSessionEventsToApi: true,
-        sessionEventsApiUrl: '/api/authevents' // this is the default if not supplied
-      })
-    ]
-  ```
+   ```ts
+     imports: [
+       BrowserModule,
+       SwaAuthModule.forRoot({
+         sendSessionEventsToApi: true,
+         sessionEventsApiUrl: '/api/authevents' // this is the default if not supplied
+       })
+     ]
+   ```
 
-  **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://docs.angular-swa-auth.codingdemo.co.uk/interfaces/AuthEventPayload.html)
+   **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://docs.angular-swa-auth.codingdemo.co.uk/interfaces/AuthEventPayload.html)
 
 ## More resources
 
