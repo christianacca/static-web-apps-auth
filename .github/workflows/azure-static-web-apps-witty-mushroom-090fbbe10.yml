@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: angular-swa-auth.codingdemo.co.uk CI/CD
 
 on:
   push:
