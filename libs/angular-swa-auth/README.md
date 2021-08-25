@@ -4,17 +4,17 @@ Programmatically work with Azure Static Web Apps authentication in an angular ap
 
 ## Features
 
-- an [`AuthService`](https://projects.codingmonster.co.uk/static-web-apps-auth/injectables/AuthService.html) facade
+- an [`AuthService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/AuthService.html) facade
   - methods to programmatically trigger sign-in, sign-up, sign-out and purge flows
   - exposes convenient observables to allow your app to examine and/or react to current user and authentication session events
   - optionally send authentication session events to your functions app
-- [`AuthGuard`](https://projects.codingmonster.co.uk/static-web-apps-auth/guards/AuthGuard.html)
+- [`AuthGuard`](https://docs.angular-swa-auth.codingdemo.co.uk/guards/AuthGuard.html)
   - triggers the sign in flow for all or some of the routes in an app when the user is not already authenticated
-- [AutoLoginHttpInterceptor](https://projects.codingmonster.co.uk/static-web-apps-auth/interceptors/AutoLoginHttpInterceptor.html)
+- [AutoLoginHttpInterceptor](https://docs.angular-swa-auth.codingdemo.co.uk/interceptors/AutoLoginHttpInterceptor.html)
   - triggers the sign in flow when your functions api return an unauthenticated (401) response
 - convenient types and values representing the authenticated user and identity providers
 - configure the list of identity providers that should be available to your users to sign in with
-- [`IdentityProviderInteractiveSelectorService`](https://projects.codingmonster.co.uk/static-web-apps-auth/injectables/IdentityProviderInteractiveSelectorService.html)
+- [`IdentityProviderInteractiveSelectorService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
   - utility service that can be used to build a UI to prompt the user to select an identity provider
   
 ## When to use this library?
@@ -25,7 +25,8 @@ Depending on your use case you might not need this library at all. You likely do
 * The same authorization rules apply to all client-side routes
 * You don't need to inform your functions app when a user has signed in / out
 
-If this is your app, then checkout [angular-swa-auth-nolib](https://angular-swa-auth-nolib.codingdemo.co.uk) sample app
+If this is your app, then have a look at [angular-swa-auth-nolib](https://angular-swa-auth-nolib.codingdemo.co.uk): 
+a sample app that does not use this library to implement authentication
 
 For all other use cases, this library will likely add value.
 
@@ -64,7 +65,7 @@ For all other use cases, this library will likely add value.
 2. Implement login/logout/purge
 
   The following is guidance only. For an alternative, where the user is prompted with a modal
-  to select the identity provider to sign in with see [`IdentityProviderInteractiveSelectorService`](https://projects.codingmonster.co.uk/static-web-apps-auth/injectables/IdentityProviderInteractiveSelectorService.html)
+  to select the identity provider to sign in with see [`IdentityProviderInteractiveSelectorService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
 
    ```ts
    import { Component } from '@angular/core';
@@ -147,12 +148,12 @@ For all other use cases, this library will likely add value.
     ]
   ```
 
-  **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://projects.codingmonster.co.uk/static-web-apps-auth/interfaces/AuthEventPayload.html)
+  **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://docs.angular-swa-auth.codingdemo.co.uk/interfaces/AuthEventPayload.html)
 
 ## More resources
 
 - Library source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/libs/angular-swa-auth>
-- Library documentation: [projects.codingmonster.co.uk/static-web-apps-auth](https://projects.codingmonster.co.uk/static-web-apps-auth)
+- Library documentation: [docs.angular-swa-auth.codingdemo.co.uk](https://docs.angular-swa-auth.codingdemo.co.uk)
 - Full working demo:  
   - deployed site: [angular-swa-auth.codingdemo.co.uk](https://angular-swa-auth.codingdemo.co.uk)
   - source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-demo>
