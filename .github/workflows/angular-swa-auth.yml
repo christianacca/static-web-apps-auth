@@ -26,9 +26,17 @@ jobs:
           node-version: '14.x'
       - run: npm ci
       - run: npm run build -- angular-swa-auth --prod
-      - uses: JS-DevTools/npm-publish@v1
+      - if: github.ref == 'refs/heads/master'
+        uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./dist/libs/angular-swa-auth/package.json
           access: public
           check-version: true
+      - if: github.ref != 'refs/heads/master'
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./dist/libs/angular-swa-auth/package.json
+          access: public
+          dry-run: true
