@@ -41,4 +41,5 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./dist/libs/angular-swa-auth/package.json
           access: public
+          check-version: false
           dry-run: true
