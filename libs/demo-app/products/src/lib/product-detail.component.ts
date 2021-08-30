@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { Product } from './product';
+import { Product } from '@christianacca/demo-app/shared-types';
 
 @Component({
   selector: 'app-product-detail',

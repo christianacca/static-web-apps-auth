@@ -17,7 +17,8 @@
     "paths": {
       "@christianacca/angular-swa-auth": ["libs/angular-swa-auth/src/index.ts"],
       "@christianacca/demo-app/common-ui": ["libs/demo-app/common-ui/src/index.ts"],
-      "@christianacca/demo-app/products": ["libs/demo-app/products/src/index.ts"]
+      "@christianacca/demo-app/products": ["libs/demo-app/products/src/index.ts"],
+      "@christianacca/demo-app/shared-types": ["libs/demo-app/shared-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
