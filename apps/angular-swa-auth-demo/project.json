@@ -81,7 +81,7 @@
       "options": {
         "commands": [
           {
-            "command": "swa start http://localhost:4200 --run \"npm start angular-swa-auth-demo\" --api ./api --swa-config-location ./apps/angular-swa-auth-demo/dev"
+            "command": "swa start http://localhost:4200 --run \"npm start angular-swa-auth-demo\" --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev"
           }
         ]
       }
