@@ -1,11 +1,11 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
+import type { Product } from '@christianacca/demo-app/shared-types';
 import * as data from '../shared';
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
-  const product = {
+  const product: Product = {
     id: undefined,
-    name: req.body.name,
-    description: req.body.description
+    ...req.body
   };
 
   try {

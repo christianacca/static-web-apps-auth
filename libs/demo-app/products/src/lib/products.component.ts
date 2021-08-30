@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '@christianacca/demo-app/shared-types';
 import { Observable } from 'rxjs';
-import { Product } from './product';
 import { ProductService } from './product.service';
 
 @Component({
