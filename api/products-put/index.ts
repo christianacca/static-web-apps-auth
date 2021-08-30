@@ -1,11 +1,12 @@
-const data = require('../shared/product-data');
+import { AzureFunction, Context, HttpRequest } from '@azure/functions';
+import * as data from '../shared';
 
-module.exports = async function (context, req) {
+const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
   const product = {
     id: parseInt(req.params.id, 10),
     name: req.body.name,
     description: req.body.description,
-    quantity: req.body.quantity,
+    quantity: req.body.quantity
   };
 
   try {
@@ -15,3 +16,5 @@ module.exports = async function (context, req) {
     context.res.status(500).send(error);
   }
 };
+
+export default httpTrigger;
