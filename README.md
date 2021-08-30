@@ -1,105 +1,63 @@
+# Static Web Apps Authentication
 
+## Overview
 
-# SwaAuth
+This repo is the home to the npm package [@christianacca/angular-swa-auth](https://www.npmjs.com/package/@christianacca/angular-swa-auth)
 
-This project was generated using [Nx](https://nx.dev).
+This project was generated using [Nx](https://nx.dev)
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+The repo includes the following projects:
+* the [library](libs/angular-swa-auth/README.md) itself
+* a [demo app](apps/angular-swa-auth-demo) for the library
+* another [simple demo app](apps/angular-swa-auth-nolib) that does NOT require the <code>angular-swa-auth</code> helper library to implement authentication
 
-🔎 **Smart, Extensible Build Framework**
+## Setup
 
-## Quick Start & Documentation
+1. Install [nodejs](https://nodejs.org/en/) (LTS version)
+2. Clone the source code: `git clone https://github.com/christianacca/static-web-apps-auth`
+3. Install dependencies - run `npm install`
+4. Install tooling required by your IDE:
+   - VSC: 
+      - [recommended extensions](.vscode/extensions.json)
+      - [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools#installing)
+   - Rider:
+      - [Azure Toolkit for Rider](https://plugins.jetbrains.com/plugin/11220-azure-toolkit-for-rider)
+      - Azure Functions Core Tools (goto Preferences then Tools > Azure > Functions)
 
-[Nx Documentation](https://nx.dev/angular)
+## Run demo app
 
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
+### Command line
 
-[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
+Run backend api (terminal 1):
+```bash
+cd ./api
+npm start
+```
 
-## Adding capabilities to your workspace
+Run front-end (terminal 2):
+```bash
+npm run start:swa
+```
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+Notes:
+* Navigate to <http://localhost:4820/>
+* The front-end or api will automatically reload if you change any of their source files
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+### VS Code
 
-Below are our core plugins:
+1. Press `F5`. This will launch Chrome at <http://localhost:4820/>.
+2. You will need to wait 10-20 seconds to refresh the browser page.
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+Notes:
+* The front-end will automatically reload if you change any of it's source files 
+* Making changes to the api will require re-running
+* You can set breakpoints in the IDE in both the front-end and api code
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+### Jetbrains Rider
 
-## Generate an application
+`Run > Run > "start: demo"` OR `Run > Debug > "start: demo"`
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@swa-auth/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-
-
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Notes:
+* Navigate to <http://localhost:4820/>
+* The front-end or api will automatically reload if you change any of their source files
+* You can set breakpoints in the IDE in the api code only
