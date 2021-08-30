@@ -2,7 +2,7 @@ const data = {
   products: [
     {
       id: 10,
-      name: 'Strawberries',
+      name: 'Strawberry(s)',
       description: '16oz package of fresh organic strawberries',
       quantity: '1'
     },
@@ -16,6 +16,12 @@ const data = {
       id: 30,
       name: 'Apples',
       description: 'Bag of 7 fresh McIntosh apples',
+      quantity: 1
+    },
+    {
+      id: 40,
+      name: 'Bananas',
+      description: 'Bunch of lovely bananas',
       quantity: 1
     }
   ]
