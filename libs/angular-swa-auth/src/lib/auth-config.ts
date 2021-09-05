@@ -44,6 +44,11 @@ export class AuthConfig {
   sendSessionEventsToApi = false;
 
   /**
+   * The client-side route to redirect to when the user is found to be unauthorized
+   */
+  unauthorizedRoute = 'unauthorized';
+
+  /**
    * Return a clone of the current instance overriding the current fields using the `values` supplied
    * @param values Override values
    */

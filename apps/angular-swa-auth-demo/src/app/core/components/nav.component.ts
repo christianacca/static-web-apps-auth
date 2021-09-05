@@ -5,13 +5,17 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-nav',
   template: `
-    <nav class="menu">
+    <nav class="menu" *swaRoleCheck="let isAdmin of ['admin']; let maybeAdmin = isPlaceholder">
       <p class="menu-label">Menu</p>
       <ul class="menu-list">
-        <a routerLink="/products" routerLinkActive="router-link-active">
+        <a routerLink="/products" routerLinkActive="is-active">
           <span>Products</span>
         </a>
-        <a routerLink="/about" routerLinkActive="router-link-active">
+        <a routerLink="/users" routerLinkActive="is-active">
+          <progress *ngIf="maybeAdmin" class="progress is-primary is-medium" max="100">15%</progress>
+          <span *ngIf="!maybeAdmin" [ngClass]="!isAdmin ? 'has-text-grey-lighter' : ''">Users</span>
+        </a>
+        <a routerLink="/about" routerLinkActive="is-active">
           <span>About</span>
         </a>
       </ul>
@@ -45,19 +49,19 @@ export class NavComponent {
     this.userInfo$ = this.authService.userLoaded$;
   }
 
-  login() {
-    this.authService.login({ redirectUrl: this.redirectUrl });
+  async login() {
+    await this.authService.login({ redirectUrl: this.redirectUrl });
   }
 
-  logout() {
-    this.authService.logout(this.redirectUrl);
+  async logout() {
+    await this.authService.logout(this.redirectUrl);
   }
 
-  purge() {
-    this.authService.purge();
+  async purge() {
+    await this.authService.purge();
   }
 
-  signUp() {
-    this.authService.login({ isSignUp: true, redirectUrl: this.redirectUrl });
+  async signUp() {
+    await this.authService.login({ isSignUp: true, redirectUrl: this.redirectUrl });
   }
 }

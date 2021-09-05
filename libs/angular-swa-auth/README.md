@@ -9,8 +9,12 @@ Programmatically work with Azure Static Web Apps authentication in an angular ap
   - exposes convenient observables to allow your app to examine and/or react to current user and authentication session events
   - optionally send authentication session events to your functions app
 - [`AuthGuard`](https://docs.angular-swa-auth.codingdemo.co.uk/guards/AuthGuard.html)
-  - triggers the sign in flow for all or some of the routes in an app when the user is not already authenticated
-- [AutoLoginHttpInterceptor](https://docs.angular-swa-auth.codingdemo.co.uk/interceptors/AutoLoginHttpInterceptor.html)
+  - add to a route to trigger the sign in flow when the user is not already authenticated
+- [`SwaRoleGuard`](https://docs.angular-swa-auth.codingdemo.co.uk/guards/SwaRoleGuard.html)
+  - add to a route to perform an authorization check using roles defined in Status Web App
+- [`SwaRoleCheckDirective`](https://docs.angular-swa-auth.codingdemo.co.uk/directives/SwaRoleCheckDirective.html)
+  - structural directive to perform an authorization check using roles defined in Status Web App
+- [`AutoLoginHttpInterceptor`](https://docs.angular-swa-auth.codingdemo.co.uk/interceptors/AutoLoginHttpInterceptor.html)
   - triggers the sign in flow when your functions api return an unauthenticated (401) response
 - convenient types and values representing the authenticated user and identity providers
 - configure the list of identity providers that should be available to your users to sign in with
