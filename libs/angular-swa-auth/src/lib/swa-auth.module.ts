@@ -4,6 +4,9 @@ import { AuthConfig } from './auth-config';
 import { authEventInitializerProvider } from './auth-event-initializer.provider';
 import { AutoLoginHttpInterceptor } from './auto-login-http-interceptor.service';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
+import { SwaRoleCheckDirective } from './swa-roles-check.directive';
+
+const PUBLIC_DECLARATIONS = [SwaRoleCheckDirective];
 
 /**
  * Library module
@@ -15,7 +18,10 @@ import { IdentityProviderSelectorService } from './identity-provider-selector.se
  *   })
  * ]
  */
-@NgModule()
+@NgModule({
+  declarations: PUBLIC_DECLARATIONS,
+  exports: PUBLIC_DECLARATIONS
+})
 export class SwaAuthModule {
   static forRoot(config?: Partial<AuthConfig>): ModuleWithProviders<SwaAuthModule> {
     const finalConfigs = config ? AuthConfig.defaults.with(config) : AuthConfig.defaults;

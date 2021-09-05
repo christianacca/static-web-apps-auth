@@ -12,6 +12,8 @@ Programmatically work with Azure Static Web Apps authentication in an angular ap
   - add to a route to trigger the sign in flow when the user is not already authenticated
 - [`SwaRoleGuard`](https://docs.angular-swa-auth.codingdemo.co.uk/guards/SwaRoleGuard.html)
   - add to a route to perform an authorization check using roles defined in Status Web App
+- [`SwaRoleCheckDirective`](https://docs.angular-swa-auth.codingdemo.co.uk/directives/SwaRoleCheckDirective.html)
+  - structural directive to perform an authorization check using roles defined in Status Web App
 - [`AutoLoginHttpInterceptor`](https://docs.angular-swa-auth.codingdemo.co.uk/interceptors/AutoLoginHttpInterceptor.html)
   - triggers the sign in flow when your functions api return an unauthenticated (401) response
 - convenient types and values representing the authenticated user and identity providers
