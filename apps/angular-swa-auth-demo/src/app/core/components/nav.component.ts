@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
         <a routerLink="/products" routerLinkActive="router-link-active">
           <span>Products</span>
         </a>
+        <a routerLink="/users" routerLinkActive="router-link-active">
+          <span>Users</span>
+        </a>
         <a routerLink="/about" routerLinkActive="router-link-active">
           <span>About</span>
         </a>

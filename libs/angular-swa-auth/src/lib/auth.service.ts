@@ -3,7 +3,7 @@ import { defer, Observable, of, Subject } from 'rxjs';
 import { first, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
 import { AuthEvent } from './auth-event';
-import { ClientPrincipal } from './client-principal';
+import { anonymousRole, ClientPrincipal } from './client-principal';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
 import { StorageService } from './storage.service';
 
@@ -56,11 +56,23 @@ export interface LoginOptions {
 /**
  * @ignore
  */
+const noExplicitRoles: string[] = [];
+/**
+ * @ignore
+ */
 const storageKeyPrefix = 'angular_swa_auth';
+
 /**
  * @ignore
  */
 const signingUpFlagKey = `${storageKeyPrefix}_signing_up`;
+
+/**
+ * Is one or more of the `allowedRoles` in `actualRoles`. Implicitly every user (authenticated or unauthenticated)
+ * is a member of the {@link anonymousRole} and that is assumed when verifying `allowedRoles`
+ */
+export const hasSomeAllowedRoles = (allowedRoles: string[], actualRoles: string[]) =>
+  allowedRoles.length === 0 || allowedRoles.includes(anonymousRole) || allowedRoles.some(r => actualRoles.includes(r));
 
 /**
  * The main service for working with authenticated users
@@ -142,6 +154,14 @@ export class AuthService {
 
     await this.login({ redirectUrl: targetUrl });
     return false;
+  }
+
+  /**
+   * Does the current user have one or more of the `allowedRoles` supplied
+   * @param allowedRoles The list of roles to check
+   */
+  hasSomeRoles$(allowedRoles: string[]) {
+    return this.userLoaded$.pipe(map(user => hasSomeAllowedRoles(allowedRoles, user?.userRoles ?? noExplicitRoles)));
   }
 
   /**

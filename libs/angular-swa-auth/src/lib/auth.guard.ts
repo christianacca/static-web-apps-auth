@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 /**
- * Route guard that will ensure the user is authenticated before allowing the navigation to that route
+ * Add to a route to trigger the sign in flow when the user is not already authenticated
+ *
+ * Implements `CanActivate` to ensure the user is authenticated before allowing the navigation to the route.
  * Where the user is not yet authenticated, trigger the login flow.
  * @see { AuthService.ensureLoggedIn}
  * @example
