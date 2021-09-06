@@ -29,17 +29,25 @@ const noExplicitRoles: string[] = [];
 })
 export class SwaRoleCheckDirective implements OnInit, OnDestroy {
   @Input() set swaRoleCheckOf(value: string[]) {
+    // we're ignoring null/undefined to accommodate async fetching of allowed roles in the consumer template. In this
+    // scenario the async pipe will initially assign a null to our input property. We skip this so that the initial
+    // placeholder authz result will be in play until the allowed roles are finally fetched
     if (value == null) return;
 
     this.allowedRoles.next(value);
   }
 
-  @Input() set swaRoleCheckUserRoles(value: string[] | undefined) {
-    this.userRoles.next(value);
+  @Input() set swaRoleCheckUserRoles(value: string[]) {
+    // we're ignoring null/undefined to accommodate async fetching of user roles in the consumer template. In this
+    // scenario the async pipe will initially assign a null to our input property. We skip this so that the initial
+    // placeholder authz result will be in play until the user roles are finally fetched
+    if (value == null) return;
+
+    this.userRolesFromTemplate.next(value);
   }
 
   private allowedRoles = new ReplaySubject<string[]>(1);
-  private userRoles = new ReplaySubject<string[] | undefined>(1);
+  private userRolesFromTemplate = new ReplaySubject<string[]>(1);
   private subscription = new Subscription();
 
   private context = {
@@ -56,9 +64,9 @@ export class SwaRoleCheckDirective implements OnInit, OnDestroy {
   ngOnInit() {
     const injectedRoles$ = this.authService.userLoaded$.pipe(
       map(user => user?.userRoles),
-      takeUntil(this.userRoles)
+      takeUntil(this.userRolesFromTemplate)
     );
-    const userRoles$ = merge(this.userRoles, injectedRoles$).pipe(map(x => x ?? noExplicitRoles));
+    const userRoles$ = merge(this.userRolesFromTemplate, injectedRoles$).pipe(map(x => x ?? noExplicitRoles));
 
     const permissionCheck$: Observable<boolean> = combineLatest([this.allowedRoles, userRoles$]).pipe(
       map(([allowedRoles, userRoles]) => hasSomeAllowedRoles(allowedRoles, userRoles))
