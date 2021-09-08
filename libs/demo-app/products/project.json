@@ -16,7 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/demo-app/products/src/**/*.ts", "libs/demo-app/products/src/**/*.html"]
-      }
+      },
+      "outputs": ["{options.outputFile}"]
     }
   },
   "tags": ["framework:angular", "type:feature"]

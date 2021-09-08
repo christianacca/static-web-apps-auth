@@ -46,7 +46,7 @@
     {
       "type": "shell",
       "label": "swa start",
-      "command": "npm run start:swa -- angular-swa-auth-demo",
+      "command": "npm run start:swa angular-swa-auth-demo",
       "isBackground": true,
       "problemMatcher": [
         {

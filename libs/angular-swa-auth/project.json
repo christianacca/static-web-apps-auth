@@ -32,7 +32,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/angular-swa-auth/src/**/*.ts", "libs/angular-swa-auth/src/**/*.html"]
-      }
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "compodoc": {
       "executor": "@twittwer/compodoc:compodoc",
@@ -46,11 +47,22 @@
         }
       }
     },
+    "serve-compodoc": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx compodoc angular-swa-auth && http-server ./dist/compodoc/angular-swa-auth"
+          }
+        ]
+      }
+    },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
       "options": {
         "uiFramework": "@storybook/angular",
         "port": 4400,
+        "tsConfig": "libs/angular-swa-auth/.storybook/tsconfig.json",
         "config": {
           "configFolder": "libs/angular-swa-auth/.storybook"
         }

@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: '14.x'
       - run: npm ci
-      - run: npm run build -- angular-swa-auth --prod
+      - run: npm run build angular-swa-auth --prod
       - name: publish npm package
         if: github.ref == 'refs/heads/master'
         uses: JS-DevTools/npm-publish@v1
