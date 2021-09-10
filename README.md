@@ -10,7 +10,9 @@ The repo includes the following projects:
 
 The demo apps and a documentation site for the library are all deployed as Azure static web apps:
 
-* library documentation: <https://docs.angular-swa-auth.codingdemo.co.uk>
+* library documentation: 
+  - [reference](https://docs.angular-swa-auth.codingdemo.co.uk)
+  - [storybook examples](https://stories.angular-swa-auth.codingdemo.co.uk)
 * library demo app: <https://angular-swa-auth.codingdemo.co.uk>
 * alternative "no-library" demo app: <https://angular-swa-auth-nolib.codingdemo.co.uk>
 
@@ -43,12 +45,13 @@ npm start
 
 Run front-end (terminal 2):
 ```bash
-npm run start:swa
+npm run start:swa angular-swa-auth-demo
 ```
 
 Notes:
 * Navigate to <http://localhost:4820/>
 * The front-end or api will automatically reload if you change any of their source files
+* To run the "no-library" demo app in the terminal 2 run instead: `npm run start:swa angular-swa-auth-nolib`
 
 ### VS Code
 
@@ -72,16 +75,25 @@ Notes:
 ## Serve doc site
 
 ```bash
-npm run doc:serve
+npm run serve-compodoc angular-swa-auth
+```
+
+## Run storybook site
+
+```bash
+npm run storybook angular-swa-auth
 ```
 
 ## Deploy
 
 The demo apps and library document site are deployed as Azure static web apps:
 
-* library documentation: 
+* library reference documentation: 
   * [Github workflow](.github/workflows/azure-static-web-apps-polite-flower-0685e8810.yml)
   * [Azure portal](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-docs/providers/Microsoft.Web/staticSites/angular-swa-auth-docs/staticsite)
+* library storybook documentation:
+  * [Github workflow](.github/workflows/azure-static-web-apps-white-dune-078458a10.yml)
+  * [Azure portal](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourcegroups/angular-swa-auth-stories/providers/Microsoft.Web/staticSites/angular-swa-auth-stories/staticsite)
 * library demo app:
   * [Github workflow](.github/workflows/azure-static-web-apps-witty-mushroom-090fbbe10.yml)
   * [Azure portal](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-demo/providers/Microsoft.Web/staticSites/angular-swa-auth-demo/staticsite)
@@ -91,13 +103,13 @@ The demo apps and library document site are deployed as Azure static web apps:
 
 On every PR:
 
-* Document and demo app sites will be deployed to a pre-prod staging environment 
+* Documentation and demo app sites will be deployed to a pre-prod staging environment 
   * note: github bot will add a comment to the PR with the url to the new staging environment
 * Dry run publish of the library package to npm
 
 On push to master:
 
-* Document and demo app sites will be deployed to an prod environment
+* Documentation and demo app sites will be deployed to an prod environment
 * Publish of the library package to npm where the version in [package.json](libs/angular-swa-auth/package.json) is different to the versions already published to npm
 
 ## Releasing a new version

@@ -11,6 +11,8 @@ $light-gray: #777;
 
 $shade-light: #fafafa;
 
+@import '~bulma/bulma.sass';
+
 .menu.auth {
   margin-top: 3em;
 }

@@ -21,11 +21,22 @@ import { Component } from '@angular/core';
         <ul>
           <li>
             <a href="https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-demo">
-              Code in GitHub
+              Demo app code in GitHub
             </a>
           </li>
           <li>
-            <a href="https://www.npmjs.com/package/@christianacca/angular-swa-auth"> angular-swa-auth library</a>
+            <a href="https://www.npmjs.com/package/@christianacca/angular-swa-auth"> npm package: angular-swa-auth</a>
+          </li>
+          <li>
+            <a href="https://docs.angular-swa-auth.codingdemo.co.uk/"> Library reference documentation</a>
+          </li>
+          <li>
+            <a href="https://docs.angular-swa-auth.codingdemo.co.uk/"> Library storybook documentation</a>
+          </li>
+          <li>
+            <a href="https://docs.angular-swa-auth.codingdemo.co.uk/">
+              A demo app that does NOT use <code>angular-swa-auth</code> helper library to implement authentication</a
+            >
           </li>
         </ul>
       </div>

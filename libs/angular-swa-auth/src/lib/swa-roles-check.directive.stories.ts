@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { BehaviorSubject, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -14,7 +14,8 @@ const user: ClientPrincipal = {
 };
 
 export default {
-  title: 'ResourceAuthzCheck',
+  title: 'SwaRoleCheckDirective',
+  component: SwaRoleCheckDirective,
   decorators: [
     moduleMetadata({
       imports: [CommonModule],
@@ -25,91 +26,53 @@ export default {
             userLoaded$: new BehaviorSubject(user)
           }
         }
-      ],
-      declarations: [SwaRoleCheckDirective]
+      ]
     })
   ]
+} as Meta;
+
+interface SwaRoleCheckDirectiveArgs {
+  allowedRoles: string[] | null;
+  userRoles: string[] | null;
+}
+
+const Template: Story<SwaRoleCheckDirectiveArgs> = args => ({
+  props: args,
+  template: `
+    <ng-container *swaRoleCheck="let authz of allowedRoles; userRoles: userRoles">
+      <h2>Authorized: <em>{{ authz | json }}</em></h2>
+    </ng-container>
+  `
+});
+
+export const Granted = Template.bind({});
+Granted.args = {
+  allowedRoles: ['admin', 'app-update'],
+  userRoles: ['company-read', 'app-update']
 };
 
-export const granted = () => ({
-  template: `
-    <h2>Allowed roles:</h2>
-    <pre>{{ allowedRoles | json }}</pre>
+export const Denied = Template.bind({});
+Denied.args = {
+  allowedRoles: ['admin', 'app-update'],
+  userRoles: ['company-read']
+};
 
-    <h2>User roles:</h2>
-    <pre>{{ userRoles | json }}</pre>
+export const NoAllowedRoles = Template.bind({});
+NoAllowedRoles.args = {
+  allowedRoles: null,
+  userRoles: ['company-read']
+};
 
-    <ng-container *swaRoleCheck="let authz of allowedRoles; userRoles: userRoles">
-      <h2>Authorized: <em>{{ authz | json }}</em></h2>
-    </ng-container>
-  `,
-  props: {
-    allowedRoles: ['admin', 'app-update'],
-    userRoles: ['company-read', 'app-update']
-  }
-});
+export const EmptyAllowedRoles = Template.bind({});
+EmptyAllowedRoles.args = {
+  allowedRoles: [],
+  userRoles: ['company-read']
+};
 
-export const denied = () => ({
-  template: `
-    <h2>Allowed roles:</h2>
-    <pre>{{ allowedRoles | json }}</pre>
-
-    <h2>User roles:</h2>
-    <pre>{{ userRoles | json }}</pre>
-
-    <ng-container *swaRoleCheck="let authz of allowedRoles; userRoles: userRoles">
-      <h2>Authorized: <em>{{ authz | json }}</em></h2>
-    </ng-container>
-  `,
-  props: {
-    allowedRoles: ['admin', 'app-update'],
-    userRoles: ['company-read']
-  }
-});
-
-export const noAllowedRoles = () => ({
-  template: `
-    <h2>Allowed roles:</h2>
-    <pre>{{ allowedRoles | json }}</pre>
-
-    <h2>User roles:</h2>
-    <pre>{{ userRoles | json }}</pre>
-
-    <ng-container *swaRoleCheck="let authz of allowedRoles; userRoles: userRoles">
-      <h2>Authorized: <em>{{ authz | json }}</em></h2>
-    </ng-container>
-  `,
-  props: {
-    allowedRoles: null,
-    userRoles: ['company-read']
-  }
-});
-
-export const emptyAllowedRoles = () => ({
-  template: `
-    <h2>Allowed roles:</h2>
-    <pre>{{ allowedRoles | json }}</pre>
-
-    <h2>User roles:</h2>
-    <pre>{{ userRoles | json }}</pre>
-
-    <ng-container *swaRoleCheck="let authz of allowedRoles; userRoles: userRoles">
-      <h2>Authorized: <em>{{ authz | json }}</em></h2>
-    </ng-container>
-  `,
-  props: {
-    allowedRoles: [],
-    userRoles: ['company-read']
-  }
-});
-
-export const asyncAllowedRoles = () => ({
+export const AsyncAllowedRoles: Story<SwaRoleCheckDirectiveArgs> = args => ({
   template: `
     <h2>Allowed roles:</h2>
     <pre style="min-height: 124px">{{ allowedRoles$ | async | json }}</pre>
-
-    <h2>User roles:</h2>
-    <pre>{{ userRoles | json }}</pre>
 
     <ng-container *swaRoleCheck="let authz of (allowedRoles$ | async); userRoles: userRoles; let waiting=isPlaceholder">
       <h2>Waiting Authz Result: <em>{{ waiting | json }}</em></h2>
@@ -117,16 +80,17 @@ export const asyncAllowedRoles = () => ({
     </ng-container>
   `,
   props: {
-    allowedRoles$: of(['admin', 'app-update']).pipe(delay(1500)),
-    userRoles: ['app-update']
+    allowedRoles$: of(args.allowedRoles).pipe(delay(1500)),
+    userRoles: args.userRoles
   }
 });
+AsyncAllowedRoles.args = {
+  allowedRoles: ['admin', 'app-update'],
+  userRoles: ['app-update']
+};
 
-export const asyncUserRoles = () => ({
+export const AsyncUserRoles: Story<SwaRoleCheckDirectiveArgs> = args => ({
   template: `
-    <h2>Allowed roles:</h2>
-    <pre>{{ allowedRoles | json }}</pre>
-
     <h2>User roles:</h2>
     <pre style="min-height: 103px">{{ userRoles$ | async | json }}</pre>
 
@@ -140,12 +104,16 @@ export const asyncUserRoles = () => ({
     </ng-container>
   `,
   props: {
-    allowedRoles: ['admin', 'app-update'],
-    userRoles$: of(['app-update']).pipe(delay(1500))
+    allowedRoles: args.allowedRoles,
+    userRoles$: of(args.userRoles).pipe(delay(1500))
   }
 });
+AsyncUserRoles.args = {
+  allowedRoles: ['admin', 'app-update'],
+  userRoles: ['app-update']
+};
 
-export const asyncAllowedRolesAndUserRoles = () => ({
+export const AsyncAllowedRolesAndUserRoles: Story<SwaRoleCheckDirectiveArgs> = args => ({
   template: `
     <h2>Allowed roles:</h2>
     <pre style="min-height: 124px">{{ allowedRoles$ | async | json }}</pre>
@@ -159,19 +127,17 @@ export const asyncAllowedRolesAndUserRoles = () => ({
     </ng-container>
   `,
   props: {
-    allowedRoles$: of(['admin', 'app-update']).pipe(delay(3000)),
-    userRoles$: of(['app-update']).pipe(delay(1500))
+    allowedRoles$: of(args.allowedRoles).pipe(delay(3000)),
+    userRoles$: of(args.userRoles).pipe(delay(1500))
   }
 });
+AsyncAllowedRolesAndUserRoles.args = {
+  allowedRoles: ['admin', 'app-update'],
+  userRoles: ['app-update']
+};
 
-export const dependencyInjectedUserRoles = () => ({
+export const DependencyInjectedUserRoles: Story<SwaRoleCheckDirectiveArgs> = args => ({
   template: `
-    <h2>Allowed roles:</h2>
-    <pre>{{ allowedRoles | json }}</pre>
-
-    <h2>User roles:</h2>
-    <pre>{{ ['app-update'] | json }}</pre>
-
     <ng-container *swaRoleCheck="let authz of allowedRoles">
       <h2>Authorized: <em>{{ authz | json }}</em></h2>
     </ng-container>
@@ -181,17 +147,21 @@ export const dependencyInjectedUserRoles = () => ({
       {
         provide: AuthService,
         useValue: {
-          userLoaded$: new BehaviorSubject({ ...user, userRoles: ['app-update'] })
+          userLoaded$: new BehaviorSubject({ ...user, userRoles: args.userRoles })
         }
       }
     ]
   },
   props: {
-    allowedRoles: ['admin', 'app-update']
+    allowedRoles: args.allowedRoles
   }
 });
+DependencyInjectedUserRoles.args = {
+  allowedRoles: ['admin', 'app-update'],
+  userRoles: ['app-update']
+};
 
-export const templateUserRolesTrumpsDependencyInjection = () => ({
+export const TemplateUserRolesTrumpsDependencyInjection: Story<SwaRoleCheckDirectiveArgs> = args => ({
   template: `
     <ng-container *swaRoleCheck="let authz of allowedRoles; userRoles: (userRoles$ | async); let waiting=isPlaceholder">
       <h2>Waiting Authz Result: <em>{{ waiting | json }}</em></h2>
@@ -209,7 +179,11 @@ export const templateUserRolesTrumpsDependencyInjection = () => ({
     ]
   },
   props: {
-    allowedRoles: ['admin', 'app-update'],
-    userRoles$: of(['app-update']).pipe(delay(1000))
+    allowedRoles: args.allowedRoles,
+    userRoles$: of(args.userRoles).pipe(delay(1000))
   }
 });
+TemplateUserRolesTrumpsDependencyInjection.args = {
+  allowedRoles: ['admin', 'app-update'],
+  userRoles: ['app-update']
+};

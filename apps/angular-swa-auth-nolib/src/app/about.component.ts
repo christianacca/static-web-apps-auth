@@ -24,6 +24,11 @@ import { Component } from '@angular/core';
               Code in GitHub
             </a>
           </li>
+          <li>
+            <a href="https://angular-swa-auth.codingdemo.co.uk">
+              Demo app that DOES use <code>angular-swa-auth</code> helper library to implement authentication
+            </a>
+          </li>
         </ul>
       </div>
     </div>
