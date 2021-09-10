@@ -7,10 +7,10 @@ import { AuthService, ClientPrincipal } from '../auth';
     <nav class="menu">
       <p class="menu-label">Menu</p>
       <ul class="menu-list">
-        <a routerLink="/products" routerLinkActive="router-link-active">
+        <a routerLink="/products" routerLinkActive="is-active">
           <span>Products</span>
         </a>
-        <a routerLink="/about" routerLinkActive="router-link-active">
+        <a routerLink="/about" routerLinkActive="is-active">
           <span>About</span>
         </a>
       </ul>

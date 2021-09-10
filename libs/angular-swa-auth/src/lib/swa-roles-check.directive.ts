@@ -11,6 +11,8 @@ const noExplicitRoles: string[] = [];
 /**
  * Structural directive to perform an authorization check using roles defined in Status Web App
  *
+ * Checkout the storybook examples for more guidance: <https://stories.angular-swa-auth.codingdemo.co.uk/?path=/story/swarolecheckdirective>
+ *
  * @example
  * ```html
  * <nav class="menu" *swaRoleCheck="let isAdmin of ['admin']; let maybeAdmin = isPlaceholder">

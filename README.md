@@ -10,7 +10,9 @@ The repo includes the following projects:
 
 The demo apps and a documentation site for the library are all deployed as Azure static web apps:
 
-* library documentation: <https://docs.angular-swa-auth.codingdemo.co.uk>
+* library documentation: 
+  - [reference](https://docs.angular-swa-auth.codingdemo.co.uk)
+  - [storybook examples](https://stories.angular-swa-auth.codingdemo.co.uk)
 * library demo app: <https://angular-swa-auth.codingdemo.co.uk>
 * alternative "no-library" demo app: <https://angular-swa-auth-nolib.codingdemo.co.uk>
 
@@ -49,6 +51,7 @@ npm run start:swa angular-swa-auth-demo
 Notes:
 * Navigate to <http://localhost:4820/>
 * The front-end or api will automatically reload if you change any of their source files
+* To run the "no-library" demo app in the terminal 2 run instead: `npm run start:swa angular-swa-auth-nolib`
 
 ### VS Code
 

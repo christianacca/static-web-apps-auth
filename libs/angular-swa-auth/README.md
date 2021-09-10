@@ -157,7 +157,9 @@ For all other use cases, this library will likely add value.
 ## More resources
 
 - Library source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/libs/angular-swa-auth>
-- Library documentation: [docs.angular-swa-auth.codingdemo.co.uk](https://docs.angular-swa-auth.codingdemo.co.uk)
+- Library documentation: 
+  - [reference](https://docs.angular-swa-auth.codingdemo.co.uk)
+  - [storybook](https://stories.angular-swa-auth.codingdemo.co.uk)
 - Full working demo:  
   - deployed site: [angular-swa-auth.codingdemo.co.uk](https://angular-swa-auth.codingdemo.co.uk)
   - source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-demo>
