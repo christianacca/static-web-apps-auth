@@ -14,6 +14,8 @@ interface AuthResponseData {
   clientPrincipal: ClientPrincipal | null;
 }
 
+export type AllowedRole = string | AllowedRole[];
+
 /**
  * Options that control the behaviour when purging user information
  */
@@ -71,8 +73,14 @@ const signingUpFlagKey = `${storageKeyPrefix}_signing_up`;
  * Is one or more of the `allowedRoles` in `actualRoles`. Implicitly every user (authenticated or unauthenticated)
  * is a member of the {@link anonymousRole} and that is assumed when verifying `allowedRoles`
  */
-export const hasSomeAllowedRoles = (allowedRoles: string[], actualRoles: string[]) =>
-  allowedRoles.length === 0 || allowedRoles.includes(anonymousRole) || allowedRoles.some(r => actualRoles.includes(r));
+export const hasSomeAllowedRoles = (allowedRoles: AllowedRole[], actualRoles: string[]) => {
+  const allowedRoleNames = allowedRoles.flat(10) as unknown as string[];
+  return (
+    allowedRoleNames.length === 0 ||
+    allowedRoleNames.includes(anonymousRole) ||
+    allowedRoleNames.some(r => actualRoles.includes(r))
+  );
+};
 
 /**
  * The main service for working with authenticated users
@@ -160,7 +168,7 @@ export class AuthService {
    * Does the current user have one or more of the `allowedRoles` supplied
    * @param allowedRoles The list of roles to check
    */
-  hasSomeRoles$(allowedRoles: string[]) {
+  hasSomeRoles$(allowedRoles: AllowedRole[]) {
     return this.userLoaded$.pipe(map(user => hasSomeAllowedRoles(allowedRoles, user?.userRoles ?? noExplicitRoles)));
   }
 

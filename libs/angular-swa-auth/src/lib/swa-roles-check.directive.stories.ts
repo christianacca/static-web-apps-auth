@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { BehaviorSubject, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { AuthService } from './auth.service';
+import { AllowedRole, AuthService } from './auth.service';
 import { ClientPrincipal } from './client-principal';
 import { SwaRoleCheckDirective } from './swa-roles-check.directive';
 
@@ -32,7 +32,7 @@ export default {
 } as Meta;
 
 interface SwaRoleCheckDirectiveArgs {
-  allowedRoles: string[] | null;
+  allowedRoles: AllowedRole[] | null;
   userRoles: string[] | null;
 }
 
@@ -55,6 +55,12 @@ export const Denied = Template.bind({});
 Denied.args = {
   allowedRoles: ['admin', 'app-update'],
   userRoles: ['company-read']
+};
+
+export const NestedAllowedRoles = Template.bind({});
+NestedAllowedRoles.args = {
+  allowedRoles: ['admin', ['app-update', 'admin']],
+  userRoles: ['company-read', 'app-update']
 };
 
 export const NoAllowedRoles = Template.bind({});

@@ -18,10 +18,7 @@
         "stylePreprocessorOptions": {
           "includePaths": ["./node_modules"]
         },
-        "styles": [
-          "node_modules/font-awesome/css/font-awesome.css",
-          "apps/angular-swa-auth-demo/src/styles.scss"
-        ],
+        "styles": ["node_modules/font-awesome/css/font-awesome.css", "apps/angular-swa-auth-demo/src/styles.scss"],
         "scripts": []
       },
       "configurations": {

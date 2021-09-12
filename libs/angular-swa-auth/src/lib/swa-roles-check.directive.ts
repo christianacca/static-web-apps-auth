@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { combineLatest, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { AuthService, hasSomeAllowedRoles } from './auth.service';
+import { AllowedRole, AuthService, hasSomeAllowedRoles } from './auth.service';
 
 /**
  * @ignore
@@ -15,12 +15,12 @@ const noExplicitRoles: string[] = [];
  *
  * @example
  * ```html
- * <nav class="menu" *swaRoleCheck="let isAdmin of ['admin']; let maybeAdmin = isPlaceholder">
+ * <nav class="menu" *swaRoleCheck="let canAdmin of ['admin']; let maybeCanAdmin = isPlaceholder">
  *   <p class="menu-label">Menu</p>
  *   <ul class="menu-list">
  *     <a routerLink="/users" routerLinkActive="is-active">
- *       <progress *ngIf="maybeAdmin" class="progress is-primary is-medium" max="100">15%</progress>
- *       <span *ngIf="!maybeAdmin" [ngClass]="!isAdmin ? 'has-text-grey-lighter' : ''">Users</span>
+ *       <progress *ngIf="maybeCanAdmin" class="progress is-primary is-medium" max="100">15%</progress>
+ *       <span *ngIf="!maybeCanAdmin" [ngClass]="!canAdmin ? 'has-text-grey-lighter' : ''">Users</span>
  *     </a>
  *   </ul>
  * </nav>
@@ -30,7 +30,7 @@ const noExplicitRoles: string[] = [];
   selector: '[swaRoleCheck]'
 })
 export class SwaRoleCheckDirective implements OnInit, OnDestroy {
-  @Input() set swaRoleCheckOf(value: string[]) {
+  @Input() set swaRoleCheckOf(value: AllowedRole[]) {
     // we're ignoring null/undefined to accommodate async fetching of allowed roles in the consumer template. In this
     // scenario the async pipe will initially assign a null to our input property. We skip this so that the initial
     // placeholder authz result will be in play until the allowed roles are finally fetched
@@ -48,7 +48,7 @@ export class SwaRoleCheckDirective implements OnInit, OnDestroy {
     this.userRolesFromTemplate.next(value);
   }
 
-  private allowedRoles = new ReplaySubject<string[]>(1);
+  private allowedRoles = new ReplaySubject<AllowedRole[]>(1);
   private userRolesFromTemplate = new ReplaySubject<string[]>(1);
   private subscription = new Subscription();
 
