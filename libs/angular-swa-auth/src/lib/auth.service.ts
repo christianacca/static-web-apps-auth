@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { defer, Observable, of, Subject } from 'rxjs';
-import { first, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
+import { first, map, mergeMap, shareReplay, take, tap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
 import { AuthEvent } from './auth-event';
 import { anonymousRole, ClientPrincipal } from './client-principal';
@@ -165,11 +165,18 @@ export class AuthService {
   }
 
   /**
-   * Does the current user have one or more of the `allowedRoles` supplied
+   * Does the current user have one or more of the `allowedRoles` supplied.
+   *
+   * Note: because the observable returned completes, consumers do NOT have to unsubscribe from it
+   *
    * @param allowedRoles The list of roles to check
+   * @return {Observable<boolean>} an observable that returns true/false and then completes
    */
   hasSomeRoles$(allowedRoles: AllowedRole[]) {
-    return this.userLoaded$.pipe(map(user => hasSomeAllowedRoles(allowedRoles, user?.userRoles ?? noExplicitRoles)));
+    return this.userLoaded$.pipe(
+      map(user => hasSomeAllowedRoles(allowedRoles, user?.userRoles ?? noExplicitRoles)),
+      take(1)
+    );
   }
 
   /**

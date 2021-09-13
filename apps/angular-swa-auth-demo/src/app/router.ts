@@ -10,7 +10,7 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
   {
     path: 'products',
-    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () => import('@christianacca/demo-app/products').then(m => m.ProductsModule)
   },
   {
@@ -18,7 +18,7 @@ export const routes: Routes = [
     data: {
       allowedRoles: RoutePermissions.adminArea
     },
-    canActivate: [AuthGuard, SwaRoleGuard],
+    canActivate: [SwaRoleGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'landing' },
       { path: 'landing', component: AdminLandingComponent },
@@ -27,7 +27,7 @@ export const routes: Routes = [
         data: {
           allowedRoles: RoutePermissions.productAdminArea
         },
-        canActivate: [SwaRoleGuard],
+        canLoad: [SwaRoleGuard],
         loadChildren: () => import('@christianacca/demo-app/product-admin').then(m => m.ProductAdminModule)
       },
       {
@@ -35,7 +35,7 @@ export const routes: Routes = [
         data: {
           allowedRoles: RoutePermissions.userAdminArea
         },
-        canActivate: [SwaRoleGuard],
+        canLoad: [SwaRoleGuard],
         loadChildren: () => import('@christianacca/demo-app/user-admin').then(m => m.UserAdminModule)
       }
     ]
