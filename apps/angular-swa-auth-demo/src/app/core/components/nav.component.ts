@@ -48,7 +48,7 @@ export class NavComponent {
   private redirectUrl = '/about';
 
   constructor(private authService: AuthService) {
-    this.userInfo$ = this.authService.userLoaded$;
+    this.userInfo$ = this.authService.currentUser$;
   }
 
   async login() {

@@ -90,6 +90,15 @@ export const hasSomeAllowedRoles = (allowedRoles: AllowedRole[], actualRoles: st
 })
 export class AuthService {
   /**
+   * Return the current authenticated user or `null` when the user is not authenticated.
+   *
+   * The first subscriber will trigger a fetch from the built-in user api endpoint. Late subscribers will then receive
+   * the last value emitted.
+   *
+   */
+  currentUser$: Observable<ClientPrincipal | null>;
+
+  /**
    * The identity providers available to login with.
    * Note: This is just a convenient alias of `AuthConfig.identityProviders`
    */
@@ -110,15 +119,6 @@ export class AuthService {
    */
   sessionEvents$ = this.sessionEvents.asObservable();
 
-  /**
-   * An event that will emit user details is fetched from the api. The value emitted will
-   * be undefined when the user is not authenticated
-   *
-   * Late subscribers will receive the last value emitted.
-   *
-   */
-  userLoaded$: Observable<ClientPrincipal | null>;
-
   private currentIdp$: Observable<string | undefined>;
 
   constructor(
@@ -126,7 +126,7 @@ export class AuthService {
     private storage: StorageService,
     private idpSelectorService: IdentityProviderSelectorService
   ) {
-    this.userLoaded$ = defer(() => this.httpGet<AuthResponseData>('/.auth/me')).pipe(
+    this.currentUser$ = defer(() => this.httpGet<AuthResponseData>('/.auth/me')).pipe(
       map(resp => resp.clientPrincipal),
       tap(user => {
         if (user) {
@@ -136,12 +136,12 @@ export class AuthService {
       shareReplay({ bufferSize: 1, refCount: false })
     );
 
-    this.isAuthenticated$ = this.userLoaded$.pipe(
+    this.isAuthenticated$ = this.currentUser$.pipe(
       map(user => !!user),
       shareReplay({ bufferSize: 1, refCount: false })
     );
 
-    this.currentIdp$ = this.userLoaded$.pipe(map(user => user?.identityProvider));
+    this.currentIdp$ = this.currentUser$.pipe(map(user => user?.identityProvider));
   }
 
   /**
@@ -155,7 +155,7 @@ export class AuthService {
    * @see `login`
    */
   async ensureLoggedIn(targetUrl?: string): Promise<boolean> {
-    const user = await this.userLoaded$.pipe(first()).toPromise();
+    const user = await this.currentUser$.pipe(first()).toPromise();
     if (user) {
       return true;
     }
@@ -173,7 +173,7 @@ export class AuthService {
    * @return {Observable<boolean>} an observable that returns true/false and then completes
    */
   hasSomeRoles$(allowedRoles: AllowedRole[]) {
-    return this.userLoaded$.pipe(
+    return this.currentUser$.pipe(
       map(user => hasSomeAllowedRoles(allowedRoles, user?.userRoles ?? noExplicitRoles)),
       take(1)
     );
@@ -208,7 +208,7 @@ export class AuthService {
    * @returns {boolean} false when the user is not already authenticated, true otherwise
    */
   async logout(redirectUrl?: string): Promise<boolean> {
-    const user = await this.userLoaded$.toPromise();
+    const user = await this.currentUser$.toPromise();
     if (!user) {
       return false;
     }
@@ -229,7 +229,7 @@ export class AuthService {
    * @returns {boolean} false when the user is authenticated, true otherwise
    */
   async purge(options: PurgeOptions = {}): Promise<boolean> {
-    const user = await this.userLoaded$.toPromise();
+    const user = await this.currentUser$.toPromise();
     if (!user) {
       return false;
     }

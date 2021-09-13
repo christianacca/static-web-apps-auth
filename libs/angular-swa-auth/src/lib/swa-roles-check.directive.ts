@@ -64,7 +64,7 @@ export class SwaRoleCheckDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const injectedRoles$ = this.authService.userLoaded$.pipe(
+    const injectedRoles$ = this.authService.currentUser$.pipe(
       map(user => user?.userRoles),
       takeUntil(this.userRolesFromTemplate)
     );
