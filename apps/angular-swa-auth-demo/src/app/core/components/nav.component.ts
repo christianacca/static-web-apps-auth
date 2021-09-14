@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 import { AuthService, ClientPrincipal } from '@christianacca/angular-swa-auth';
+import { RoutePermissions } from '@christianacca/demo-app/core';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
   template: `
-    <nav class="menu" *swaRoleCheck="let isAdmin of ['admin']; let maybeAdmin = isPlaceholder">
+    <nav class="menu" *swaRoleCheck="let canAdmin of routePermissions.adminArea; let maybeCanAdmin = isPlaceholder">
       <p class="menu-label">Menu</p>
       <ul class="menu-list">
         <a routerLink="/products" routerLinkActive="is-active">
           <span>Products</span>
         </a>
-        <a routerLink="/users" routerLinkActive="is-active">
-          <progress *ngIf="maybeAdmin" class="progress is-primary is-medium" max="100">15%</progress>
-          <span *ngIf="!maybeAdmin" [ngClass]="!isAdmin ? 'has-text-grey-lighter' : ''">Users</span>
+        <a routerLink="/admin-area" routerLinkActive="is-active">
+          <progress *ngIf="maybeCanAdmin" class="progress is-primary is-medium" max="100">15%</progress>
+          <span *ngIf="!maybeCanAdmin" [ngClass]="!canAdmin ? 'has-text-grey-lighter' : ''">Admin Area</span>
         </a>
         <a routerLink="/about" routerLinkActive="is-active">
           <span>About</span>
@@ -41,12 +42,13 @@ import { Observable } from 'rxjs';
   `
 })
 export class NavComponent {
+  routePermissions = RoutePermissions;
   userInfo$: Observable<ClientPrincipal | null>;
 
   private redirectUrl = '/about';
 
   constructor(private authService: AuthService) {
-    this.userInfo$ = this.authService.userLoaded$;
+    this.userInfo$ = this.authService.currentUser$;
   }
 
   async login() {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { defer, Observable, of, Subject } from 'rxjs';
-import { first, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
+import { first, map, mergeMap, shareReplay, take, tap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
 import { AuthEvent } from './auth-event';
 import { anonymousRole, ClientPrincipal } from './client-principal';
@@ -13,6 +13,8 @@ import { StorageService } from './storage.service';
 interface AuthResponseData {
   clientPrincipal: ClientPrincipal | null;
 }
+
+export type AllowedRole = string | AllowedRole[];
 
 /**
  * Options that control the behaviour when purging user information
@@ -71,8 +73,14 @@ const signingUpFlagKey = `${storageKeyPrefix}_signing_up`;
  * Is one or more of the `allowedRoles` in `actualRoles`. Implicitly every user (authenticated or unauthenticated)
  * is a member of the {@link anonymousRole} and that is assumed when verifying `allowedRoles`
  */
-export const hasSomeAllowedRoles = (allowedRoles: string[], actualRoles: string[]) =>
-  allowedRoles.length === 0 || allowedRoles.includes(anonymousRole) || allowedRoles.some(r => actualRoles.includes(r));
+export const hasSomeAllowedRoles = (allowedRoles: AllowedRole[], actualRoles: string[]) => {
+  const allowedRoleNames = allowedRoles.flat(10) as unknown as string[];
+  return (
+    allowedRoleNames.length === 0 ||
+    allowedRoleNames.includes(anonymousRole) ||
+    allowedRoleNames.some(r => actualRoles.includes(r))
+  );
+};
 
 /**
  * The main service for working with authenticated users
@@ -81,6 +89,15 @@ export const hasSomeAllowedRoles = (allowedRoles: string[], actualRoles: string[
   providedIn: 'root'
 })
 export class AuthService {
+  /**
+   * Return the current authenticated user or `null` when the user is not authenticated.
+   *
+   * The first subscriber will trigger a fetch from the built-in user api endpoint. Late subscribers will then receive
+   * the last value emitted.
+   *
+   */
+  currentUser$: Observable<ClientPrincipal | null>;
+
   /**
    * The identity providers available to login with.
    * Note: This is just a convenient alias of `AuthConfig.identityProviders`
@@ -102,15 +119,6 @@ export class AuthService {
    */
   sessionEvents$ = this.sessionEvents.asObservable();
 
-  /**
-   * An event that will emit user details is fetched from the api. The value emitted will
-   * be undefined when the user is not authenticated
-   *
-   * Late subscribers will receive the last value emitted.
-   *
-   */
-  userLoaded$: Observable<ClientPrincipal | null>;
-
   private currentIdp$: Observable<string | undefined>;
 
   constructor(
@@ -118,7 +126,7 @@ export class AuthService {
     private storage: StorageService,
     private idpSelectorService: IdentityProviderSelectorService
   ) {
-    this.userLoaded$ = defer(() => this.httpGet<AuthResponseData>('/.auth/me')).pipe(
+    this.currentUser$ = defer(() => this.httpGet<AuthResponseData>('/.auth/me')).pipe(
       map(resp => resp.clientPrincipal),
       tap(user => {
         if (user) {
@@ -128,12 +136,12 @@ export class AuthService {
       shareReplay({ bufferSize: 1, refCount: false })
     );
 
-    this.isAuthenticated$ = this.userLoaded$.pipe(
+    this.isAuthenticated$ = this.currentUser$.pipe(
       map(user => !!user),
       shareReplay({ bufferSize: 1, refCount: false })
     );
 
-    this.currentIdp$ = this.userLoaded$.pipe(map(user => user?.identityProvider));
+    this.currentIdp$ = this.currentUser$.pipe(map(user => user?.identityProvider));
   }
 
   /**
@@ -147,7 +155,7 @@ export class AuthService {
    * @see `login`
    */
   async ensureLoggedIn(targetUrl?: string): Promise<boolean> {
-    const user = await this.userLoaded$.pipe(first()).toPromise();
+    const user = await this.currentUser$.pipe(first()).toPromise();
     if (user) {
       return true;
     }
@@ -157,11 +165,18 @@ export class AuthService {
   }
 
   /**
-   * Does the current user have one or more of the `allowedRoles` supplied
+   * Does the current user have one or more of the `allowedRoles` supplied.
+   *
+   * Note: because the observable returned completes, consumers do NOT have to unsubscribe from it
+   *
    * @param allowedRoles The list of roles to check
+   * @return {Observable<boolean>} an observable that returns true/false and then completes
    */
-  hasSomeRoles$(allowedRoles: string[]) {
-    return this.userLoaded$.pipe(map(user => hasSomeAllowedRoles(allowedRoles, user?.userRoles ?? noExplicitRoles)));
+  hasSomeRoles$(allowedRoles: AllowedRole[]) {
+    return this.currentUser$.pipe(
+      map(user => hasSomeAllowedRoles(allowedRoles, user?.userRoles ?? noExplicitRoles)),
+      take(1)
+    );
   }
 
   /**
@@ -193,7 +208,7 @@ export class AuthService {
    * @returns {boolean} false when the user is not already authenticated, true otherwise
    */
   async logout(redirectUrl?: string): Promise<boolean> {
-    const user = await this.userLoaded$.toPromise();
+    const user = await this.currentUser$.toPromise();
     if (!user) {
       return false;
     }
@@ -214,7 +229,7 @@ export class AuthService {
    * @returns {boolean} false when the user is authenticated, true otherwise
    */
   async purge(options: PurgeOptions = {}): Promise<boolean> {
-    const user = await this.userLoaded$.toPromise();
+    const user = await this.currentUser$.toPromise();
     if (!user) {
       return false;
     }

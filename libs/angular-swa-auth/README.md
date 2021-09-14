@@ -139,8 +139,33 @@ For all other use cases, this library will likely add value.
      }
    ];
    ```
+
+4. Optionally add `SwaRoleGuard` to your route(s)
+
+   ```ts
+   import { AuthGuard } from '@christianacca/angular-swa-auth';
    
-4. Optionally send authentication session events to your function app api
+   const routes: Route[] = [
+     {
+       path: 'product-admin',
+       data: {
+         allowedRoles: 'admin' // other ex: ['admin', 'owner']  ['admin', ['product-reader', 'owner']]
+       },
+       canActivate: [SwaRoleGuard],
+       component: AdminComponent
+     },
+     {
+       path: 'user-admin',
+       data: {
+         allowedRoles: 'owner'
+       },
+       canLoad: [SwaRoleGuard],
+       loadChildren: () => import('@christianacca/demo-app/user-admin').then(m => m.UserAdminModule)
+     }
+   ];
+   ```
+   
+5. Optionally send authentication session events to your function app api
 
    ```ts
      imports: [

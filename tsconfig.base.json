@@ -10,16 +10,18 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["ES2019", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@christianacca/angular-swa-auth": ["libs/angular-swa-auth/src/index.ts"],
       "@christianacca/demo-app/common-ui": ["libs/demo-app/common-ui/src/index.ts"],
+      "@christianacca/demo-app/core": ["libs/demo-app/core/src/index.ts"],
+      "@christianacca/demo-app/product-admin": ["libs/demo-app/product-admin/src/index.ts"],
       "@christianacca/demo-app/products": ["libs/demo-app/products/src/index.ts"],
       "@christianacca/demo-app/shared-types": ["libs/demo-app/shared-types/src/index.ts"],
-      "@christianacca/demo-app/users": ["libs/demo-app/users/src/index.ts"]
+      "@christianacca/demo-app/user-admin": ["libs/demo-app/user-admin/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

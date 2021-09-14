@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2021-09-14
+
+### Added
+
+- `SwaRoleCheckDirective`: `allowedRoles` input property supports nested array's of role names
+- `SwaRoleGuard`: 
+  - `allowedRoles` route data configuration supports nested array's of role names
+  - new `canLoad` implementation for use with lazy loaded routes
+- `AuthGuard`: new `canLoad` implementation for use with lazy loaded routes
+
+### Fixes
+
+- `AuthService`: `hasSomeRoles$` should complete immediately after computing its result
+
+### Breaking changes
+
+#### Renamed `AuthService.userLoaded$` to `currentUser$`
+
+This is to better express intention that this observable returns the authenticated state of the current user rather than a stream of events over time.
+
+#### `AuthService.hasSomeRoles$` observable completes
+
+`hasSomeRoles$` now returns an `Observable` that emits a  completion notification immediately after computing its result. The implication is that consumers 
+no longer need to unsubscribe from it.
+
+#### `SwaRoleGuard` triggers sign in flow
+
+`SwaRoleGuard` no longer redirects to unauthorized route when user is not yet authenticated but instead will prompt user to sign-in.
+
 ## [1.1.1] - 2021-09-06
 
 ### Fixes
