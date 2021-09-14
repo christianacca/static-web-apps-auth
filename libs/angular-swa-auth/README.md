@@ -98,7 +98,7 @@ For all other use cases, this library will likely add value.
      providers = this.authService.identityProviders;
 
      constructor(private authService: AuthService) {
-       this.userInfo$ = this.authService.userLoaded$;
+       this.userInfo$ = this.authService.currentUser$;
      }
 
      login(identityProvider: string) {
@@ -179,16 +179,51 @@ For all other use cases, this library will likely add value.
 
    **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://docs.angular-swa-auth.codingdemo.co.uk/interfaces/AuthEventPayload.html)
 
+## Next steps
+
+### Running your app locally
+
+1. Install the Azure Static Web app emulator
+
+   ```bash
+   npm i @azure/static-web-apps-cli -D
+   ```
+   
+2. Add npm script to run your angular app
+
+   In package.json add the following to the scripts block:
+
+   ```json
+   {
+     "scripts": {
+       "start:swa": "swa start http://localhost:4200 --run \"npm start\""
+     }
+   }
+   ```
+   
+3. Serve your app:
+
+   ```bash
+   npm run start:swa
+   ```
+   
+   You can now browse to your app at: <http:localhost:4280>
+
+### Deploying your app to Azure Static Web Apps service
+
+Follow the official guidance here: <https://docs.microsoft.com/en-us/azure/static-web-apps/get-started-portal?tabs=angular>
+
 ## More resources
 
-- Library source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/libs/angular-swa-auth>
+- [Azure Static Web Apps documentation](https://docs.microsoft.com/en-us/azure/static-web-apps/)
+- [Library source code](https://github.com/christianacca/static-web-apps-auth/tree/master/libs/angular-swa-auth)
 - Library documentation: 
   - [reference](https://docs.angular-swa-auth.codingdemo.co.uk)
   - [storybook](https://stories.angular-swa-auth.codingdemo.co.uk)
 - Full working demo:  
-  - deployed site: [angular-swa-auth.codingdemo.co.uk](https://angular-swa-auth.codingdemo.co.uk)
-  - source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-demo>
+  - [deployed site](https://angular-swa-auth.codingdemo.co.uk)
+  - [source code](https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-demo)
 - Demo app that does NOT use a library to implement simple authentication: 
-  - deployed site: [angular-swa-auth-nolib](https://angular-swa-auth-nolib.codingdemo.co.uk)
-  - source code: <https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-nolib>
+  - [deployed site](https://angular-swa-auth-nolib.codingdemo.co.uk)
+  - [source code](https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-nolib)
   
