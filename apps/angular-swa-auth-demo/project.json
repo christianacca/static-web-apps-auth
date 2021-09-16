@@ -113,5 +113,5 @@
       }
     }
   },
-  "tags": ["framework:angular"]
+  "tags": ["scope:angular-swa-auth-demo", "framework:angular"]
 }

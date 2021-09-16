@@ -22,5 +22,5 @@
       }
     }
   },
-  "tags": ["type:feature", "framework:angular"]
+  "tags": ["scope:angular-swa-auth-demo", "type:feature", "framework:angular"]
 }

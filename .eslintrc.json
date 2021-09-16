@@ -23,6 +23,26 @@
               {
                 "sourceTag": "framework:pojo",
                 "onlyDependOnLibsWithTags": ["framework:pojo"]
+              },
+              {
+                "sourceTag": "bundle:main",
+                "onlyDependOnLibsWithTags": ["bundle:main"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:public"]
+              },
+              {
+                "sourceTag": "scope:public",
+                "onlyDependOnLibsWithTags": ["scope:public"]
+              },
+              {
+                "sourceTag": "scope:angular-swa-auth-demo",
+                "onlyDependOnLibsWithTags": ["scope:angular-swa-auth-demo", "scope:shared", "scope:public"]
+              },
+              {
+                "sourceTag": "scope:angular-swa-auth-nolib",
+                "onlyDependOnLibsWithTags": ["scope:angular-swa-auth-nolib", "scope:shared", "scope:public"]
               }
             ]
           }

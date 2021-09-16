@@ -20,5 +20,5 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "tags": ["framework:angular", "type:feature"]
+  "tags": ["scope:shared", "type:feature", "framework:angular"]
 }

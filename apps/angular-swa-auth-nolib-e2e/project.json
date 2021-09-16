@@ -24,6 +24,6 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "tags": [],
+  "tags": ["scope:angular-swa-auth-nolib", "type:e2e"],
   "implicitDependencies": ["angular-swa-auth-nolib"]
 }

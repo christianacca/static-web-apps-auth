@@ -24,6 +24,6 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "tags": ["angular"],
+  "tags": ["scope:angular-swa-auth-demo", "type:e2e", "framework:angular"],
   "implicitDependencies": ["angular-swa-auth-demo"]
 }

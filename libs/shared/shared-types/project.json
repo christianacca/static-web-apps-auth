@@ -19,5 +19,5 @@
       }
     }
   },
-  "tags": ["framework:pojo"]
+  "tags": ["scope:shared", "type:util", "framework:pojo"]
 }
