@@ -1,4 +1,4 @@
-import type { Product } from '@christianacca/demo-app/shared-types';
+import type { Product } from '@christianacca/shared/shared-types';
 
 const products: Product[] = [
   {

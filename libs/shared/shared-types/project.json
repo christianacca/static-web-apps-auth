@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/shared-types",
+  "sourceRoot": "libs/shared/shared-types/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/shared/shared-types/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/shared-types"],
+      "options": {
+        "jestConfig": "libs/shared/shared-types/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["framework:pojo"]
+}

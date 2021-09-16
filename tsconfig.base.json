@@ -16,12 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@christianacca/angular-swa-auth": ["libs/angular-swa-auth/src/index.ts"],
-      "@christianacca/demo-app/common-ui": ["libs/demo-app/common-ui/src/index.ts"],
-      "@christianacca/demo-app/core": ["libs/demo-app/core/src/index.ts"],
-      "@christianacca/demo-app/product-admin": ["libs/demo-app/product-admin/src/index.ts"],
-      "@christianacca/demo-app/products": ["libs/demo-app/products/src/index.ts"],
-      "@christianacca/demo-app/shared-types": ["libs/demo-app/shared-types/src/index.ts"],
-      "@christianacca/demo-app/user-admin": ["libs/demo-app/user-admin/src/index.ts"]
+      "@christianacca/angular-swa-auth-demo/core": ["libs/angular-swa-auth-demo/core/src/index.ts"],
+      "@christianacca/angular-swa-auth-demo/product-admin": ["libs/angular-swa-auth-demo/product-admin/src/index.ts"],
+      "@christianacca/angular-swa-auth-demo/shell": ["libs/angular-swa-auth-demo/shell/src/index.ts"],
+      "@christianacca/angular-swa-auth-demo/user-admin": ["libs/angular-swa-auth-demo/user-admin/src/index.ts"],
+      "@christianacca/shared/common-ui": ["libs/shared/common-ui/src/index.ts"],
+      "@christianacca/shared/products": ["libs/shared/products/src/index.ts"],
+      "@christianacca/shared/shared-types": ["libs/shared/shared-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

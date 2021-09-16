@@ -3,15 +3,16 @@
   "projects": {
     "angular-swa-auth": "libs/angular-swa-auth",
     "angular-swa-auth-demo": "apps/angular-swa-auth-demo",
+    "angular-swa-auth-demo-core": "libs/angular-swa-auth-demo/core",
     "angular-swa-auth-demo-e2e": "apps/angular-swa-auth-demo-e2e",
+    "angular-swa-auth-demo-product-admin": "libs/angular-swa-auth-demo/product-admin",
+    "angular-swa-auth-demo-shell": "libs/angular-swa-auth-demo/shell",
+    "angular-swa-auth-demo-user-admin": "libs/angular-swa-auth-demo/user-admin",
     "angular-swa-auth-nolib": "apps/angular-swa-auth-nolib",
     "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e",
-    "demo-app-common-ui": "libs/demo-app/common-ui",
-    "demo-app-core": "libs/demo-app/core",
-    "demo-app-product-admin": "libs/demo-app/product-admin",
-    "demo-app-products": "libs/demo-app/products",
-    "demo-app-shared-types": "libs/demo-app/shared-types",
-    "demo-app-user-admin": "libs/demo-app/user-admin"
+    "shared-common-ui": "libs/shared/common-ui",
+    "shared-products": "libs/shared/products",
+    "shared-shared-types": "libs/shared/shared-types"
   },
   "cli": {
     "defaultCollection": "@nrwl/angular"

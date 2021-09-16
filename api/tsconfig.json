@@ -8,7 +8,7 @@
     "strict": false,
     "baseUrl": ".",
     "paths": {
-      "@christianacca/demo-app/shared-types": ["../libs/demo-app/shared-types/src/index.ts"]
+      "@christianacca/shared/shared-types": ["../libs/shared/shared-types/src/index.ts"]
     }
   },
   "exclude": [
