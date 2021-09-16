@@ -84,6 +84,22 @@ npm run serve-compodoc angular-swa-auth
 npm run storybook angular-swa-auth
 ```
 
+## Running linting
+
+Note: we're using `yarn` to run the commands below, this simplifies the syntax of command you type.
+
+```bash
+# lint all projects
+yarn run-many:lint --all
+# lint single library
+yarn lint your-lib
+# lint all affected by a change
+yarn affected:lint
+```
+
+- replace _your-app_ and _your-lib_ with the actual name of the project. EG: `angular-swa-auth-demo`, `angular-swa-auth-demo-product-admin`
+- To only test code affected by your current _uncommitted_ changes add to the `--affected:lint` command: `--base=HEAD`
+
 ## Deploy
 
 The demo apps and library document site are deployed as Azure static web apps:

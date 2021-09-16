@@ -1,0 +1,24 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/products",
+  "sourceRoot": "libs/shared/products/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/products"],
+      "options": {
+        "jestConfig": "libs/shared/products/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/shared/products/src/**/*.ts", "libs/shared/products/src/**/*.html"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": ["scope:shared", "type:feature", "framework:angular"]
+}

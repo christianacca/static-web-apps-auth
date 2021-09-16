@@ -1,5 +1,5 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
-import type { Product } from '@christianacca/demo-app/shared-types';
+import type { Product } from '@christianacca/shared/shared-types';
 import * as data from '../shared';
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {

@@ -90,5 +90,5 @@
       }
     }
   },
-  "tags": ["framework:angular"]
+  "tags": ["scope:public", "type:util", "framework:angular", "bundle:main"]
 }

@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/angular-swa-auth-demo/user-admin",
+  "sourceRoot": "libs/angular-swa-auth-demo/user-admin/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular-swa-auth-demo/user-admin"],
+      "options": {
+        "jestConfig": "libs/angular-swa-auth-demo/user-admin/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular-swa-auth-demo/user-admin/src/**/*.ts",
+          "libs/angular-swa-auth-demo/user-admin/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:angular-swa-auth-demo", "type:feature", "framework:angular"]
+}

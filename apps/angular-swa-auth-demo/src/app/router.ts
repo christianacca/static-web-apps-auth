@@ -1,17 +1,14 @@
 import { Routes } from '@angular/router';
 import { AuthGuard, SwaRoleGuard } from '@christianacca/angular-swa-auth';
-import { RoutePermissions } from '@christianacca/demo-app/core';
-import { AboutComponent } from './about.component';
-import { AdminLandingComponent } from './admin-landing.component';
-import { NotFoundComponent } from './core';
-import { UnauthorizedComponent } from './unauthorized.component';
+import { RoutePermissions } from '@christianacca/angular-swa-auth-demo/core';
+import { AdminLandingComponent } from '@christianacca/angular-swa-auth-demo/shell';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
   {
     path: 'products',
     canLoad: [AuthGuard],
-    loadChildren: () => import('@christianacca/demo-app/products').then(m => m.ProductsModule)
+    loadChildren: () => import('@christianacca/shared/products').then(m => m.ProductsModule)
   },
   {
     path: 'admin-area',
@@ -28,7 +25,7 @@ export const routes: Routes = [
           allowedRoles: RoutePermissions.productAdminArea
         },
         canLoad: [SwaRoleGuard],
-        loadChildren: () => import('@christianacca/demo-app/product-admin').then(m => m.ProductAdminModule)
+        loadChildren: () => import('@christianacca/angular-swa-auth-demo/product-admin').then(m => m.ProductAdminModule)
       },
       {
         path: 'user',
@@ -36,11 +33,8 @@ export const routes: Routes = [
           allowedRoles: RoutePermissions.userAdminArea
         },
         canLoad: [SwaRoleGuard],
-        loadChildren: () => import('@christianacca/demo-app/user-admin').then(m => m.UserAdminModule)
+        loadChildren: () => import('@christianacca/angular-swa-auth-demo/user-admin').then(m => m.UserAdminModule)
       }
     ]
-  },
-  { path: 'about', component: AboutComponent },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: '**', component: NotFoundComponent }
+  }
 ];
