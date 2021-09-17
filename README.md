@@ -8,13 +8,13 @@ The repo includes the following projects:
 * a [demo app](apps/angular-swa-auth-demo) for the library
 * another [simple demo app](apps/angular-swa-auth-nolib) that does NOT require the <code>angular-swa-auth</code> helper library to implement authentication
 
-The demo apps and a documentation site for the library are all deployed as Azure static web apps:
+The demo apps and documentation sites are available here:
 
 * library documentation: 
   - [reference](https://docs.angular-swa-auth.codingdemo.co.uk)
   - [storybook examples](https://stories.angular-swa-auth.codingdemo.co.uk)
-* library demo app: <https://angular-swa-auth.codingdemo.co.uk>
-* alternative "no-library" demo app: <https://angular-swa-auth-nolib.codingdemo.co.uk>
+* [library demo app](https://angular-swa-auth.codingdemo.co.uk)
+* [alternative "no-library" demo app](https://angular-swa-auth-nolib.codingdemo.co.uk)
 
 ---
 
@@ -102,20 +102,12 @@ yarn affected:lint
 
 ## Deploy
 
-The demo apps and library document site are deployed as Azure static web apps:
+The demo apps and library document site are deployed to Azure static web apps:
 
-* library reference documentation: 
-  * [Github workflow](.github/workflows/azure-static-web-apps-polite-flower-0685e8810.yml)
-  * [Azure portal](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-docs/providers/Microsoft.Web/staticSites/angular-swa-auth-docs/staticsite)
-* library storybook documentation:
-  * [Github workflow](.github/workflows/azure-static-web-apps-white-dune-078458a10.yml)
-  * [Azure portal](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourcegroups/angular-swa-auth-stories/providers/Microsoft.Web/staticSites/angular-swa-auth-stories/staticsite)
-* library demo app:
-  * [Github workflow](.github/workflows/azure-static-web-apps-witty-mushroom-090fbbe10.yml)
-  * [Azure portal](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-demo/providers/Microsoft.Web/staticSites/angular-swa-auth-demo/staticsite)
-* alternative "no-library" demo app:
-  * [Github workflow](.github/workflows/azure-static-web-apps-proud-water-05af79a10.yml)
-  * [Azure portal](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-nolib/providers/Microsoft.Web/staticSites/angular-swa-auth-nolib/staticsite)
+* [library reference documentation](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-docs/providers/Microsoft.Web/staticSites/angular-swa-auth-docs/staticsite)
+* [library storybook documentation](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourcegroups/angular-swa-auth-stories/providers/Microsoft.Web/staticSites/angular-swa-auth-stories/staticsite)
+* [library demo app](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-demo/providers/Microsoft.Web/staticSites/angular-swa-auth-demo/staticsite)
+* [alternative "no-library" demo app](https://portal.azure.com/#@christiancrowhurstgmail.onmicrosoft.com/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/angular-swa-auth-nolib/providers/Microsoft.Web/staticSites/angular-swa-auth-nolib/staticsite)
 
 On every PR:
 
@@ -132,4 +124,4 @@ On push to master:
 
 1. Bump the version of the library in the [package.json](libs/angular-swa-auth/package.json) file (follow semver)
 2. Add details of the changes ('Added', 'Fixes', 'Breaking Changes') to the library [CHANGELOG.md](libs/angular-swa-auth/CHANGELOG.md)
-3. Push changes as a commit directly to master of submit a PR to merge to master
+3. Submit a PR to merge to master
