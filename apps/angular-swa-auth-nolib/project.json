@@ -76,7 +76,7 @@
       "options": {
         "commands": [
           {
-            "command": "swa start http://localhost:4200 --run \"npm start angular-swa-auth-nolib\" --api ./api --swa-config-location ./apps/angular-swa-auth-nolib/dev"
+            "command": "swa start http://localhost:4200 --run \"npm start angular-swa-auth-nolib\" --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-nolib/dev"
           }
         ]
       }
