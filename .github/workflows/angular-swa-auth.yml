@@ -1,4 +1,4 @@
-name: angular-swa-auth lib CI/CD
+name: Azure Static Web Apps CI/CD
 
 # Controls when the workflow will run
 on:
