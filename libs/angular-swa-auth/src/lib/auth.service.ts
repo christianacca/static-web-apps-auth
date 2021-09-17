@@ -14,6 +14,9 @@ interface AuthResponseData {
   clientPrincipal: ClientPrincipal | null;
 }
 
+/**
+ * The shape for an allowed (aka required) role
+ */
 export type AllowedRole = string | AllowedRole[];
 
 /**
