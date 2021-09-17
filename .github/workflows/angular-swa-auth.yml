@@ -12,7 +12,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: true
+
 jobs:
   build_and_publish_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
@@ -20,21 +22,34 @@ jobs:
 
     steps:
 
-      # Build demo apps, libs, storybook and docs...
-      - uses: actions/checkout@v2
+      # Build demo apps, libs, storybook and docs (uses agent jobs below to distribute tasks)...
+      - name: Checkout (non-PR)
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Checkout (PR)
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
           cache: 'npm'
           cache-dependency-path: package-lock.json
-      - run: npm ci
-      - uses: mansagroup/nrwl-nx-action@v2
-        with:
-          targets: lint,build,build-storybook,compodoc
-          parallel: true
-          nxCloud: true
+      - run: npm install
+      - run: npm run nx-cloud -- start-ci-run
+      - run: npm run nx -- affected --target=lint --parallel
+      - run: npm run nx -- affected --target=build --parallel
+      - run: npm run nx -- affected --target=build-storybook --parallel
+      - run: npm run nx -- affected --target=compodoc --parallel
+      - run: npm run nx-cloud -- stop-all-agents
 
       # Publish library...
       - name: "Check library affected"
@@ -145,6 +160,23 @@ jobs:
           skip_app_build: true
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+
+  agents:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Agent 1
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        agent: [ 1, 2, 3 ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - run: npm install
+      - name: Start Nx Agent ${{ matrix.agent }}
+        run: npx nx-cloud start-agent
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
