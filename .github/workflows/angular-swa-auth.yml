@@ -34,6 +34,7 @@ jobs:
         with:
           targets: lint,build,build-storybook,compodoc
           parallel: true
+          nxCloud: true
 
       # Publish library...
       - name: "Check library affected"
