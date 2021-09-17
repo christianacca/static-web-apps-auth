@@ -23,8 +23,7 @@ const PRIVATE_COMPONENTS = [HeaderBarBrandComponent];
         component: UnauthorizedComponent
       },
       { path: 'about', component: AboutComponent },
-      { path: 'unauthorized', component: UnauthorizedComponent },
-      { path: '**', component: NotFoundComponent }
+      { path: 'unauthorized', component: UnauthorizedComponent }
     ]),
     SwaAuthModule
   ],
@@ -34,4 +33,4 @@ const PRIVATE_COMPONENTS = [HeaderBarBrandComponent];
 export class ShellModule {}
 
 // make public (ie available outside of this library)...
-export { AdminLandingComponent };
+export { AdminLandingComponent, NotFoundComponent };

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard, SwaRoleGuard } from '@christianacca/angular-swa-auth';
 import { RoutePermissions } from '@christianacca/angular-swa-auth-demo/core';
-import { AdminLandingComponent } from '@christianacca/angular-swa-auth-demo/shell';
+import { AdminLandingComponent, NotFoundComponent } from '@christianacca/angular-swa-auth-demo/shell';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
@@ -36,5 +36,6 @@ export const routes: Routes = [
         loadChildren: () => import('@christianacca/angular-swa-auth-demo/user-admin').then(m => m.UserAdminModule)
       }
     ]
-  }
+  },
+  { path: '**', component: NotFoundComponent }
 ];
