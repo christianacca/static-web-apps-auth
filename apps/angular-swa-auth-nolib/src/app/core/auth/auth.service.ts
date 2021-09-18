@@ -19,10 +19,10 @@ export class AuthService {
    * Late subscribers will receive the last value emitted.
    *
    */
-  userLoaded$: Observable<ClientPrincipal>;
+  currentUser$: Observable<ClientPrincipal>;
 
   constructor(private httpClient: HttpClient) {
-    this.userLoaded$ = this.httpClient.get<AuthResponseData>('/.auth/me').pipe(
+    this.currentUser$ = this.httpClient.get<AuthResponseData>('/.auth/me').pipe(
       map(resp => resp.clientPrincipal),
       shareReplay({ bufferSize: 1, refCount: false })
     );

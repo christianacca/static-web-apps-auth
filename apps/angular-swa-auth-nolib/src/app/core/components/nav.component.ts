@@ -35,6 +35,6 @@ export class NavComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   async ngOnInit() {
-    this.userInfo = await this.authService.userLoaded$.toPromise();
+    this.userInfo = await this.authService.currentUser$.toPromise();
   }
 }
