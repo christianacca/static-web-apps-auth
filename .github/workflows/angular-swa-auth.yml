@@ -30,7 +30,8 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - run: npm ci
-      - uses: mansagroup/nrwl-nx-action@v2
+      - name: "Run linting and builds"
+        uses: mansagroup/nrwl-nx-action@v2
         with:
           targets: lint,build,build-storybook,compodoc
           parallel: true
