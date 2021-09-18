@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService, ClientPrincipal } from '../auth';
 
 @Component({
@@ -22,19 +23,17 @@ import { AuthService, ClientPrincipal } from '../auth';
         <a href="/.auth/purge/github">Forget me</a>
       </div>
     </nav>
-    <div class="user">
+    <div class="user" *ngIf="userInfo$ | async as user">
       <p>Welcome</p>
-      <p>{{ userInfo.userDetails }}</p>
-      <p>{{ userInfo.identityProvider }}</p>
+      <p>{{ user.userDetails }}</p>
+      <p>{{ user.identityProvider }}</p>
     </div>
   `
 })
-export class NavComponent implements OnInit {
-  userInfo!: ClientPrincipal;
+export class NavComponent {
+  userInfo$: Observable<ClientPrincipal | null>;
 
-  constructor(private authService: AuthService) {}
-
-  async ngOnInit() {
-    this.userInfo = await this.authService.currentUser$.toPromise();
+  constructor(private authService: AuthService) {
+    this.userInfo$ = this.authService.currentUser$;
   }
 }
