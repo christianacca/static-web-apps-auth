@@ -13,20 +13,17 @@ const user: ClientPrincipal = {
   userRoles: []
 };
 
+const fakeAuthService: Pick<AuthService, 'currentUser$'> = {
+  currentUser$: new BehaviorSubject(user)
+};
+
 export default {
   title: 'SwaRoleCheckDirective',
   component: SwaRoleCheckDirective,
   decorators: [
     moduleMetadata({
       imports: [CommonModule],
-      providers: [
-        {
-          provide: AuthService,
-          useValue: {
-            userLoaded$: new BehaviorSubject(user)
-          }
-        }
-      ]
+      providers: [{ provide: AuthService, useValue: fakeAuthService }]
     })
   ]
 } as Meta;
