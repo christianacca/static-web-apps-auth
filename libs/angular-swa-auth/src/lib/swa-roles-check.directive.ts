@@ -1,7 +1,8 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { combineLatest, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { AllowedRole, AuthService, hasSomeAllowedRoles } from './auth.service';
+import { AllowedRole, AuthService } from './auth.service';
+import { hasSomeAllowedRoles } from './has-some-allowed-roles';
 
 /**
  * @ignore

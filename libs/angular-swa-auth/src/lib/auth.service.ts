@@ -3,7 +3,8 @@ import { defer, Observable, of, Subject } from 'rxjs';
 import { first, map, mergeMap, shareReplay, take, tap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
 import { AuthEvent } from './auth-event';
-import { anonymousRole, ClientPrincipal } from './client-principal';
+import { ClientPrincipal } from './client-principal';
+import { hasSomeAllowedRoles } from './has-some-allowed-roles';
 import { IdentityProviderSelectorService } from './identity-provider-selector.service';
 import { StorageService } from './storage.service';
 
@@ -71,19 +72,6 @@ const storageKeyPrefix = 'angular_swa_auth';
  * @ignore
  */
 const signingUpFlagKey = `${storageKeyPrefix}_signing_up`;
-
-/**
- * Is one or more of the `allowedRoles` in `actualRoles`. Implicitly every user (authenticated or unauthenticated)
- * is a member of the {@link anonymousRole} and that is assumed when verifying `allowedRoles`
- */
-export const hasSomeAllowedRoles = (allowedRoles: AllowedRole[], actualRoles: string[]) => {
-  const allowedRoleNames = allowedRoles.flat(10) as unknown as string[];
-  return (
-    allowedRoleNames.length === 0 ||
-    allowedRoleNames.includes(anonymousRole) ||
-    allowedRoleNames.some(r => actualRoles.includes(r))
-  );
-};
 
 /**
  * The main service for working with authenticated users

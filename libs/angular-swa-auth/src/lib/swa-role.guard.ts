@@ -13,6 +13,7 @@ import { from, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
 import { AllowedRole, AuthService } from './auth.service';
+import { flattenAllowedRoles } from './has-some-allowed-roles';
 
 /**
  * Add to a route to perform an authorization check using roles defined in Status Web App.
@@ -24,17 +25,22 @@ import { AllowedRole, AuthService } from './auth.service';
  * field on `Route.data` for the route about to be navigated to.
  *
  * Where the user is deemed unauthorized the SPA will be routed to the client-side route configured
- * using {@link AuthConfig.unauthorizedRoute}
+ * using {@link AuthConfig.unauthorizedRoute}.
+ *
+ * The  allowed role(s) from the matching route will be passed as query string parameters to this nominated
+ * unauthorized route.
  *
  * @see {AuthService.hasSomeRoles$}
  *
  * @example
  * ```ts
+ * // app.module.ts...
+ *
  * export const routes: Routes = [
  *   {
  *     path: 'product-admin',
  *     data: {
- *       allowedRoles: 'admin' // other ex: ['admin', 'owner']  ['admin', ['product-reader', 'owner']]
+ *       allowedRoles: 'admin' // other ex: ['admin', ['product-reader', 'owner']]
  *     },
  *     canActivate: [SwaRoleGuard],
  *     component: AdminComponent
@@ -48,6 +54,15 @@ import { AllowedRole, AuthService } from './auth.service';
  *     loadChildren: () => import('@christianacca/demo-app/user-admin').then(m => m.UserAdminModule)
  *   }
  * ];
+ *
+ * // unauthorized.component.ts...
+ *
+ * export class UnauthorizedComponent {
+ *   allowedRoles: string[];
+ *   constructor(route: ActivatedRoute) {
+ *     this.allowedRoles = route.snapshot.queryParamMap.getAll('allowedRoles');
+ *   }
+ * }
  * ```
  */
 @Injectable({
@@ -99,6 +114,12 @@ export class SwaRoleGuard implements CanActivate, CanLoad {
   private ensureHasSomeRoles(allowedRoles: AllowedRole[]) {
     return this.authService
       .hasSomeRoles$(allowedRoles)
-      .pipe(map(isAuthorized => isAuthorized || this.router.parseUrl(this.config.unauthorizedRoute)));
+      .pipe(map(isAuthorized => isAuthorized || this.getUnauthorizedUrl(allowedRoles)));
+  }
+
+  private getUnauthorizedUrl(allowedRoles: AllowedRole[]) {
+    const url = this.router.parseUrl(this.config.unauthorizedRoute);
+    url.queryParams['allowedRoles'] = flattenAllowedRoles(allowedRoles);
+    return url;
   }
 }

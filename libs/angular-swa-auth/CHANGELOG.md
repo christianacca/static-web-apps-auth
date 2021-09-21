@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2021-09-21
+
+### Added
+
+- `SwaRoleGuard`: pass allowed role(s) as query string parameters to the nominated unauthorized route
+
 ## [2.0.0] - 2021-09-14
 
 ### Added
