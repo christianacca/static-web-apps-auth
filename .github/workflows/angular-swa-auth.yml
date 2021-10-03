@@ -100,7 +100,7 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/dist/apps/angular-swa-auth-nolib" # App source code path
           config_file_location: "/apps/angular-swa-auth-nolib"
-          api_location: "api" # Api source code path - optional
+          api_location: "" # There is a problem trying to build the api again (its already been built above; following this issue to resolve: https://github.com/Azure/static-web-apps/issues/343
           skip_app_build: true
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
