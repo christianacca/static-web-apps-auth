@@ -8,7 +8,8 @@
       "executor": "@nrwl/angular:package",
       "outputs": ["dist/libs/angular-swa-auth"],
       "options": {
-        "project": "libs/angular-swa-auth/ng-package.json"
+        "project": "libs/angular-swa-auth/ng-package.json",
+        "tsConfig": "libs/angular-swa-auth/tsconfig.lib.prod.json"
       },
       "configurations": {
         "production": {
@@ -52,7 +53,17 @@
       "options": {
         "commands": [
           {
-            "command": "nx compodoc angular-swa-auth && http-server ./dist/compodoc/angular-swa-auth"
+            "command": "nx compodoc angular-swa-auth --serve"
+          }
+        ]
+      }
+    },
+    "watch-compodoc": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx compodoc angular-swa-auth --serve --watch"
           }
         ]
       }
@@ -65,7 +76,8 @@
         "tsConfig": "libs/angular-swa-auth/.storybook/tsconfig.json",
         "config": {
           "configFolder": "libs/angular-swa-auth/.storybook"
-        }
+        },
+        "angularBrowserTarget": "angular-swa-auth:build"
       },
       "configurations": {
         "ci": {
@@ -81,7 +93,8 @@
         "outputPath": "dist/storybook/angular-swa-auth",
         "config": {
           "configFolder": "libs/angular-swa-auth/.storybook"
-        }
+        },
+        "angularBrowserTarget": "angular-swa-auth:build"
       },
       "configurations": {
         "ci": {
