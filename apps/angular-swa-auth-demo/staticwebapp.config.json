@@ -1,7 +1,7 @@
 {
   "routes": [
     {
-      "route": "/api/products/*",
+      "route": "/api/*",
       "allowedRoles": ["authenticated"]
     },
     {

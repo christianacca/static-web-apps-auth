@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="start: api" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/api/package.json" />
+    <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="start" />
+      <script value="start:api" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

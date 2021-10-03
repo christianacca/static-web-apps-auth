@@ -32,26 +32,28 @@ The demo apps and documentation sites are available here:
    - Rider:
       - [Azure Toolkit for Rider](https://plugins.jetbrains.com/plugin/11220-azure-toolkit-for-rider)
       - Azure Functions Core Tools (goto Preferences then Tools > Azure > Functions)
+      - Prettier plugin (enable option to format on save)
 
 ## Run demo app
 
 ### Command line
 
-Run backend api (terminal 1):
 ```bash
-cd ./api
-npm start
-```
-
-Run front-end (terminal 2):
-```bash
-npm run start:swa angular-swa-auth-demo
+npm run start:demo
 ```
 
 Notes:
 * Navigate to <http://localhost:4820/>
 * The front-end or api will automatically reload if you change any of their source files
-* To run the "no-library" demo app in the terminal 2 run instead: `npm run start:swa angular-swa-auth-nolib`
+
+
+To run the "no-library" demo app:
+
+```bash
+npm run start:api
+npm run start:swa angular-swa-auth-demo # <- in another terminal
+```
+
 
 ### VS Code
 
@@ -75,26 +77,29 @@ Notes:
 ## Serve doc site
 
 ```bash
-npm run serve-compodoc angular-swa-auth
+# serve
+npx nx serve-compodoc angular-swa-auth
+# serve and reload browser when source code changes
+npx nx watch-compodoc angular-swa-auth
 ```
+
+Navigate to <http://localhost:8080/>
 
 ## Run storybook site
 
 ```bash
-npm run storybook angular-swa-auth
+npx nx storybook angular-swa-auth
 ```
 
 ## Running linting
 
-Note: we're using `yarn` to run the commands below, this simplifies the syntax of command you type.
-
 ```bash
 # lint all projects
-yarn run-many:lint --all
+npx nx run-many:lint --all --parallel
 # lint single library
-yarn lint your-lib
+npx nx lint your-lib
 # lint all affected by a change
-yarn affected:lint
+npx nx affected:lint --parallel
 ```
 
 - replace _your-app_ and _your-lib_ with the actual name of the project. EG: `angular-swa-auth-demo`, `angular-swa-auth-demo-product-admin`
@@ -126,3 +131,10 @@ On push to master:
 1. Bump the version of the library in the [package.json](libs/angular-swa-auth/package.json) file (follow semver)
 2. Add details of the changes ('Added', 'Fixes', 'Breaking Changes') to the library [CHANGELOG.md](libs/angular-swa-auth/CHANGELOG.md)
 3. Submit a PR to merge to master
+
+
+---
+
+# Other guides
+
+* Create your own library repo: [create-initial-repo](docs/create-initial-repo.md)
