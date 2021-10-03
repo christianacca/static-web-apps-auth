@@ -19,6 +19,7 @@ import { AppStoreModule } from './store/store.module';
     AppStoreModule,
     externalModules,
     SwaAuthModule.forRoot({
+      sendSessionEventsToApi: true,
       identityProviderSelectorType: IdentityProviderInteractiveSelectorService,
       apiUrl: environment.API
     }),
