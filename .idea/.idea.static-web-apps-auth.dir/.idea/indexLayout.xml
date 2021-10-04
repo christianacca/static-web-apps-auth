@@ -2,7 +2,7 @@
 <project version="4">
   <component name="UserContentModel">
     <attachedFolders>
-      <Path>apps/api</Path>
+      <Path>api</Path>
     </attachedFolders>
     <explicitIncludes />
     <explicitExcludes />
