@@ -1,5 +1,7 @@
 # Static Web Apps Authentication
 
+## Overview
+
 This repo is the home to the npm package [@christianacca/angular-swa-auth](https://www.npmjs.com/package/@christianacca/angular-swa-auth)
 
 The repo includes the following projects:
@@ -16,95 +18,13 @@ The demo apps and documentation sites are available here:
 * [library demo app](https://angular-swa-auth.codingdemo.co.uk)
 * [alternative "no-library" demo app](https://angular-swa-auth-nolib.codingdemo.co.uk)
 
----
 
-# Development guide
-
-## Dev machine setup
+## Run demo app locally
 
 1. Install [nodejs](https://nodejs.org/en/) (LTS version)
 2. Clone the source code: `git clone https://github.com/christianacca/static-web-apps-auth`
-3. Install dependencies - run `npm install`
-4. Install tooling required by your IDE:
-   - VSC: 
-      - [recommended extensions](.vscode/extensions.json)
-      - [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools#installing)
-   - Rider:
-      - [Azure Toolkit for Rider](https://plugins.jetbrains.com/plugin/11220-azure-toolkit-for-rider)
-      - Azure Functions Core Tools (goto Preferences then Tools > Azure > Functions)
-      - Prettier plugin (enable option to format on save)
-
-## Run demo app
-
-### Command line
-
-```bash
-npm run start:demo
-```
-
-Notes:
-* Navigate to <http://localhost:4820/>
-* The front-end or api will automatically reload if you change any of their source files
-
-
-To run the "no-library" demo app:
-
-```bash
-npm run start:api
-npm run start:swa angular-swa-auth-demo # <- in another terminal
-```
-
-
-### VS Code
-
-1. Press `F5`. This will launch Chrome at <http://localhost:4820/>.
-2. You will need to wait 10-20 seconds to refresh the browser page.
-
-Notes:
-* The front-end will automatically reload if you change any of it's source files 
-* Making changes to the api will require re-running
-* You can set breakpoints in the IDE in both the front-end and api code
-
-### Jetbrains Rider
-
-`Run > Run > "start: demo"` OR `Run > Debug > "start: demo"`
-
-Notes:
-* Navigate to <http://localhost:4820/>
-* The front-end or api will automatically reload if you change any of their source files
-* You can set breakpoints in the IDE in the api code only
-
-## Serve doc site
-
-```bash
-# serve
-npx nx serve-compodoc angular-swa-auth
-# serve and reload browser when source code changes
-npx nx watch-compodoc angular-swa-auth
-```
-
-Navigate to <http://localhost:8080/>
-
-## Run storybook site
-
-```bash
-npx nx storybook angular-swa-auth
-```
-
-## Running linting
-
-```bash
-# lint all projects
-npx nx run-many:lint --all --parallel
-# lint single library
-npx nx lint your-lib
-# lint all affected by a change
-npx nx affected:lint --parallel
-```
-
-- replace _your-app_ and _your-lib_ with the actual name of the project. EG: `angular-swa-auth-demo`, `angular-swa-auth-demo-product-admin`
-- To only test code affected by your current _uncommitted_ changes add to the `--affected:lint` command: `--base=HEAD`
-
+3. Install dependencies: `npm install`
+4. `npm run start:demo` then browse to <http://localhost:4820/>
 
 ## Deploy
 
@@ -126,15 +46,10 @@ On push to master:
 * Documentation and demo app sites will be deployed to an prod environment
 * Publish of the library package to npm where the version in [package.json](libs/angular-swa-auth/package.json) is different to the versions already published to npm
 
-## Releasing a new version
+## Contributing
 
-1. Bump the version of the library in the [package.json](libs/angular-swa-auth/package.json) file (follow semver)
-2. Add details of the changes ('Added', 'Fixes', 'Breaking Changes') to the library [CHANGELOG.md](libs/angular-swa-auth/CHANGELOG.md)
-3. Submit a PR to merge to master
+[CONTRIBUTING.md](docs/CONTRIBUTING.md): developer guide if you intend to make changes in this repo
 
-
----
-
-# Other guides
+## Other guides
 
 * Create your own library repo: [create-initial-repo](docs/create-initial-repo.md)
