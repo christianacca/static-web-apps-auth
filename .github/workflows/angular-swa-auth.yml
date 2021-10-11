@@ -37,6 +37,14 @@ jobs:
           parallel: true
           nxCloud: true
 
+      - name: "Run e2e"
+        uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: e2e
+          parallel: false
+          nxCloud: true
+          args: "--opts='--headless'"
+
       # Publish library...
       - name: "Check library affected"
         id: check_library_affected
