@@ -7,6 +7,8 @@ describe('angular-swa-auth-nolib', () => {
     // Custom command example, see `../support/commands.ts` file
     // cy.login('my-email@something.com', 'myPassword');
 
+    // todo: use new cy.session api to perform login once per fixture file
+
     cy.url().should('include', '/login');
   });
 });
