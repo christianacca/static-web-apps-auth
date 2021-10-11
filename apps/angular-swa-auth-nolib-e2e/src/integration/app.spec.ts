@@ -3,11 +3,10 @@ import { getGreeting } from '../support/app.po';
 describe('angular-swa-auth-nolib', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
+  it('should display login page', () => {
     // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+    // cy.login('my-email@something.com', 'myPassword');
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to angular-swa-auth-nolib!');
+    cy.url().should('include', '/login');
   });
 });

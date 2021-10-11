@@ -4,15 +4,26 @@
   "projectType": "application",
   "targets": {
     "e2e": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "start-server-and-test 'nx serve-swa-with-api angular-swa-auth-nolib' 4280 'nx _e2e angular-swa-auth-nolib-e2e {args.opts}'"
+          }
+        ]
+      }
+    },
+    "_e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/angular-swa-auth-nolib-e2e/cypress.json",
         "tsConfig": "apps/angular-swa-auth-nolib-e2e/tsconfig.e2e.json",
-        "devServerTarget": "angular-swa-auth-nolib:serve:development"
+        "devServerTarget": "angular-swa-auth-nolib:echo-dev-server-url",
+        "baseUrl": "http://localhost:4280"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "angular-swa-auth-nolib:serve:production"
+          "devServerTarget": "angular-swa-auth-nolib:echo-dev-server-url"
         }
       }
     },

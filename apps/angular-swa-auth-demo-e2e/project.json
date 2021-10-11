@@ -4,15 +4,26 @@
   "projectType": "application",
   "targets": {
     "e2e": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "start-server-and-test 'nx serve-swa-with-api' 4280 'nx _e2e angular-swa-auth-demo-e2e {args.opts}'"
+          }
+        ]
+      }
+    },
+    "_e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/angular-swa-auth-demo-e2e/cypress.json",
         "tsConfig": "apps/angular-swa-auth-demo-e2e/tsconfig.e2e.json",
-        "devServerTarget": "angular-swa-auth-demo:serve:development"
+        "devServerTarget": "angular-swa-auth-demo:echo-dev-server-url",
+        "baseUrl": "http://localhost:4280"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "angular-swa-auth-demo:serve:production"
+          "devServerTarget": "angular-swa-auth-demo:echo-dev-server-url"
         }
       }
     },

@@ -81,6 +81,30 @@
         ]
       }
     },
+    "serve-swa-with-api": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npm run build:api"
+          },
+          {
+            "command": "swa start http://localhost:4200 --run 'npm start' --api ./api --swa-config-location ./apps/angular-swa-auth-demo/dev"
+          }
+        ],
+        "parallel": false
+      }
+    },
+    "echo-dev-server-url": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "echo 'dev server running'"
+          }
+        ]
+      }
+    },
     "stats": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
