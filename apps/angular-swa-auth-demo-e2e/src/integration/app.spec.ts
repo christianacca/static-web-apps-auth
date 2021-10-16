@@ -1,13 +1,9 @@
-import { getGreeting } from '../support/app.po';
-
 describe('angular-swa-auth-demo', () => {
+  // todo: use cy.session api to perform login once per fixture file(s)
+
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    // cy.login('my-email@something.com', 'myPassword');
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Overview');
+  it('should display about page', () => {
+    cy.url().should('include', '/about');
   });
 });
