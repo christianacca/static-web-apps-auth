@@ -146,7 +146,18 @@ When following the steps below to create _your own repo_:
    npm set-script start "npm-run-all --parallel start:host watch"
    ```
    
-2. Azure static web app emulator
+2. Create a self-signed certificate
+
+   1. Add the scripts to generate a certificate:
+
+      - tools/cert-gen
+      - tools/dev-scripts
+  
+   2. Generate the certificate. In a powershell prompt: `./tools/dev-scripts/create-cert.ps1`
+  
+   3. Trust the certificate. In a powershell prompt: `./tools/dev-scripts/trust-cert.ps1`
+   
+3. Azure static web app emulator
    
    Add swa configuration files (one for prod and one local dev). See the files:
    
@@ -164,7 +175,7 @@ When following the steps below to create _your own repo_:
    Add command to serve angular app and swa emulator:
 
    ```bash
-   npx nx g @nrwl/workspace:run-commands serve-swa --project angular-swa-auth-demo --command "swa start http://localhost:4200 --run 'npm start' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev"
+   npx nx g @nrwl/workspace:run-commands serve-swa --project angular-swa-auth-demo --command "swa start http://localhost:4200 --run 'npm start' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
    ```
 
    Add convenience npm script to run api, angular app and swa emulator:
@@ -174,13 +185,15 @@ When following the steps below to create _your own repo_:
    npm set-script start:swa "nx serve-swa"
    npm set-script start:demo "npm-run-all --parallel start:api start:swa"
    ```
+   
+   Note: `set-script` requires npm v7 or above
 
    To confirm setup:
    
-   - `npm start:demo`
-   - Browse to <http://localhost:4080> you should see the generated angular app site
-   - Browse to <http://localhost:4280/.auth/login/github> you should see an emulated login page
-   - Browse to <http://localhost:4080/api/HttpTrigger1> you should see a response from the functions app
+   - `npm run start:demo`
+   - Browse to <https://localhost:4080> you should see the generated angular app site
+   - Browse to <https://localhost:4280/.auth/login/github> you should see an emulated login page
+   - Browse to <https://localhost:4080/api/HttpTrigger1> you should see a response from the functions app
    
 3. VS Code tooling
    
@@ -191,7 +204,7 @@ When following the steps below to create _your own repo_:
 
    To confirm setup in VS Code:
    
-   * Press `F5`. This will launch Chrome at <http://localhost:4820/>.
+   * Press `F5`. This will launch Chrome at <https://localhost:4820/>.
    * Wait 10-20 seconds then refresh the browser page to see the generated angular app site
    * Set a breakpoint in both angular code and in the azure function and see VSCode hit those breakpoints
   
@@ -207,7 +220,7 @@ When following the steps below to create _your own repo_:
    
    * Press `F9`
    * Set a breakpoint in the azure function 
-   * Browse to <http://localhost:4820/> and see Rider hit the breakpoint
+   * Browse to <https://localhost:4820/> and see Rider hit the breakpoint
 
 5. Adjust angular schematics
 

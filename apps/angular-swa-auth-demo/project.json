@@ -76,7 +76,7 @@
       "options": {
         "commands": [
           {
-            "command": "swa start http://localhost:4200 --run 'npm start' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev"
+            "command": "swa start http://localhost:4200 --run 'npm start' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
           }
         ]
       }

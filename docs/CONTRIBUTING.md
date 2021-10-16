@@ -24,7 +24,7 @@ npm run start:demo
 ```
 
 Notes:
-* Navigate to <http://localhost:4820/>
+* Navigate to <https://localhost:4820/>
 * The front-end or api will automatically reload if you change any of their source files
 
 
@@ -37,7 +37,7 @@ npm run start:swa angular-swa-auth-demo # <- in another terminal
 
 ### Using VS Code
 
-1. Press `F5`. This will launch Chrome at <http://localhost:4820/>.
+1. Press `F5`. This will launch Chrome at <https://localhost:4820/>.
 2. You will need to wait 10-20 seconds to refresh the browser page.
 
 Notes:
@@ -50,7 +50,7 @@ Notes:
 `Run > Run 'start: demo'` OR `Run > Debug 'start: demo'`
 
 Notes:
-* Navigate to <http://localhost:4820/>
+* Navigate to <https://localhost:4820/>
 * The front-end or api will automatically reload if you change any of their source files
 * You can set breakpoints in the IDE in the api code only
 
@@ -87,7 +87,7 @@ npx nx affected:build --uncommitted
 
 ```bash
 # run in watch mode
-npx nx e2e angular-swa-auth-demo-e2e --opts='--watch' # <- `opts=...` is a non-standard way of supplying
+npx nx e2e angular-swa-auth-demo-e2e --opts='--watch'
 npx nx e2e angular-swa-auth-nolib-e2e --opts='--watch'
 
 # run all affected by a change
