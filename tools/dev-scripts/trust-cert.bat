@@ -1,0 +1,1 @@
+start powershell -NoExit -ExecutionPolicy Bypass -NoLogo -File %~dp0\trust-cert.ps1

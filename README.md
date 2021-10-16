@@ -23,8 +23,22 @@ The demo apps and documentation sites are available here:
 
 1. Install [nodejs](https://nodejs.org/en/) (LTS version)
 2. Clone the source code: `git clone https://github.com/christianacca/static-web-apps-auth`
-3. Install dependencies: `npm install`
-4. `npm run start:demo` then browse to <http://localhost:4820/>
+3. Trust the dev HTTPS certificate (see note below on security caveats):
+  - windows (easy): double click batch file ./tools/dev-scripts/trust-cert.bat and accept any prompts
+  - all OSes (almost as easy): From powershell, run ./tools/dev-scripts/trust-cert.ps1
+4. Install dependencies: `npm install`
+5. `npm run start:demo` then browse to <https://localhost:4820/>
+
+### Security caveats when trusting the dev cert
+
+This demo tries to play nicely with best practice of always using TLS even for local development.
+To make this as frictionless as possible, this repo contains a [self-signed cert](tools/certs) which needs to be trusted for the browser
+to accept the content of the demo site served over https for localhost. Yay for convenience!
+
+However, this might pose a security risk (?). If you are concerned with this, then the advice is to re-generate the certificate
+using the following script BEFORE trusting the cert: [generate-dev-certificate.md](docs/generate-dev-certificate.md).
+
+This regenerated cert will only be local to your machine as it will not be committed back to this git repo.
 
 ## Deploy
 
@@ -53,3 +67,4 @@ On push to master:
 ## Other guides
 
 * Create your own library repo: [create-initial-repo](docs/create-initial-repo.md)
+* Generating a new dev HTTPS certificate: [generate-dev-certificate.md](docs/generate-dev-certificate.md)
