@@ -7,10 +7,15 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          {
-            "command": "start-server-and-test 'nx serve-swa-with-api' 4280 'nx _e2e angular-swa-auth-demo-e2e {args.opts}'"
-          }
+          "start-server-and-test 'nx serve-swa-with-api' 4280 'nx _e2e angular-swa-auth-demo-e2e {args.opts}'"
         ]
+      },
+      "configurations": {
+        "ci": {
+          "commands": [
+            "start-server-and-test 'nx serve-swa-with-api' 4280 'nx _e2e angular-swa-auth-demo-e2e --configuration=ci'"
+          ]
+        }
       }
     },
     "_e2e": {
@@ -22,8 +27,9 @@
         "baseUrl": "http://localhost:4280"
       },
       "configurations": {
-        "production": {
-          "devServerTarget": "angular-swa-auth-demo:echo-dev-server-url"
+        "ci": {
+          "headless": true,
+          "record": true
         }
       }
     },

@@ -8,5 +8,6 @@
   "video": true,
   "videosFolder": "../../dist/cypress/apps/angular-swa-auth-nolib-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/angular-swa-auth-nolib-e2e/screenshots",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "projectId": "m39zoz"
 }

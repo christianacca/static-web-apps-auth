@@ -43,7 +43,9 @@ jobs:
           targets: e2e
           parallel: false
           nxCloud: true
-          args: "--opts='--headless'"
+          args: '--configuration=ci'
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
       # Publish library...
       - name: "Check library affected"
