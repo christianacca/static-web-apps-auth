@@ -8,6 +8,7 @@
     "angular-swa-auth-demo-product-admin": "libs/angular-swa-auth-demo/product-admin",
     "angular-swa-auth-demo-shell": "libs/angular-swa-auth-demo/shell",
     "angular-swa-auth-demo-user-admin": "libs/angular-swa-auth-demo/user-admin",
+    "angular-swa-auth-demo-user-profile": "libs/angular-swa-auth-demo/user-profile",
     "angular-swa-auth-nolib": "apps/angular-swa-auth-nolib",
     "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e",
     "shared-common-ui": "libs/shared/common-ui",

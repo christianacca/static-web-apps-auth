@@ -1,49 +1,84 @@
-import { Component } from '@angular/core';
-import { AuthService, ClientPrincipal } from '@christianacca/angular-swa-auth';
+import { Component, HostBinding } from '@angular/core';
+import { AuthService, ClientPrincipal, managedIdentityProviders } from '@christianacca/angular-swa-auth';
 import { RoutePermissions } from '@christianacca/angular-swa-auth-demo/core';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
   template: `
-    <nav class="menu" *swaRoleCheck="let canAdmin of routePermissions.adminArea; let maybeCanAdmin = isPlaceholder">
+    <ng-container>
       <p class="menu-label">Menu</p>
       <ul class="menu-list">
-        <a routerLink="/products" routerLinkActive="is-active">
-          <span>Products</span>
-        </a>
-        <a routerLink="/admin-area" routerLinkActive="is-active">
-          <progress *ngIf="maybeCanAdmin" class="progress is-primary is-medium" max="100">15%</progress>
-          <span *ngIf="!maybeCanAdmin" [ngClass]="!canAdmin ? 'has-text-grey-lighter' : ''">Admin Area</span>
-        </a>
-        <a routerLink="/about" routerLinkActive="is-active">
-          <span>About</span>
-        </a>
+        <li>
+          <a routerLink="/products" routerLinkActive="is-active">
+            <span>Products</span>
+          </a>
+        </li>
+        <li *swaRoleCheck="let canOffer of routePermissions.offers; let maybeCanOffer = isPlaceholder">
+          <a routerLink="/offers" routerLinkActive="is-active">
+            <progress *ngIf="maybeCanOffer" class="progress is-primary is-medium" max="100">15%</progress>
+            <span *ngIf="!maybeCanOffer" [ngClass]="!canOffer ? 'has-text-grey-lighter' : ''">Offers</span>
+          </a>
+        </li>
+        <li *swaRoleCheck="let canAdmin of routePermissions.adminArea; let maybeCanAdmin = isPlaceholder">
+          <a routerLink="/admin-area/landing" routerLinkActive="is-active">
+            <progress *ngIf="maybeCanAdmin" class="progress is-primary is-medium" max="100">15%</progress>
+            <span *ngIf="!maybeCanAdmin" [ngClass]="!canAdmin ? 'has-text-grey-lighter' : ''">Admin Area</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/user-profile" routerLinkActive="is-active">
+            <span>My Profile</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/about" routerLinkActive="is-active">
+            <span>About</span>
+          </a>
+        </li>
       </ul>
-    </nav>
-    <nav class="menu auth">
       <p class="menu-label">Auth</p>
-      <div class="menu-list auth">
+      <ul class="menu-list">
         <ng-container *ngIf="userInfo$ | async as user; else loginTpl">
-          <a (click)="logout()">Logout</a>
-          <a (click)="purge()">Forget me</a>
+          <li><a role="button" (click)="logout()">Logout</a></li>
+          <li><a role="button" (click)="purge()">Forget me</a></li>
         </ng-container>
         <ng-template #loginTpl>
-          <a (click)="login()">Login</a>
-          <a (click)="signUp()">Sign Up?</a>
+          <li><a role="button" (click)="login()" data-testid="login">Login</a></li>
+          <li><a role="button" (click)="signUp()">Sign Up?</a></li>
+          <li class="sub-menu">
+            <p class="menu-label">Auth With {{ identityProviders.github.name }}</p>
+            <ul>
+              <li>
+                <a role="button" (click)="login(identityProviders.github.id)" data-testid="login-with-github">Login</a>
+              </li>
+            </ul>
+          </li>
         </ng-template>
-      </div>
-    </nav>
-    <div class="user" *ngIf="userInfo$ | async as user">
+      </ul>
+    </ng-container>
+    <div class="user" *ngIf="userInfo$ | async as user" data-testid="user">
       <p>Welcome</p>
       <p>{{ user.userDetails }}</p>
       <p>{{ user.identityProvider }}</p>
     </div>
-  `
+  `,
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ]
 })
 export class NavComponent {
+  identityProviders = managedIdentityProviders;
   routePermissions = RoutePermissions;
   userInfo$: Observable<ClientPrincipal | null>;
+
+  @HostBinding('class.menu') readonly hostClass = 'menu';
+  @HostBinding('attr.role') readonly role = 'navigation';
+  @HostBinding('attr.aria-label') readonly roleLabel = 'Main menu';
 
   private redirectUrl = '/about';
 
@@ -51,8 +86,8 @@ export class NavComponent {
     this.userInfo$ = this.authService.currentUser$;
   }
 
-  async login() {
-    await this.authService.login({ redirectUrl: this.redirectUrl });
+  async login(identityProvider?: string) {
+    await this.authService.login({ redirectUrl: this.redirectUrl, identityProvider });
   }
 
   async logout() {

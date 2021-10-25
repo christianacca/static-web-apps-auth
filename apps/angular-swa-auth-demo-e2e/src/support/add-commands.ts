@@ -9,20 +9,22 @@
 // ***********************************************
 
 import '@testing-library/cypress/add-commands';
-import { login } from './commands';
+import { loggedIn, loggedInAs } from './commands';
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
-      login: typeof login;
+      login: typeof loggedIn;
+      loginAs: typeof loggedInAs;
     }
   }
 }
+
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', login);
+Cypress.Commands.add('login', loggedIn);
+Cypress.Commands.add('loginAs', loggedInAs);
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
