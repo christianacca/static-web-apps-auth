@@ -1,4 +1,5 @@
 export * from './lib/swa-auth.module';
+export * from './lib/auth-event';
 export * from './lib/auth.service';
 export * from './lib/auth.guard';
 export * from './lib/swa-role.guard';

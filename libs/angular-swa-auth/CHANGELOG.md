@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2021-11-08
+
+### Added
+
+- `AuthEventPersistenceService`: allow `AuthEvent` server payload to be customized
+- Make `flattenAllowedRoles` public
+
+
 ## [2.1.0] - 2021-09-21
 
 ### Added
