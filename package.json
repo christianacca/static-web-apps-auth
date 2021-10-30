@@ -93,7 +93,7 @@
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "azure-functions-core-tools": "^3.0.3785",
-    "cypress": "^7.7.0",
+    "cypress": "^8.7.0",
     "dotenv": "~10.0.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.1.0",
