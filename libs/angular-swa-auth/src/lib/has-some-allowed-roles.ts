@@ -15,7 +15,7 @@ export const hasSomeAllowedRoles = (allowedRoles: AllowedRole[], actualRoles: st
 };
 
 /**
- * @ignore
+ * Convenience function to flatten a jagged array of names of roles into a single dimensional array
  */
 export const flattenAllowedRoles = (allowedRoles: AllowedRole[]) =>
   Array.from(new Set<string>(allowedRoles.flat(10) as unknown as string[]));

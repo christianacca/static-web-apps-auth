@@ -10,4 +10,4 @@ export * from './lib/identity-provider-selector.service';
 export * from './lib/first-identity-provider-selector.service';
 export * from './lib/identity-provider-interactive-selector.service';
 export * from './lib/swa-roles-check.directive';
-export { hasSomeAllowedRoles } from './lib/has-some-allowed-roles';
+export * from './lib/has-some-allowed-roles';
