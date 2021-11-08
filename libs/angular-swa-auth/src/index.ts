@@ -1,4 +1,5 @@
 export * from './lib/swa-auth.module';
+export * from './lib/auth-event';
 export * from './lib/auth.service';
 export * from './lib/auth.guard';
 export * from './lib/swa-role.guard';
@@ -10,4 +11,4 @@ export * from './lib/identity-provider-selector.service';
 export * from './lib/first-identity-provider-selector.service';
 export * from './lib/identity-provider-interactive-selector.service';
 export * from './lib/swa-roles-check.directive';
-export { hasSomeAllowedRoles } from './lib/has-some-allowed-roles';
+export * from './lib/has-some-allowed-roles';

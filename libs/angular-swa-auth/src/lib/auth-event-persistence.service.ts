@@ -2,17 +2,8 @@ import { ErrorHandler, Injectable, OnDestroy } from '@angular/core';
 import { EMPTY, Observable, Subscription } from 'rxjs';
 import { catchError, concatMap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
-import { AuthEvent, AuthEventType } from './auth-event';
+import { AuthEvent } from './auth-event';
 import { AuthService } from './auth.service';
-
-/**
- * An extract of an `AuthEvent` that will sent to the function app api
- */
-export interface AuthEventPayload {
-  type: AuthEventType;
-  userId: string;
-  identityProvider: string;
-}
 
 /**
  * Send authentication session events to your functions app api
@@ -50,24 +41,22 @@ export class AuthEventPersistenceService implements OnDestroy {
   protected sendEvent(evt: AuthEvent): Observable<void> {
     const payload = this.prepareEventPayload(evt);
     // `sendBeacon` is a more reliable way of ensuring the http request is made even when app page is unloaded
-    navigator.sendBeacon(this.config.sessionEventsApiUrl, JSON.stringify(payload));
+    navigator.sendBeacon(
+      this.config.sessionEventsApiUrl,
+      typeof payload === 'string' ? payload : JSON.stringify(payload)
+    );
     return EMPTY;
   }
 
   /**
-   * Override this method if you need to prepare the modify the data sent to the api.
+   * Override this method if you need to modify the data sent to the api.
    *
-   * By default only the `userId` and `identityProvider` fields to represent the user be sent be sent for GDPR/PII
-   * reasons.
    * Note: the the cookie containing all the `ClientPrincipal` fields will be available also to the api function
    *
    */
-  protected prepareEventPayload(evt: AuthEvent): AuthEventPayload {
-    const {
-      user: { userId, identityProvider },
-      type
-    } = evt;
-    return { userId, identityProvider, type };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected prepareEventPayload(evt: AuthEvent): any {
+    return AuthEvent.toAuthEventPayload(evt);
   }
 
   ngOnDestroy() {

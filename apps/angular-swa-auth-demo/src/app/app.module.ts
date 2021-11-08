@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { IdentityProviderInteractiveSelectorService, SwaAuthModule } from '@christianacca/angular-swa-auth';
 import { ShellModule } from '@christianacca/angular-swa-auth-demo/shell';
+import { UserProfileModule } from '@christianacca/angular-swa-auth-demo/user-profile';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { externalModules } from './build-specific';
@@ -23,7 +24,8 @@ import { AppStoreModule } from './store/store.module';
       identityProviderSelectorType: IdentityProviderInteractiveSelectorService,
       apiUrl: environment.API
     }),
-    ShellModule
+    ShellModule,
+    UserProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -117,10 +117,10 @@ The following process should be used whenever creating a new page or substantial
 (note: inspiration for this process see <https://blog.hichroma.com/component-driven-development-ce1109d56c8e)>
 
 1. If you are creating a "top level" page (usually a page that is expected to be routed to from a menu), create a new lazy loaded feature library
-  - See [add-library.md](add-library.md)
+   - See [add-library.md](add-library.md)
 2. Design phase: identify the components of the page (usually this is one container component for the page and 0..many presentation components)
 3. Start storybook app: `npx nx storybook {public|shared|app}-{library-name}`
-  - e.g. `npx nx storybook angular-swa-auth`
+   - e.g. `npx nx storybook angular-swa-auth`
 4. Create presentation components. Work bottom up from the smallest/nested unit of the page. For each component:
   1. create a new storybook file - this will act as the container for the presentation component whilst developing
   2. create the initial storybook for the component. For this initial storybook follow conventions so that the story appears in the storybook UI:

@@ -4,7 +4,13 @@ import { IdentityProviderInteractiveSelectorService } from '@christianacca/angul
 @Component({
   selector: 'app-idp-selector-modal',
   template: `
-    <div *ngIf="svc.prompt$ | async as vm" class="modal" [ngClass]="{ 'is-active': vm.open }">
+    <div
+      *ngIf="svc.prompt$ | async as vm"
+      class="modal"
+      role="dialog"
+      aria-label="Identity Provider Selector"
+      [ngClass]="{ 'is-active': vm.open }"
+    >
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
@@ -14,6 +20,7 @@ import { IdentityProviderInteractiveSelectorService } from '@christianacca/angul
           <p class="menu-label">With:</p>
           <div class="menu-list">
             <a
+              role="link"
               *ngFor="let provider of vm.selectionOptions.identityProviders"
               (click)="svc.selectAndClose(provider.id)"
               >{{ provider.name }}</a

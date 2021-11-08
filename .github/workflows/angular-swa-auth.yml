@@ -20,7 +20,6 @@ jobs:
 
     steps:
 
-      # Build demo apps, libs, storybook and docs...
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -30,6 +29,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - run: npm ci
+
+      - name: Sets env vars for PR
+        run: |
+          echo "COMMIT_INFO_MESSAGE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+        if: github.ref != 'refs/heads/master'
+
+      # Build demo apps, libs, storybook and docs...
       - name: "Run linting and builds"
         uses: mansagroup/nrwl-nx-action@v2
         with:
@@ -46,6 +52,7 @@ jobs:
           args: '--configuration=ci'
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          COMMIT_INFO_MESSAGE: ${{ github.event.pull_request.title }}
 
       # Publish library...
       - name: "Check library affected"

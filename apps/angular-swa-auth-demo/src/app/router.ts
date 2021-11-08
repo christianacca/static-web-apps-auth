@@ -2,12 +2,22 @@ import { Routes } from '@angular/router';
 import { AuthGuard, SwaRoleGuard } from '@christianacca/angular-swa-auth';
 import { RoutePermissions } from '@christianacca/angular-swa-auth-demo/core';
 import { AdminLandingComponent, NotFoundComponent } from '@christianacca/angular-swa-auth-demo/shell';
+import { userProfileRoutes } from '@christianacca/angular-swa-auth-demo/user-profile';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
   {
     path: 'products',
     canLoad: [AuthGuard],
+    loadChildren: () => import('@christianacca/shared/products').then(m => m.ProductsModule)
+  },
+  {
+    path: 'offers',
+    canLoad: [SwaRoleGuard],
+    data: {
+      discounted: true,
+      allowedRoles: RoutePermissions.offers
+    },
     loadChildren: () => import('@christianacca/shared/products').then(m => m.ProductsModule)
   },
   {
@@ -37,5 +47,6 @@ export const routes: Routes = [
       }
     ]
   },
+  ...userProfileRoutes,
   { path: '**', component: NotFoundComponent }
 ];

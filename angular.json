@@ -8,45 +8,11 @@
     "angular-swa-auth-demo-product-admin": "libs/angular-swa-auth-demo/product-admin",
     "angular-swa-auth-demo-shell": "libs/angular-swa-auth-demo/shell",
     "angular-swa-auth-demo-user-admin": "libs/angular-swa-auth-demo/user-admin",
+    "angular-swa-auth-demo-user-profile": "libs/angular-swa-auth-demo/user-profile",
     "angular-swa-auth-nolib": "apps/angular-swa-auth-nolib",
     "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e",
     "shared-common-ui": "libs/shared/common-ui",
     "shared-products": "libs/shared/products",
     "shared-shared-types": "libs/shared/shared-types"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "generators": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "strict": true
-    },
-    "@nrwl/angular:component": {
-      "style": "scss",
-      "changeDetection": "OnPush",
-      "displayBlock": true,
-      "inlineStyle": true
-    }
-  },
-  "defaultProject": "angular-swa-auth-demo"
+  }
 }
