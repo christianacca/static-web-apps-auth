@@ -5,7 +5,7 @@ import * as identityProviderSelectorPo from '../support/pages/identity-provider-
 import { authenticatedUser } from './authenticated-user';
 
 export interface AuthRoutingSpecParameters {
-  menuLink: () => Cypress.Chainable<JQuery>;
+  menuLink: () => Cypress.Chainable<JQuery<Element>>;
   targetUrl: string;
   contextLabel: string;
   loginWith?: Partial<ClientPrincipal>;
