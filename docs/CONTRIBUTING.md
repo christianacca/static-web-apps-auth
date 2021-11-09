@@ -136,7 +136,7 @@ The following process should be used whenever creating a new page or substantial
    2. extract data access and business logic into suitable abstractions leaving the container component as an orchestrator.
       - Such abstractions include: domain models, view models, services, pure functions, rxjs operators and ngrx selectors, reducers, and effects
       - For guidance on adding a domain model and data access services see [add-domain-model.md](add-domain-model.md)
-   3. Create Cypress test for the container and the page interactions to test the various states of the page (see below workflow for this)
+   3. Create Cypress test for the container and the page interactions to test the various states of the page (see guide below for this)
 
 ## Cypress test workflow
 
@@ -162,7 +162,7 @@ The following describes the recommended workflow for adding automated tests.
 ### Team process (QA after dev)
 
 In practice QA resource might not be able to work in parallel on tests whilst dev works on feature
-   - QA resource might not be immediately available at steps 3-4
+   - QA resource might not be immediately available at steps 3-4 above
    - there is a high level of fluidity in the implementation such that QA working in parallel with dev would cause merge hell
 
 In that case the process changes to:
@@ -189,7 +189,7 @@ on the page under test, but rather the features of the library that page happens
 2. Add the container along with it's route
    - Confirm that the initial test passes
 3. Assemble the presentation components on the page
-   - Use the initial test as your dev environment to visually confirm your work
+   - Use the initial test as your _dev environment_ to visually confirm your work
 4. Fill in the details of the initial test to assert that the state of the page is what the user would expect. EG:
    - Buttons are disabled/enabled
    - Details of the entity(s) are displayed and used to populate form fields
