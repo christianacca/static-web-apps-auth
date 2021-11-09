@@ -9,12 +9,18 @@
 // ***********************************************
 
 import '@testing-library/cypress/add-commands';
-import { loggedIn, loggedInAs } from './commands';
+import { ByRoleOptions } from '@testing-library/dom/types/queries';
+import { button, link, loggedIn, loggedInAs } from './commands';
+import Chainable = Cypress.Chainable;
+
+type FindByRoleType = (options: ByRoleOptions) => Chainable<JQuery<Element>>;
 
 declare global {
   namespace Cypress {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
+      button: FindByRoleType;
+      link: FindByRoleType;
       login: typeof loggedIn;
       loginAs: typeof loggedInAs;
     }
@@ -31,7 +37,8 @@ Cypress.Commands.add('loginAs', loggedInAs);
 //
 //
 // -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
+Cypress.Commands.add('button', { prevSubject: 'optional' }, button);
+Cypress.Commands.add('link', { prevSubject: 'optional' }, link);
 //
 //
 // -- This will overwrite an existing command --

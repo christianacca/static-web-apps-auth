@@ -122,21 +122,88 @@ The following process should be used whenever creating a new page or substantial
 3. Start storybook app: `npx nx storybook {public|shared|app}-{library-name}`
    - e.g. `npx nx storybook angular-swa-auth`
 4. Create presentation components. Work bottom up from the smallest/nested unit of the page. For each component:
-  1. create a new storybook file - this will act as the container for the presentation component whilst developing
-  2. create the initial storybook for the component. For this initial storybook follow conventions so that the story appears in the storybook UI:
-    - under a group named after the library
-    - as a "root" menu item ie cannot be expanded/collapsed
-  3. for a shared library component add more stories for each "state" of the component (enumerate the interesting combinations of input property values)
+   1. create a new storybook file - this will act as the container for the presentation component whilst developing
+   2. create the initial storybook for the component. For this initial storybook follow conventions so that the story appears in the storybook UI:
+      - under a group named after the library
+      - as a "root" menu item ie cannot be expanded/collapsed
+   3. for a shared library component add more stories for each "state" of the component (enumerate the interesting combinations of input property values)
 5. Extract reusable angular components, directives, or pipes
-  - any time use see a repeating piece of code or - probably because you just copy pasted it ;-) - try and extract this into a component, or pipe or directive.
-  - where these units of functionality are not specific to any particular page, add them to the `{app}/common-ui` lib
-  - where these units of functionality are not specific to one particular application, but are not universal to MRI, add them to `shared/common-ui` lib
+   - any time use see a repeating piece of code or - probably because you just copy pasted it ;-) - try and extract this into a component, or pipe or directive.
+   - where these units of functionality are not specific to any particular page, add them to the `{app}/common-ui` lib
+   - where these units of functionality are not specific to one particular application, but are not universal to MRI, add them to `shared/common-ui` lib
 6. Create the container component for the page
-  1. assemble the presentation components and bind them to the business and data access logic
-  2. extract data access and business logic into suitable abstractions leaving the container component as an orchestrator.
-    - Such abstractions include: domain models, view models, services, pure functions, rxjs operators and ngrx selectors, reducers, and effects
-    - For guidance on adding a domain model and data access services see [add-domain-model.md](add-domain-model.md)
-  3. Create Cypress test for the container and the page interactions to test the various states of the page.
+   1. assemble the presentation components and bind them to the business and data access logic
+   2. extract data access and business logic into suitable abstractions leaving the container component as an orchestrator.
+      - Such abstractions include: domain models, view models, services, pure functions, rxjs operators and ngrx selectors, reducers, and effects
+      - For guidance on adding a domain model and data access services see [add-domain-model.md](add-domain-model.md)
+   3. Create Cypress test for the container and the page interactions to test the various states of the page (see below workflow for this)
+
+## Cypress test workflow
+
+The following describes the recommended workflow for adding automated tests.
+
+### Team process (ideal: QA and dev working in parallel)
+
+1. Dev: Initial main success path. Dev iterates between:
+   - implementing code
+   - adding cypress tests
+   - refactor tests to remove duplicate and improve readability
+2. Dev: open PR and message QA that main success path is implemented with test cases
+3. Dev: dev to walk QA through tests written thus far, pointing out any dev work left remaining (eg alternate success paths and exception paths)
+4. QA: review tests for completeness and accuracy; adds more tests as necessary (consider pair programming; commit changes asap):
+   - tests missed by dev
+   - boundary conditions and edge cases
+5. Dev: implement remaining code for alternative and exception paths. Dev iterates between:
+   - implementing code
+   - adding cypress tests
+6. Dev: inform QA that PR is dev done
+7. QA: further review tests for completeness and accuracy and duplication. Makes changes necessary to complete test suite
+
+### Team process (QA after dev)
+
+In practice QA resource might not be able to work in parallel on tests whilst dev works on feature
+   - QA resource might not be immediately available at steps 3-4
+   - there is a high level of fluidity in the implementation such that QA working in parallel with dev would cause merge hell
+
+In that case the process changes to:
+
+1. Dev: iterates between:
+   - implementing code
+   - adding cypress tests
+   - refactor tests to remove duplicate and improve readability
+2. Dev: open PR and message QA that dev done
+3. QA: review tests and makes changes necessary to complete test suite:
+   - tests missed by dev
+   - boundary conditions and edge cases
+   - refactor tests to remove duplicate and improve readability
+
+### Demo of process
+
+The example more for testing an app than a library. Where you are adding tests for a library (the auth library in this case), you will be less focused
+on the page under test, but rather the features of the library that page happens to exercise.
+
+1. Add initial test to confirm page loads
+   - usually this will be a deep link with the user having already been logged in
+   - the test will fail until you've added the page
+   - assert that the page loads (eg test that you can find the container component by testid)
+2. Add the container along with it's route
+   - Confirm that the initial test passes
+3. Assemble the presentation components on the page
+   - Use the initial test as your dev environment to visually confirm your work
+4. Fill in the details of the initial test to assert that the state of the page is what the user would expect. EG:
+   - Buttons are disabled/enabled
+   - Details of the entity(s) are displayed and used to populate form fields
+5. Write the basics of another test for an action the user can perform on the page
+   - Ensure this is the only test that is running by adding `.only` to the test
+6. Repeat for the next user action on the page
+7. De-dup the tests:
+   - extract page object functions where you see selectors being repeated
+   - use beforeEach to setup the common Arrange/Given part of the test
+   - extract repeating assertions into functions
+      - include these at the top of spec file if they don't need to be shared by multiple specs
+      - include these in a fixture folder where they are shared by multiple specs
+8. Iterate on steps 6-7 for the remaining main success paths
+
 
 ## Add a new library
 
