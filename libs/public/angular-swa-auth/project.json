@@ -1,0 +1,87 @@
+{
+  "projectType": "library",
+  "root": "libs/public/angular-swa-auth",
+  "sourceRoot": "libs/public/angular-swa-auth/src",
+  "prefix": "swa",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/public/angular-swa-auth"],
+      "options": {
+        "project": "libs/public/angular-swa-auth/ng-package.json",
+        "tsConfig": "libs/public/angular-swa-auth/tsconfig.lib.prod.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/public/angular-swa-auth/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/public/angular-swa-auth/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/public/angular-swa-auth"],
+      "options": {
+        "jestConfig": "libs/public/angular-swa-auth/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/public/angular-swa-auth/src/**/*.ts", "libs/public/angular-swa-auth/src/**/*.html"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "compodoc": {
+      "executor": "@twittwer/compodoc:compodoc",
+      "options": {
+        "tsConfig": "libs/public/angular-swa-auth/tsconfig.lib.json",
+        "outputPath": "dist/compodoc/public-angular-swa-auth"
+      },
+      "configurations": {
+        "json": {
+          "exportFormat": "json"
+        }
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "port": 4400,
+        "tsConfig": "libs/public/angular-swa-auth/.storybook/tsconfig.json",
+        "config": {
+          "configFolder": "libs/public/angular-swa-auth/.storybook"
+        },
+        "angularBrowserTarget": "public-angular-swa-auth:build"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "outputPath": "dist/storybook/public-angular-swa-auth",
+        "config": {
+          "configFolder": "libs/public/angular-swa-auth/.storybook"
+        },
+        "angularBrowserTarget": "angular-swa-auth:build"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  },
+  "tags": ["scope:public", "type:util", "framework:angular", "bundle:main"]
+}

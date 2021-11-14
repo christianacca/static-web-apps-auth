@@ -1,35 +1,36 @@
-# @christianacca/angular-swa-auth
+# @christianacca/public-angular-swa-auth
 
 Programmatically work with Azure Static Web Apps authentication in an angular app
 
 ## Features
 
-- an [`AuthService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/AuthService.html) facade
+- an [`AuthService`](https://docs.public-angular-swa-auth.codingdemo.co.uk/injectables/AuthService.html) facade
   - methods to programmatically trigger sign-in, sign-up, sign-out and purge flows
   - exposes convenient observables to allow your app to examine and/or react to current user and authentication session events
   - optionally send authentication session events to your functions app
-- [`AuthGuard`](https://docs.angular-swa-auth.codingdemo.co.uk/guards/AuthGuard.html)
+- [`AuthGuard`](https://docs.public-angular-swa-auth.codingdemo.co.uk/guards/AuthGuard.html)
   - add to a route to trigger the sign in flow when the user is not already authenticated
-- [`SwaRoleGuard`](https://docs.angular-swa-auth.codingdemo.co.uk/guards/SwaRoleGuard.html)
+- [`SwaRoleGuard`](https://docs.public-angular-swa-auth.codingdemo.co.uk/guards/SwaRoleGuard.html)
   - add to a route to perform an authorization check using roles defined in Status Web App
-- [`SwaRoleCheckDirective`](https://docs.angular-swa-auth.codingdemo.co.uk/directives/SwaRoleCheckDirective.html)
+- [`SwaRoleCheckDirective`](https://docs.public-angular-swa-auth.codingdemo.co.uk/directives/SwaRoleCheckDirective.html)
   - structural directive to perform an authorization check using roles defined in Status Web App
-- [`AutoLoginHttpInterceptor`](https://docs.angular-swa-auth.codingdemo.co.uk/interceptors/AutoLoginHttpInterceptor.html)
+- [`AutoLoginHttpInterceptor`](https://docs.public-angular-swa-auth.codingdemo.co.uk/interceptors/AutoLoginHttpInterceptor.html)
   - triggers the sign in flow when your functions api return an unauthenticated (401) response
 - convenient types and values representing the authenticated user and identity providers
 - configure the list of identity providers that should be available to your users to sign in with
-- [`IdentityProviderInteractiveSelectorService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
+- [`IdentityProviderInteractiveSelectorService`](https://docs.public-angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
   - utility service that can be used to build a UI to prompt the user to select an identity provider
-  
+
 ## When to use this library?
 
 Depending on your use case you might not need this library at all. You likely do NOT need this library if your requirements are simple:
-* Your angular app is ONLY served up to authenticated users
-* It's not a problem that authentication does not work for deep linking (see [issue 502](https://github.com/Azure/static-web-apps/issues/502))
-* The same authorization rules apply to all client-side routes
-* You don't need to inform your functions app when a user has signed in / out
 
-If this is your app, then have a look at [angular-swa-auth-nolib](https://angular-swa-auth-nolib.codingdemo.co.uk): 
+- Your angular app is ONLY served up to authenticated users
+- It's not a problem that authentication does not work for deep linking (see [issue 502](https://github.com/Azure/static-web-apps/issues/502))
+- The same authorization rules apply to all client-side routes
+- You don't need to inform your functions app when a user has signed in / out
+
+If this is your app, then have a look at [public-angular-swa-auth-nolib](https://public-angular-swa-auth-nolib.codingdemo.co.uk):
 a sample app that does not use this library to implement authentication
 
 For all other use cases, this library will likely add value.
@@ -38,9 +39,9 @@ For all other use cases, this library will likely add value.
 
 ### 1. Install library
 
-   ```bash
-   npm install @christianacca/angular-swa-auth
-   ```
+```bash
+npm install @christianacca/public-angular-swa-auth
+```
 
 ### 2. Configure and use library
 
@@ -49,10 +50,10 @@ For all other use cases, this library will likely add value.
    ```ts
    import { NgModule } from '@angular/core';
    import { BrowserModule } from '@angular/platform-browser';
-   import { SwaAuthModule } from '@christianacca/angular-swa-auth';
-   
+   import { SwaAuthModule } from '@christianacca/public-angular-swa-auth';
+
    import { AppComponent } from './app.component';
-   
+
    @NgModule({
      declarations: [AppComponent],
      imports: [
@@ -69,13 +70,13 @@ For all other use cases, this library will likely add value.
 2. Implement login/logout/purge
 
    The following is guidance only. For an alternative, where the user is prompted with a modal
-   to select the identity provider to sign in with see [`IdentityProviderInteractiveSelectorService`](https://docs.angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
+   to select the identity provider to sign in with see [`IdentityProviderInteractiveSelectorService`](https://docs.public-angular-swa-auth.codingdemo.co.uk/injectables/IdentityProviderInteractiveSelectorService.html)
 
    ```ts
    import { Component } from '@angular/core';
-   import { AuthService, ClientPrincipal } from '@christianacca/angular-swa-auth';
+   import { AuthService, ClientPrincipal } from '@christianacca/public-angular-swa-auth';
    import { Observable } from 'rxjs';
-   
+
    @Component({
      selector: 'app-auth',
      template: `
@@ -120,8 +121,8 @@ For all other use cases, this library will likely add value.
    If your app can only be accessed by authenticated users then add the guard to the top level route. EG:
 
    ```ts
-   import { AuthGuard } from '@christianacca/angular-swa-auth';
-   
+   import { AuthGuard } from '@christianacca/public-angular-swa-auth';
+
    const routes: Route[] = [
      {
        path: '',
@@ -143,8 +144,8 @@ For all other use cases, this library will likely add value.
 4. Optionally add `SwaRoleGuard` to your route(s)
 
    ```ts
-   import { AuthGuard } from '@christianacca/angular-swa-auth';
-   
+   import { AuthGuard } from '@christianacca/public-angular-swa-auth';
+
    const routes: Route[] = [
      {
        path: 'product-admin',
@@ -164,20 +165,20 @@ For all other use cases, this library will likely add value.
      }
    ];
    ```
-   
+
 5. Optionally send authentication session events to your function app api
 
    ```ts
-     imports: [
-       BrowserModule,
-       SwaAuthModule.forRoot({
-         sendSessionEventsToApi: true,
-         sessionEventsApiUrl: '/api/authevents' // this is the default if not supplied
-       })
-     ]
+   imports: [
+     BrowserModule,
+     SwaAuthModule.forRoot({
+       sendSessionEventsToApi: true,
+       sessionEventsApiUrl: '/api/authevents' // this is the default if not supplied
+     })
+   ];
    ```
 
-   **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://docs.angular-swa-auth.codingdemo.co.uk/interfaces/AuthEventPayload.html)
+   **IMPORTANT**: you will need to add a function to your functions app api that receives via a POST an instance of [`AuthEventPayload`](https://docs.public-angular-swa-auth.codingdemo.co.uk/interfaces/AuthEventPayload.html)
 
 ## Next steps
 
@@ -188,7 +189,7 @@ For all other use cases, this library will likely add value.
    ```bash
    npm i @azure/static-web-apps-cli -D
    ```
-   
+
 2. Add npm script to run your angular app
 
    In package.json add the following to the scripts block:
@@ -200,13 +201,13 @@ For all other use cases, this library will likely add value.
      }
    }
    ```
-   
+
 3. Serve your app:
 
    ```bash
    npm run start:swa
    ```
-   
+
    You can now browse to your app at: <http:localhost:4280>
 
 ### Deploying your app to Azure Static Web Apps service
@@ -216,14 +217,13 @@ Follow the official guidance here: <https://docs.microsoft.com/en-us/azure/stati
 ## More resources
 
 - [Azure Static Web Apps documentation](https://docs.microsoft.com/en-us/azure/static-web-apps/)
-- [Library source code](https://github.com/christianacca/static-web-apps-auth/tree/master/libs/angular-swa-auth)
-- Library documentation: 
-  - [reference](https://docs.angular-swa-auth.codingdemo.co.uk)
-  - [storybook](https://stories.angular-swa-auth.codingdemo.co.uk)
-- Full working demo:  
-  - [deployed site](https://angular-swa-auth.codingdemo.co.uk)
-  - [source code](https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-demo)
-- Demo app that does NOT use a library to implement simple authentication: 
-  - [deployed site](https://angular-swa-auth-nolib.codingdemo.co.uk)
-  - [source code](https://github.com/christianacca/static-web-apps-auth/tree/master/apps/angular-swa-auth-nolib)
-  
+- [Library source code](https://github.com/christianacca/static-web-apps-auth/tree/master/libs/public-angular-swa-auth)
+- Library documentation:
+  - [reference](https://docs.public-angular-swa-auth.codingdemo.co.uk)
+  - [storybook](https://stories.public-angular-swa-auth.codingdemo.co.uk)
+- Full working demo:
+  - [deployed site](https://public-angular-swa-auth.codingdemo.co.uk)
+  - [source code](https://github.com/christianacca/static-web-apps-auth/tree/master/apps/public-angular-swa-auth-demo)
+- Demo app that does NOT use a library to implement simple authentication:
+  - [deployed site](https://public-angular-swa-auth-nolib.codingdemo.co.uk)
+  - [source code](https://github.com/christianacca/static-web-apps-auth/tree/master/apps/public-angular-swa-auth-nolib)

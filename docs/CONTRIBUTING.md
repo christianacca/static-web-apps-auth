@@ -58,9 +58,9 @@ Notes:
 
 ```bash
 # serve
-npx nx serve-compodoc angular-swa-auth
+npx nx compodoc public-angular-swa-auth --serve
 # serve and reload browser when source code changes
-npx nx watch-compodoc angular-swa-auth
+npx nx compodoc public-angular-swa-auth --watch
 ```
 
 Navigate to <http://localhost:8080/>
@@ -68,7 +68,7 @@ Navigate to <http://localhost:8080/>
 ## Serve storybook site
 
 ```bash
-npx nx storybook angular-swa-auth
+npx nx storybook public-angular-swa-auth
 ```
 
 ## Lint code changes
@@ -107,8 +107,8 @@ Ordinarily you would supply them like so:  `npx nx affected:e2e --uncomitted --h
 3. If there is a change to a ui element, serve storybook site to verify functionality. Modify stories as necessary
 4. Add/modify existing cypress test to cover the change being made
 5. Run linting to ensure code change confirms to project conventions
-6. Bump the version of the library in package.json for the library (eg: [package.json](libs/angular-swa-auth/package.json)); make sure to follow semver
-7. Add details of the changes ('Added', 'Fixes', 'Breaking Changes') to the library CHANGELOG.md (eg: [CHANGELOG.md](libs/angular-swa-auth/CHANGELOG.md))
+6. Bump the version of the library in package.json for the library (eg: [package.json](libs/public/angular-swa-auth/package.json)); make sure to follow semver
+7. Add details of the changes ('Added', 'Fixes', 'Breaking Changes') to the library CHANGELOG.md (eg: [CHANGELOG.md](libs/public/angular-swa-auth/CHANGELOG.md))
 8. Submit a PR to merge to master
 
 ### Changes to demo apps
@@ -120,7 +120,7 @@ The following process should be used whenever creating a new page or substantial
    - See [add-library.md](add-library.md)
 2. Design phase: identify the components of the page (usually this is one container component for the page and 0..many presentation components)
 3. Start storybook app: `npx nx storybook {public|shared|app}-{library-name}`
-   - e.g. `npx nx storybook angular-swa-auth`
+   - e.g. `npx nx storybook public-angular-swa-auth`
 4. Create presentation components. Work bottom up from the smallest/nested unit of the page. For each component:
    1. create a new storybook file - this will act as the container for the presentation component whilst developing
    2. create the initial storybook for the component. For this initial storybook follow conventions so that the story appears in the storybook UI:

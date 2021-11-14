@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@christianacca/angular-swa-auth": ["libs/angular-swa-auth/src/index.ts"],
+      "@christianacca/angular-swa-auth": ["libs/public/angular-swa-auth/src/index.ts"],
       "@christianacca/angular-swa-auth-demo/core": ["libs/angular-swa-auth-demo/core/src/index.ts"],
       "@christianacca/angular-swa-auth-demo/product-admin": ["libs/angular-swa-auth-demo/product-admin/src/index.ts"],
       "@christianacca/angular-swa-auth-demo/shell": ["libs/angular-swa-auth-demo/shell/src/index.ts"],
