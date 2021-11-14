@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'angular-swa-auth',
-  preset: '../../jest.preset.js',
+  displayName: 'public-angular-swa-auth',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$'
     }
   },
-  coverageDirectory: '../../coverage/libs/angular-swa-auth',
+  coverageDirectory: '../../../coverage/libs/public/angular-swa-auth',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular'
   },

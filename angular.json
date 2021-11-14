@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "angular-swa-auth": "libs/angular-swa-auth",
     "angular-swa-auth-demo": "apps/angular-swa-auth-demo",
     "angular-swa-auth-demo-core": "libs/angular-swa-auth-demo/core",
     "angular-swa-auth-demo-e2e": "apps/angular-swa-auth-demo-e2e",
@@ -11,6 +10,7 @@
     "angular-swa-auth-demo-user-profile": "libs/angular-swa-auth-demo/user-profile",
     "angular-swa-auth-nolib": "apps/angular-swa-auth-nolib",
     "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e",
+    "public-angular-swa-auth": "libs/public/angular-swa-auth",
     "shared-common-ui": "libs/shared/common-ui",
     "shared-products": "libs/shared/products",
     "shared-shared-types": "libs/shared/shared-types"

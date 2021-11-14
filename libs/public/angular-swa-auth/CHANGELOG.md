@@ -9,7 +9,6 @@ All notable changes to this project will be documented in this file.
 - `AuthEventPersistenceService`: allow `AuthEvent` server payload to be customized
 - Make `flattenAllowedRoles` public
 
-
 ## [2.1.0] - 2021-09-21
 
 ### Added
@@ -21,7 +20,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - `SwaRoleCheckDirective`: `allowedRoles` input property supports nested array's of role names
-- `SwaRoleGuard`: 
+- `SwaRoleGuard`:
   - `allowedRoles` route data configuration supports nested array's of role names
   - new `canLoad` implementation for use with lazy loaded routes
 - `AuthGuard`: new `canLoad` implementation for use with lazy loaded routes
@@ -38,7 +37,7 @@ This is to better express intention that this observable returns the authenticat
 
 #### `AuthService.hasSomeRoles$` observable completes
 
-`hasSomeRoles$` now returns an `Observable` that emits a  completion notification immediately after computing its result. The implication is that consumers 
+`hasSomeRoles$` now returns an `Observable` that emits a completion notification immediately after computing its result. The implication is that consumers
 no longer need to unsubscribe from it.
 
 #### `SwaRoleGuard` triggers sign in flow
@@ -56,7 +55,7 @@ no longer need to unsubscribe from it.
 ### Added
 
 - `SwaRoleGuard`: add to a route to perform an authorization check using roles defined in Status Web App
-- `SwaRoleCheckDirective`: Structural directive to perform an authorization check using roles defined in Status Web App 
+- `SwaRoleCheckDirective`: Structural directive to perform an authorization check using roles defined in Status Web App
 
 ## [1.0.0] - 2021-08-26
 

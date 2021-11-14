@@ -24,8 +24,8 @@ The demo apps and documentation sites are available here:
 1. Install [nodejs](https://nodejs.org/en/) (LTS version)
 2. Clone the source code: `git clone https://github.com/christianacca/static-web-apps-auth`
 3. Trust the dev HTTPS certificate (see note below on security caveats):
-  - windows (easy): double click batch file ./tools/dev-scripts/trust-cert.bat and accept any prompts
-  - all OSes (almost as easy): From powershell, run ./tools/dev-scripts/trust-cert.ps1
+  - windows: double click batch file ./tools/dev-scripts/trust-cert.bat and accept any prompts
+  - mac/linux: From powershell, run ./tools/dev-scripts/trust-cert.ps1
 4. Install dependencies: `npm install`
 5. `npm run start:demo` then browse to <https://localhost:4820/>
 

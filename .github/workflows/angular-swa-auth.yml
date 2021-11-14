@@ -60,13 +60,13 @@ jobs:
         id: check_library_affected
         uses: andstor/file-existence-action@v1
         with:
-          files: "./dist/libs/angular-swa-auth/package.json"
+          files: "./dist/libs/public/angular-swa-auth/package.json"
       - name: publish npm package
         if: github.ref == 'refs/heads/master' && steps.check_library_affected.outputs.files_exists == 'true'
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: ./dist/libs/angular-swa-auth/package.json
+          package: ./dist/libs/public/angular-swa-auth/package.json
           access: public
           check-version: true
       - name: publish npm package (dry run)
@@ -74,7 +74,7 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: ./dist/libs/angular-swa-auth/package.json
+          package: ./dist/libs/public/angular-swa-auth/package.json
           access: public
           check-version: false
           dry-run: true
@@ -128,7 +128,7 @@ jobs:
         id: check_storybook_affected
         uses: andstor/file-existence-action@v1
         with:
-          files: "./dist/storybook/angular-swa-auth/index.html"
+          files: "./dist/storybook/public-angular-swa-auth/index.html"
       - name: Deploy storybook app
         if: steps.check_storybook_affected.outputs.files_exists == 'true'
         uses: Azure/static-web-apps-deploy@v1
@@ -138,7 +138,7 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/dist/storybook/angular-swa-auth" # App source code path
+          app_location: "/dist/storybook/public-angular-swa-auth" # App source code path
           api_location: "" # Api source code path - optional
           skip_app_build: true
           output_location: "" # Built app content directory - optional
@@ -149,7 +149,7 @@ jobs:
         id: check_docs_affected
         uses: andstor/file-existence-action@v1
         with:
-          files: "./dist/compodoc/angular-swa-auth/index.html"
+          files: "./dist/compodoc/public-angular-swa-auth/index.html"
       - name: Deploy documentation app
         if: steps.check_docs_affected.outputs.files_exists == 'true'
         uses: Azure/static-web-apps-deploy@v1
@@ -159,7 +159,7 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/dist/compodoc/angular-swa-auth" # App source code path
+          app_location: "/dist/compodoc/public-angular-swa-auth" # App source code path
           api_location: "" # Api source code path - optional
           skip_app_build: true
           output_location: "" # Built app content directory - optional
