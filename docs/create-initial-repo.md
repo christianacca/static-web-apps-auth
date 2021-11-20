@@ -56,7 +56,8 @@ When following the steps below to create _your own repo_:
    }
    ```
    
-   To confirm setup run `npm start`. Browse to <http://localhost:4200> you should see the generated angular app site
+   To confirm setup run `npm start`. Browse to <http://localhost:4200> you should see the generated angular app site 
+   (_Note: you might have to do this an incognito browser to avoid browser grumbling about lack of SSL_)
 
    **IMPORTANT**: if you get the error: `Cannot find module 'webpack'`, then:
 
@@ -67,6 +68,8 @@ When following the steps below to create _your own repo_:
 3. Create the publishable library
 
    Use nx tools to generate the library:
+   
+   (_**IMPORTANT**: If not already done so stop the angular dev server started above_)
    
    ```bash
    npx ng g @nrwl/angular:lib angular-swa-auth --directory=public --prefix swa --tags=scope:public,type:util,framework:angular,status=published,bundle:main --style scss --simple-module-name --publishable --importPath=@christianacca/angular-swa-auth
@@ -83,6 +86,7 @@ When following the steps below to create _your own repo_:
    ```
 
    To confirm setup run: `npx nx storybook public-angular-swa-auth`. Browse to <http://localhost:4400> you should see the generated storybook site
+   (_Note: you might have to do this an incognito browser to avoid browser grumbling about lack of SSL_)
 
 5. Add library documentation using [compodoc](https://compodoc.app/)
 
@@ -96,19 +100,9 @@ When following the steps below to create _your own repo_:
    ```
 
    To confirm setup run: `npx nx compodoc public-angular-swa-auth --serve`. Browse to <http://localhost:8080> you should see the generated docs site
-
-6. Convert to per-project configuration
-
-   **IMPORTANT**: This step is only required if the tooling created a workspace using the v1 format
-
-   Open angular.json and change as necessary: `"version": 1` to `"version": 2`, then run:
+   (_Note: you might have to do this an incognito browser to avoid browser grumbling about lack of SSL_)
    
-   ```bash
-   npx nx format
-   npx nx g @nrwl/workspace:convert-to-nx-project --all
-   ```
-   
-7. Add Azure functions as your api
+6. Add Azure functions as your api
 
    Use VSCode tooling to generate the app:
 
@@ -127,7 +121,7 @@ When following the steps below to create _your own repo_:
    npm install azure-functions-core-tools -D  # <- make sure current working directory is at the root of the repo
    ```
 
-   To confirm setup run: `npm start`. Browse to <http://localhost:7071/api/HttpTrigger1> you should see a response from the functions app
+   To confirm setup run: `cd ./api && npm i && npm start`. Browse to <http://localhost:7071/api/HttpTrigger1> you should see a response from the functions app
 
 ## Setup tooling for local dev
 
@@ -175,22 +169,23 @@ When following the steps below to create _your own repo_:
    Add command to serve angular app and swa emulator:
 
    ```bash
-   npx nx g @nrwl/workspace:run-commands serve-swa --project angular-swa-auth-demo --command "swa start http://localhost:4200 --run 'npm start' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
+   npx nx g @nrwl/workspace:run-commands serve-swa --project angular-swa-auth-demo --command "swa start http://localhost:4200 --run 'npx nx serve angular-swa-auth-demo' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
    ```
 
    Add convenience npm script to run api, angular app and swa emulator:
 
    ```bash
    npm set-script start:api "cd ./api && npm start"
+   npm set-script start:ng "ng serve"
    npm set-script start:swa "nx serve-swa"
-   npm set-script start:demo "npm-run-all --parallel start:api start:swa"
+   npm set-script start "npm-run-all --parallel start:api start:swa"
    ```
    
    Note: `set-script` requires npm v7 or above
 
    To confirm setup:
    
-   - `npm run start:demo`
+   - `npm start`
    - Browse to <https://localhost:4080> you should see the generated angular app site
    - Browse to <https://localhost:4280/.auth/login/github> you should see an emulated login page
    - Browse to <https://localhost:4080/api/HttpTrigger1> you should see a response from the functions app
