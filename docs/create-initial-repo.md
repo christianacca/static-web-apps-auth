@@ -169,7 +169,7 @@ When following the steps below to create _your own repo_:
    Add command to serve angular app and swa emulator:
 
    ```bash
-   npx nx g @nrwl/workspace:run-commands serve-swa --project angular-swa-auth-demo --command "swa start http://localhost:4200 --run 'npx nx serve angular-swa-auth-demo' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
+   npx nx g @nrwl/workspace:run-commands serve-swa --project angular-swa-auth-demo --command "swa start http://localhost:4200 --run 'npx nx serve angular-swa-auth-demo' --api-location http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-demo/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
    ```
 
    Add convenience npm script to run api, angular app and swa emulator:

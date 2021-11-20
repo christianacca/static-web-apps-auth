@@ -71,7 +71,7 @@
     "@angular/cli": "12.2.5",
     "@angular/compiler-cli": "12.2.5",
     "@angular/language-service": "12.2.5",
-    "@azure/static-web-apps-cli": "^0.7.2",
+    "@azure/static-web-apps-cli": "^0.8.1",
     "@compodoc/compodoc": "^1.1.15",
     "@nrwl/cli": "13.1.4",
     "@nrwl/cypress": "13.1.4",
