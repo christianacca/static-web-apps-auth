@@ -27,7 +27,7 @@ The demo apps and documentation sites are available here:
   - windows: double click batch file ./tools/dev-scripts/trust-cert.bat and accept any prompts
   - mac/linux: From powershell, run ./tools/dev-scripts/trust-cert.ps1
 4. Install dependencies: `npm install`
-5. `npm run start:demo` then browse to <https://localhost:4820/>
+5. `npm start` then browse to <https://localhost:4820/>
 
 ### Security caveats when trusting the dev cert
 

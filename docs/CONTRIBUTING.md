@@ -4,10 +4,10 @@
 2. Install tooling required by your IDE
   - VSC:
     - [recommended extensions](.vscode/extensions.json)
-    - [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools#installing)
+    - [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools#installing) (note: project tested with v3)
   - Rider:
     - [Azure Toolkit for Rider](https://plugins.jetbrains.com/plugin/11220-azure-toolkit-for-rider)
-    - Azure Functions Core Tools (goto Preferences then Tools > Azure > Functions)
+    - Azure Functions Core Tools (goto Preferences then Tools > Azure > Functions) (note: project tested with v3)
     - Prettier plugin (enable option to format on save)
 3. Use the **Developer workflow** steps below whenever making contributions, and submit a PR for the change
 
@@ -20,7 +20,7 @@ Run `npx nx dep-graph --groupByFolder`, then select the button "Select All" to s
 ### Using command line
 
 ```bash
-npm run start:demo
+npm start
 ```
 
 Notes:
@@ -32,8 +32,12 @@ To run the "no-library" demo app:
 
 ```bash
 npm run start:api
-npm run start:swa angular-swa-auth-demo # <- in another terminal
+npm run start:swa angular-swa-auth-nolib # <- in another terminal
 ```
+
+Notes:
+* Navigate to <https://localhost:4820/>
+* The front-end or api will automatically reload if you change any of their source files
 
 ### Using VS Code
 

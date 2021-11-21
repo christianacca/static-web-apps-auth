@@ -76,7 +76,7 @@
       "options": {
         "commands": [
           {
-            "command": "swa start http://localhost:4200 --run 'npm start angular-swa-auth-nolib' --api http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-nolib/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
+            "command": "swa start http://localhost:4200 --run 'npx nx serve angular-swa-auth-nolib' --api-location http://localhost:7071 --swa-config-location ./apps/angular-swa-auth-nolib/dev --ssl-cert=./tools/certs/localhost.crt --ssl-key=./tools/certs/localhost.key --ssl"
           }
         ]
       }
@@ -89,7 +89,7 @@
             "command": "npm run build:api"
           },
           {
-            "command": "swa start http://localhost:4200 --run 'npm start angular-swa-auth-nolib' --api ./api --swa-config-location ./apps/angular-swa-auth-nolib/dev"
+            "command": "swa start http://localhost:4200 --run 'npx nx serve angular-swa-auth-nolib' --api-location ./api --swa-config-location ./apps/angular-swa-auth-nolib/dev"
           }
         ],
         "parallel": false
