@@ -1,7 +1,7 @@
 import { AuthEvent } from '@christianacca/angular-swa-auth';
 import { authenticatedUser } from '../../fixtures/authenticated-user';
 import { signupMarkerKey } from '../../fixtures/sut-constants';
-import { assertAuthEventSentByBeacon, stubSendBeacon } from '../../support/commands/auth-library';
+import { aliases, assertAuthEventSentByBeacon, stubSendBeacon } from '../../support/commands/auth-library';
 
 describe('signed up state', () => {
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('signed up state', () => {
     });
 
     // then...
-    cy.get('@sendBeaconStub').should('have.been.calledTwice');
+    cy.get(aliases.sendBeaconStub).should('have.been.calledTwice');
     assertAuthEventSentByBeacon(AuthEvent.login(authenticatedUser));
     assertAuthEventSentByBeacon(AuthEvent.signUp(authenticatedUser));
     cy.window().should(win => {

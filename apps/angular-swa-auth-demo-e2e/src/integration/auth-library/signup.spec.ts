@@ -1,6 +1,6 @@
 import { managedIdentityProviders } from '@christianacca/angular-swa-auth';
 import { signupMarkerKey } from '../../fixtures/sut-constants';
-import { stubSendBeacon } from '../../support/commands/auth-library';
+import { aliases, stubSendBeacon } from '../../support/commands/auth-library';
 import * as identityProviderSelectorPo from '../../support/pages/identity-provider-selector.po';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
 
@@ -17,7 +17,7 @@ describe('signup', () => {
   afterEach(() => {
     // signup event is sent only after a successful authentication; in this way we only send the auth event to the api
     // as an authenticated request that can be trusted by the server
-    cy.get('@sendBeaconStub').should('not.have.been.called');
+    cy.get(aliases.sendBeaconStub).should('not.have.been.called');
   });
 
   it('should set signing up marker', function () {

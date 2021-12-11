@@ -1,17 +1,22 @@
 import { AuthEvent } from '@christianacca/angular-swa-auth';
-import { authenticatedUser } from '../../fixtures/authenticated-user';
-import { assertAuthEventSentByBeacon, spyOnGetUser, stubSendBeacon } from '../../support/commands/auth-library';
+import { authenticatedUser as user } from '../../fixtures/authenticated-user';
+import {
+  aliases,
+  assertAuthEventSentByBeacon,
+  spyOnGetUser,
+  stubSendBeacon
+} from '../../support/commands/auth-library';
 
 describe('logged in state', () => {
   beforeEach(() => {
     spyOnGetUser();
 
-    cy.loginAs(authenticatedUser);
+    cy.loginAs(user);
   });
 
   afterEach(() => {
     // verify that multiple subscriptions to AuthService.currentUser$ only result in one call to the server
-    cy.get('@getUserSpy').should('have.been.calledOnce');
+    cy.get(aliases.getUserSpy).should('have.been.calledOnce');
   });
 
   it('initial application load', function () {
@@ -26,11 +31,11 @@ describe('logged in state', () => {
 
     // user details returned from server
     cy.findByTestId('user').within(() => {
-      cy.findByText(authenticatedUser.identityProvider);
-      cy.findByText(authenticatedUser.userDetails);
+      cy.findByText(user.identityProvider);
+      cy.findByText(user.userDetails);
     });
 
-    cy.get('@sendBeaconStub').should('have.been.calledOnce');
-    assertAuthEventSentByBeacon(AuthEvent.login(authenticatedUser));
+    cy.get(aliases.sendBeaconStub).should('have.been.calledOnce');
+    assertAuthEventSentByBeacon(AuthEvent.login(user));
   });
 });
