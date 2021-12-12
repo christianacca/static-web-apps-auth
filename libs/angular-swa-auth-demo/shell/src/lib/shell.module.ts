@@ -5,32 +5,22 @@ import { SwaAuthModule } from '@christianacca/angular-swa-auth';
 import { HeaderBarBrandComponent, HeaderBarComponent, IdpSelectorModalComponent, NavComponent } from './components';
 import {
   AboutComponent,
+  AdminLandingComponent,
   CONTAINERS,
   NotFoundComponent,
-  UnauthorizedComponent,
-  AdminLandingComponent
+  ShellComponent,
+  UnauthorizedComponent
 } from './containers';
 
 const PUBLIC_COMPONENTS = [IdpSelectorModalComponent, HeaderBarComponent, NavComponent];
 const PRIVATE_COMPONENTS = [HeaderBarBrandComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: 'unauthorized',
-        component: UnauthorizedComponent
-      },
-      { path: 'about', component: AboutComponent },
-      { path: 'unauthorized', component: UnauthorizedComponent }
-    ]),
-    SwaAuthModule
-  ],
+  imports: [CommonModule, SwaAuthModule, RouterModule],
   declarations: [PRIVATE_COMPONENTS, PUBLIC_COMPONENTS, CONTAINERS],
   exports: [PUBLIC_COMPONENTS]
 })
 export class ShellModule {}
 
 // make public (ie available outside of this library)...
-export { AdminLandingComponent, NotFoundComponent };
+export { AboutComponent, AdminLandingComponent, NotFoundComponent, ShellComponent, UnauthorizedComponent };

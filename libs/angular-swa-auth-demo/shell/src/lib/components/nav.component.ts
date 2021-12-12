@@ -16,13 +16,17 @@ import { Observable } from 'rxjs';
         </li>
         <li *swaRoleCheck="let canOffer of routePermissions.offers; let maybeCanOffer = isPlaceholder">
           <a routerLink="/offers" routerLinkActive="is-active">
-            <progress *ngIf="maybeCanOffer" class="progress is-primary is-medium" max="100">15%</progress>
+            <progress *ngIf="maybeCanOffer" class="progress is-primary is-medium" max="100" title="Offers">
+              15%
+            </progress>
             <span *ngIf="!maybeCanOffer" [ngClass]="!canOffer ? 'has-text-grey-lighter' : ''">Offers</span>
           </a>
         </li>
         <li *swaRoleCheck="let canAdmin of routePermissions.adminArea; let maybeCanAdmin = isPlaceholder">
           <a routerLink="/admin-area/landing" routerLinkActive="is-active">
-            <progress *ngIf="maybeCanAdmin" class="progress is-primary is-medium" max="100">15%</progress>
+            <progress *ngIf="maybeCanAdmin" class="progress is-primary is-medium" max="100" title="Admin Area">
+              15%
+            </progress>
             <span *ngIf="!maybeCanAdmin" [ngClass]="!canAdmin ? 'has-text-grey-lighter' : ''">Admin Area</span>
           </a>
         </li>

@@ -1,5 +1,5 @@
 import { managedIdentityProviders } from '@christianacca/angular-swa-auth';
-import { assertRedirectedToIdp, spyOnGetUser, stubSendBeacon } from '../../support/commands/auth-library';
+import { aliases, assertRedirectedToIdp, spyOnGetUser, stubSendBeacon } from '../../support/commands/auth-library';
 import * as identityProviderSelectorPo from '../../support/pages/identity-provider-selector.po';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
 
@@ -26,9 +26,9 @@ describe('login', () => {
 
   afterEach(() => {
     // verify that multiple subscriptions to AuthService.currentUser$ only result in one call to the server
-    cy.get('@getUserSpy').should('have.been.calledOnce');
+    cy.get(aliases.getUserSpy).should('have.been.calledOnce');
     // verify that before a successful login no auth events will be sent to api
-    cy.get('@sendBeaconStub').should('not.have.been.called');
+    cy.get(aliases.sendBeaconStub).should('not.have.been.called');
   });
 
   context('identity provider not pre-selected', () => {
