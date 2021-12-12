@@ -1,22 +1,15 @@
 import { AuthEvent } from '@christianacca/angular-swa-auth';
 import { authenticatedUser as user } from '../../fixtures/authenticated-user';
-import {
-  aliases,
-  assertAuthEventSentByBeacon,
-  spyOnGetUser,
-  stubSendBeacon
-} from '../../support/commands/auth-library';
+import { aliases, assertAuthEventSentByBeacon, stubSendBeacon } from '../../support/commands/auth-library';
 
 describe('logged in state', () => {
   beforeEach(() => {
-    spyOnGetUser();
-
-    cy.loginAs(user);
+    cy.loggedInAs(user);
   });
 
   afterEach(() => {
     // verify that multiple subscriptions to AuthService.currentUser$ only result in one call to the server
-    cy.get(aliases.getUserSpy).should('have.been.calledOnce');
+    cy.get(aliases.getUserStub).should('have.been.calledOnce');
   });
 
   it('initial application load', function () {

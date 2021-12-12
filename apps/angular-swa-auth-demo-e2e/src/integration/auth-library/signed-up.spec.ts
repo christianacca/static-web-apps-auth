@@ -6,7 +6,7 @@ import { aliases, assertAuthEventSentByBeacon, stubSendBeacon } from '../../supp
 describe('signed up state', () => {
   beforeEach(() => {
     // given
-    cy.loginAs(authenticatedUser);
+    cy.loggedInAs(authenticatedUser);
     cy.window().then(win => {
       win.sessionStorage.setItem(signupMarkerKey, '1');
     });

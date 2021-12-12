@@ -1,4 +1,5 @@
 import { ClientPrincipal } from '@christianacca/angular-swa-auth';
+import { authenticatedUser } from '../../../fixtures/authenticated-user';
 
 const aliasKeys = {
   getUserSpy: 'getUserSpy',
@@ -16,7 +17,7 @@ const getUserUrl = '.auth/me';
 export const spyOnGetUser = () => cy.intercept(getUserUrl, cy.spy().as(aliasKeys.getUserSpy));
 
 type GetUserOptions = {
-  user?: ClientPrincipal;
+  user?: ClientPrincipal | null;
   delay?: number;
 };
 export const stubGetUser = ({ user, delay }: GetUserOptions = {}) => {
@@ -25,11 +26,38 @@ export const stubGetUser = ({ user, delay }: GetUserOptions = {}) => {
     .as(aliasKeys.getUserStub)
     .callsFake(req =>
       req.reply({
-        body: { clientPrincipal: user === undefined ? null : user },
+        body: { clientPrincipal: user === undefined ? authenticatedUser : user },
         delay
       })
     );
   return cy.intercept(getUserUrl, stub).as(aliasKeys.getUserRequest);
+};
+
+export const loggedIn = stubGetUser;
+export const loggedOut = () => stubGetUser({ user: null });
+
+export const loggedInAs = (userInfo: Partial<ClientPrincipal>) =>
+  stubGetUser({ user: { ...authenticatedUser, ...userInfo } });
+
+const fakeLogoutRedirect = () =>
+  cy.intercept(/.auth\/logout/, req => {
+    const clientSidePath = req.query.post_logout_redirect_uri;
+    const url = clientSidePath ? `${Cypress.config().baseUrl}${clientSidePath}` : `${Cypress.config().baseUrl}`;
+    req.redirect(url);
+  });
+
+const fakePurgeRedirect = () =>
+  cy.intercept('.auth/purge/*', req => {
+    req.redirect(`${Cypress.config().baseUrl}`);
+  });
+
+const fakeLoginHtmlPage = () => cy.intercept(`.auth/login/**`, { fixture: 'login.html' });
+
+export const fakeStaticWebAppAuth = () => {
+  stubGetUser({ user: null });
+  fakeLoginHtmlPage();
+  fakeLogoutRedirect();
+  fakePurgeRedirect();
 };
 
 interface SendBeaconStubOptions {
