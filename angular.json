@@ -11,6 +11,7 @@
     "angular-swa-auth-nolib": "apps/angular-swa-auth-nolib",
     "angular-swa-auth-nolib-e2e": "apps/angular-swa-auth-nolib-e2e",
     "public-angular-swa-auth": "libs/public/angular-swa-auth",
+    "public-angular-swa-auth-e2e-util": "libs/public/angular-swa-auth-e2e-util",
     "shared-common-ui": "libs/shared/common-ui",
     "shared-products": "libs/shared/products",
     "shared-shared-types": "libs/shared/shared-types"

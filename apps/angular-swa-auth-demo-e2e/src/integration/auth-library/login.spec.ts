@@ -1,5 +1,5 @@
 import { managedIdentityProviders } from '@christianacca/angular-swa-auth';
-import { aliases, assertRedirectedToIdp, stubSendBeacon } from '../../support/commands/auth-library';
+import { aliases, assertRedirectedToIdp, stubSendBeacon } from '@christianacca/angular-swa-auth-e2e-util';
 import * as identityProviderSelectorPo from '../../support/pages/identity-provider-selector.po';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
 

@@ -91,15 +91,12 @@ npx nx affected:build --uncommitted
 
 ```bash
 # run in watch mode
-npx nx e2e angular-swa-auth-demo-e2e --opts='--watch'
-npx nx e2e angular-swa-auth-nolib-e2e --opts='--watch'
+npx nx e2e angular-swa-auth-demo-e2e --watch
+npx nx e2e angular-swa-auth-nolib-e2e --watch
 
 # run all affected by a change
-npx nx affected:e2e --uncomitted --opts="--headless"
+npx nx affected:e2e --uncomitted --headless
 ```
-
-Note: `--opts='...'` is a non-standard way of supplying options to the e2e command. 
-Ordinarily you would supply them like so:  `npx nx affected:e2e --uncomitted --headless`
 
 ## Developer workflow
 

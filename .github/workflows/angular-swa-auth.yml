@@ -55,13 +55,13 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
-      # Publish library...
+      # Publish angular-swa-auth library...
       - name: "Check library affected"
         id: check_library_affected
         uses: andstor/file-existence-action@v1
         with:
           files: "./dist/libs/public/angular-swa-auth/package.json"
-      - name: publish npm package
+      - name: publish angular-swa-auth npm package
         if: github.ref == 'refs/heads/master' && steps.check_library_affected.outputs.files_exists == 'true'
         uses: JS-DevTools/npm-publish@v1
         with:
@@ -69,12 +69,36 @@ jobs:
           package: ./dist/libs/public/angular-swa-auth/package.json
           access: public
           check-version: true
-      - name: publish npm package (dry run)
+      - name: publish angular-swa-auth npm package (dry run)
         if: github.ref != 'refs/heads/master' && steps.check_library_affected.outputs.files_exists == 'true'
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./dist/libs/public/angular-swa-auth/package.json
+          access: public
+          check-version: false
+          dry-run: true
+
+      # Publish angular-swa-auth-e2e-util library...
+      - name: "Check e2e library affected"
+        id: check_e2e_library_affected
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "./dist/libs/public/angular-swa-auth-e2e-util/package.json"
+      - name: publish angular-swa-auth-e2e-util npm package
+        if: github.ref == 'refs/heads/master' && steps.check_e2e_library_affected.outputs.files_exists == 'true'
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./dist/libs/public/angular-swa-auth-e2e-util/package.json
+          access: public
+          check-version: true
+      - name: publish angular-swa-auth-e2e-util npm package (dry run)
+        if: github.ref != 'refs/heads/master' && steps.check_e2e_library_affected.outputs.files_exists == 'true'
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./dist/libs/public/angular-swa-auth-e2e-util/package.json
           access: public
           check-version: false
           dry-run: true

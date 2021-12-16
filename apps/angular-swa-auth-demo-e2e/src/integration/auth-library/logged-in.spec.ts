@@ -1,6 +1,6 @@
 import { AuthEvent } from '@christianacca/angular-swa-auth';
 import { authenticatedUser as user } from '../../fixtures/authenticated-user';
-import { aliases, assertAuthEventSentByBeacon, stubSendBeacon } from '../../support/commands/auth-library';
+import { aliases, assertAuthEventSentByBeacon, stubSendBeacon } from '@christianacca/angular-swa-auth-e2e-util';
 
 describe('logged in state', () => {
   beforeEach(() => {

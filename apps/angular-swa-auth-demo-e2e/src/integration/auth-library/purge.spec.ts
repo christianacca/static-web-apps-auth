@@ -1,6 +1,6 @@
 import { AuthEvent } from '@christianacca/angular-swa-auth';
 import { authenticatedUser as user } from '../../fixtures/authenticated-user';
-import { assertAuthEventSentByBeacon, stubSendBeacon } from '../../support/commands/auth-library';
+import { assertAuthEventSentByBeacon, stubSendBeacon } from '@christianacca/angular-swa-auth-e2e-util';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
 
 describe('purge', () => {

@@ -1,7 +1,7 @@
 import { AuthEvent } from '@christianacca/angular-swa-auth';
 import { authenticatedUser } from '../../fixtures/authenticated-user';
 import { signupMarkerKey } from '../../fixtures/sut-constants';
-import { aliases, assertAuthEventSentByBeacon, stubSendBeacon } from '../../support/commands/auth-library';
+import { aliases, assertAuthEventSentByBeacon, stubSendBeacon } from '@christianacca/angular-swa-auth-e2e-util';
 
 describe('signed up state', () => {
   beforeEach(() => {

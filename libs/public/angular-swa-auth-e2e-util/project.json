@@ -1,0 +1,33 @@
+{
+  "projectType": "library",
+  "root": "libs/public/angular-swa-auth-e2e-util",
+  "sourceRoot": "libs/public/angular-swa-auth-e2e-util/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/public/angular-swa-auth-e2e-util"],
+      "options": {
+        "project": "libs/public/angular-swa-auth-e2e-util/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/public/angular-swa-auth-e2e-util/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/public/angular-swa-auth-e2e-util/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/public/angular-swa-auth-e2e-util/src/**/*.ts",
+          "libs/public/angular-swa-auth-e2e-util/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:public", "type:e2e-util", "framework:angular"]
+}

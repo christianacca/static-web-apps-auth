@@ -1,5 +1,5 @@
 import { ClientPrincipal, managedIdentityProviders } from '@christianacca/angular-swa-auth';
-import { aliases, assertRedirectedToIdp } from '../support/commands/auth-library';
+import { aliases, assertRedirectedToIdp } from '@christianacca/angular-swa-auth-e2e-util';
 import * as aboutPo from '../support/pages/about.po';
 import * as identityProviderSelectorPo from '../support/pages/identity-provider-selector.po';
 import { authenticatedUser } from './authenticated-user';
@@ -61,7 +61,6 @@ export function AuthSpecSuitFactory({
     });
 
     context('not logged in, deep linking to a guarded route', () => {
-
       it('should prompt user to select identity provider', () => {
         // when
         cy.visit(targetUrl);

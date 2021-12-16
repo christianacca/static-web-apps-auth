@@ -43,6 +43,10 @@
               {
                 "sourceTag": "scope:angular-swa-auth-nolib",
                 "onlyDependOnLibsWithTags": ["scope:angular-swa-auth-nolib", "scope:shared", "scope:public"]
+              },
+              {
+                "sourceTag": "type:e2e",
+                "onlyDependOnLibsWithTags": ["type:e2e-util", "type:util"]
               }
             ]
           }

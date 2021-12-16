@@ -9,21 +9,25 @@
 // ***********************************************
 
 import '@testing-library/cypress/add-commands';
-import { login } from './commands';
+import { loggedIn, loggedInAs, loggedOut } from '@christianacca/angular-swa-auth-e2e-util';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
-      login: typeof login;
+      loggedIn: typeof loggedIn;
+      loggedInAs: typeof loggedInAs;
+      loggedOut: typeof loggedOut;
     }
   }
 }
 
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', login);
+Cypress.Commands.add('loggedIn', loggedIn);
+Cypress.Commands.add('loggedInAs', loggedInAs);
+Cypress.Commands.add('loggedOut', loggedOut);
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })

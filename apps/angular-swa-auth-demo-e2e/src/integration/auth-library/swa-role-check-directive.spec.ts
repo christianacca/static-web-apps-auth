@@ -1,4 +1,4 @@
-import { aliases, stubGetUser } from '../../support/commands/auth-library';
+import { aliases, stubGetUser } from '@christianacca/angular-swa-auth-e2e-util';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
 
 describe('SwaRoleCheckDirective', () => {

@@ -11,7 +11,7 @@
 import '@testing-library/cypress/add-commands';
 import { ByRoleOptions } from '@testing-library/dom/types/queries';
 import { findByRole } from './commands';
-import { loggedIn, loggedInAs, loggedOut } from './commands/auth-library';
+import { loggedIn, loggedInAs, loggedOut } from '@christianacca/angular-swa-auth-e2e-util';
 import Chainable = Cypress.Chainable;
 
 type FindByRoleType = (options: ByRoleOptions | string) => Chainable<JQuery<Element>>;

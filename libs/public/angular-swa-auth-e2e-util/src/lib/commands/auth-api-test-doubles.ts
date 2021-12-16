@@ -1,5 +1,5 @@
 import { ClientPrincipal } from '@christianacca/angular-swa-auth';
-import { authenticatedUser } from '../../../fixtures/authenticated-user';
+import { authenticatedUser } from '../fixtures/authenticated-user';
 
 const aliasKeys = {
   getUserSpy: 'getUserSpy',
@@ -51,7 +51,21 @@ const fakePurgeRedirect = () =>
     req.redirect(`${Cypress.config().baseUrl}`);
   });
 
-const fakeLoginHtmlPage = () => cy.intercept(`.auth/login/**`, { fixture: 'login.html' });
+const fakeLoginHtmlPage = () =>
+  cy.intercept(`.auth/login/**`, {
+    body: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake Page</title>
+</head>
+<body>
+  <h1>Fake login page!</h1>
+</body>
+</html>
+`
+  });
 
 export const fakeStaticWebAppAuth = () => {
   stubGetUser({ user: null });

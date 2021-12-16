@@ -1,7 +1,7 @@
 import { AllowedRole, flattenAllowedRoles } from '@christianacca/angular-swa-auth';
 import { RoutePermissions } from '@christianacca/angular-swa-auth-demo/core';
 import { AuthRoutingSpecParameters, AuthSpecSuitFactory } from '../../fixtures/auth-spec-factory';
-import { assertRoutedToUnauthorized } from '../../support/commands/auth-library';
+import { assertRoutedToUnauthorized } from '@christianacca/angular-swa-auth-e2e-util';
 import * as aboutPo from '../../support/pages/about.po';
 import * as adminAreaLandingPo from '../../support/pages/admin-area-landing.po';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
