@@ -1,6 +1,6 @@
 import { managedIdentityProviders } from '@christianacca/angular-swa-auth';
 import { signupMarkerKey } from '../../fixtures/sut-constants';
-import { aliases, stubSendBeacon } from '../../support/commands/auth-library';
+import { aliases, stubSendBeacon } from '@christianacca/angular-swa-auth-e2e-util';
 import * as identityProviderSelectorPo from '../../support/pages/identity-provider-selector.po';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
 

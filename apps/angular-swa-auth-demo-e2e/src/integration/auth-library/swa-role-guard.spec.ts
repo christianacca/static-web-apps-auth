@@ -1,13 +1,13 @@
 import { AllowedRole, flattenAllowedRoles } from '@christianacca/angular-swa-auth';
 import { RoutePermissions } from '@christianacca/angular-swa-auth-demo/core';
 import { AuthRoutingSpecParameters, AuthSpecSuitFactory } from '../../fixtures/auth-spec-factory';
-import { assertRoutedToUnauthorized } from '../../support/commands/auth-library';
+import { assertRoutedToUnauthorized } from '@christianacca/angular-swa-auth-e2e-util';
 import * as aboutPo from '../../support/pages/about.po';
 import * as adminAreaLandingPo from '../../support/pages/admin-area-landing.po';
 import * as mainMenuPo from '../../support/pages/main-menu.po';
 import * as offersPo from '../../support/pages/offers.po';
 
-interface AuthzRoutingSpecParameters extends AuthRoutingSpecParameters {
+interface AuthzRoutingSpecParameters extends Omit<AuthRoutingSpecParameters, 'targetPageAssert'> {
   allowedRoles: AllowedRole[];
 }
 
@@ -20,7 +20,9 @@ describe('SwaRoleGuard', () => {
       contextLabel: 'lazy loaded route',
       loginWith: {
         userRoles: [flattenAllowedRoles(RoutePermissions.offers)[0]]
-      }
+      },
+      // make sure to wait for expected http calls to be finished before allowing test to complete...
+      targetPageAssert: () => cy.findByText('Strawberry(s)').should('exist')
     },
     {
       menuLink: mainMenuPo.adminAreaMenuItem,
@@ -28,7 +30,8 @@ describe('SwaRoleGuard', () => {
       contextLabel: 'non-lazy loaded route',
       loginWith: {
         userRoles: [flattenAllowedRoles(RoutePermissions.adminArea)[0]]
-      }
+      },
+      targetPageAssert: () => cy.heading('Product admin').should('exist')
     }
   ];
 
@@ -52,7 +55,7 @@ describe('SwaRoleGuard', () => {
   unauthorizedSpecParams.forEach(({ menuLink, targetUrl, contextLabel, allowedRoles }: AuthzRoutingSpecParameters) => {
     context(contextLabel, () => {
       // given
-      beforeEach(cy.login);
+      beforeEach(cy.loggedIn);
 
       context('logged in with insufficient permissions, routing to a guarded route', () => {
         it('should route to unauthorized page', () => {

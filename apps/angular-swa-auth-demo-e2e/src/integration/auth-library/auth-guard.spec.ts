@@ -8,12 +8,15 @@ describe('AuthGuard', () => {
     {
       menuLink: mainMenuPo.productsMenuItem,
       targetUrl: productsPo.url,
-      contextLabel: 'lazy loaded route'
+      contextLabel: 'lazy loaded route',
+      // make sure to wait for expected http calls to be finished before allowing test to complete...
+      targetPageAssert: () => cy.findByText('Strawberry(s)').should('exist')
     },
     {
       menuLink: mainMenuPo.userProfileMenuItem,
       targetUrl: userProfile.url,
-      contextLabel: 'non-lazy loaded route'
+      contextLabel: 'non-lazy loaded route',
+      targetPageAssert: () => cy.heading('user-profile works!').should('exist')
     }
   ];
 

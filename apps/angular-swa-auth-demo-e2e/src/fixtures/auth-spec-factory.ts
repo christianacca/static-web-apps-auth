@@ -1,5 +1,5 @@
 import { ClientPrincipal, managedIdentityProviders } from '@christianacca/angular-swa-auth';
-import { assertRedirectedToIdp } from '../support/commands/auth-library';
+import { aliases, assertRedirectedToIdp } from '@christianacca/angular-swa-auth-e2e-util';
 import * as aboutPo from '../support/pages/about.po';
 import * as identityProviderSelectorPo from '../support/pages/identity-provider-selector.po';
 import { authenticatedUser } from './authenticated-user';
@@ -9,13 +9,22 @@ export interface AuthRoutingSpecParameters {
   targetUrl: string;
   contextLabel: string;
   loginWith?: Partial<ClientPrincipal>;
+  targetPageAssert: () => void;
 }
 
-export function AuthSpecSuitFactory({ menuLink, targetUrl, contextLabel, loginWith }: AuthRoutingSpecParameters) {
-  context(contextLabel, () => {
+export function AuthSpecSuitFactory({
+  menuLink,
+  targetUrl,
+  contextLabel,
+  loginWith,
+  targetPageAssert
+}: AuthRoutingSpecParameters) {
+  context(contextLabel, function () {
     context('not logged in, routing to a guarded route', () => {
       // given
-      beforeEach(aboutPo.visit);
+      beforeEach(() => {
+        aboutPo.visit();
+      });
 
       it('should prompt user to select identity provider', () => {
         // when
@@ -89,26 +98,30 @@ export function AuthSpecSuitFactory({ menuLink, targetUrl, contextLabel, loginWi
     context('logged in', () => {
       // given
       beforeEach(() => {
-        cy.loginAs(loginWith ?? authenticatedUser);
+        cy.loggedInAs(loginWith ?? authenticatedUser);
       });
 
       it('routing to a guarded route, should allow navigation without prompting to login', () => {
         // given
         aboutPo.visit();
+        cy.wait(aliases.getUserRequest); // make sure app knows we're logged in
 
         // when
         menuLink().click();
 
         // then
         cy.url().should('have.string', targetUrl);
+        targetPageAssert();
       });
 
       it('deep linking to a guarded route, should allow navigation without prompting to login', () => {
         // when
         cy.visit(targetUrl);
+        cy.wait(aliases.getUserRequest); // make sure app knows we're logged in
 
         // then
         cy.url().should('have.string', targetUrl);
+        targetPageAssert();
       });
     });
   });

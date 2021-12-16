@@ -10,35 +10,40 @@
 
 import '@testing-library/cypress/add-commands';
 import { ByRoleOptions } from '@testing-library/dom/types/queries';
-import { button, link, loggedIn, loggedInAs } from './commands';
+import { findByRole } from './commands';
+import { loggedIn, loggedInAs, loggedOut } from '@christianacca/angular-swa-auth-e2e-util';
 import Chainable = Cypress.Chainable;
 
-type FindByRoleType = (options: ByRoleOptions) => Chainable<JQuery<Element>>;
+type FindByRoleType = (options: ByRoleOptions | string) => Chainable<JQuery<Element>>;
 
 declare global {
   namespace Cypress {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       button: FindByRoleType;
+      heading: FindByRoleType;
       link: FindByRoleType;
-      login: typeof loggedIn;
-      loginAs: typeof loggedInAs;
+      loggedIn: typeof loggedIn;
+      loggedInAs: typeof loggedInAs;
+      loggedOut: typeof loggedOut;
     }
   }
 }
 
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', loggedIn);
-Cypress.Commands.add('loginAs', loggedInAs);
+Cypress.Commands.add('loggedIn', loggedIn);
+Cypress.Commands.add('loggedInAs', loggedInAs);
+Cypress.Commands.add('loggedOut', loggedOut);
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
 //
 //
 // -- This is a dual command --
-Cypress.Commands.add('button', { prevSubject: 'optional' }, button);
-Cypress.Commands.add('link', { prevSubject: 'optional' }, link);
+Cypress.Commands.add('button', { prevSubject: 'optional' }, findByRole('button'));
+Cypress.Commands.add('heading', { prevSubject: 'optional' }, findByRole('heading'));
+Cypress.Commands.add('link', { prevSubject: 'optional' }, findByRole('link'));
 //
 //
 // -- This will overwrite an existing command --
