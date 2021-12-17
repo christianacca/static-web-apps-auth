@@ -7,6 +7,7 @@
     "sourceMap": true,
     "strict": false,
     "baseUrl": ".",
+    "typeRoots": [ "node_modules/@types" ],
     "paths": {
       "@christianacca/shared/shared-types": ["../libs/shared/shared-types/src/index.ts"]
     }

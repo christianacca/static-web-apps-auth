@@ -14,7 +14,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "parallel": true,
+        "parallel": 3,
         "cacheableOperations": ["build", "lint", "test", "e2e", "compodoc", "build-storybook"],
         "accessToken": "MTY3ZDI0ZjAtODg0Zi00NGQ3LWI3MmQtMzNhOTc2YmVkMjUxfHJlYWQtd3JpdGU="
       }
