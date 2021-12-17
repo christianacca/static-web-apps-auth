@@ -86,12 +86,9 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.errorMessage = undefined;
-    this.productService.getAll().subscribe(
-      () => {
-        /*.. do nothing for success.. */
-      },
-      () => (this.errorMessage = 'Unauthorized')
-    );
+    this.productService.getAll().subscribe({
+      error: () => (this.errorMessage = 'Unauthorized')
+    });
     this.clear();
   }
 

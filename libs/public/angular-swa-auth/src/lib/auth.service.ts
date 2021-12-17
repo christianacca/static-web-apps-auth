@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { defer, Observable, of, Subject } from 'rxjs';
-import { first, map, mergeMap, shareReplay, take, tap } from 'rxjs/operators';
+import { defer, firstValueFrom, Observable, of, Subject } from 'rxjs';
+import { map, mergeMap, shareReplay, take, tap } from 'rxjs/operators';
 import { AuthConfig } from './auth-config';
 import { AuthEvent } from './auth-event';
 import { ClientPrincipal } from './client-principal';
@@ -146,7 +146,7 @@ export class AuthService {
    * @see `login`
    */
   async ensureLoggedIn(targetUrl?: string): Promise<boolean> {
-    const user = await this.currentUser$.pipe(first()).toPromise();
+    const user = await firstValueFrom(this.currentUser$);
     if (user) {
       return true;
     }
@@ -176,7 +176,7 @@ export class AuthService {
    * @returns {boolean} false when the identity provider to login with is not selected, true otherwise
    */
   async login(options: LoginOptions = {}): Promise<boolean> {
-    const idp = options.identityProvider ?? (await this.selectIdentityProvider(options).toPromise());
+    const idp = options.identityProvider ?? (await firstValueFrom(this.selectIdentityProvider(options)));
 
     if (!idp) {
       return false;
@@ -199,7 +199,7 @@ export class AuthService {
    * @returns {boolean} false when the user is not already authenticated, true otherwise
    */
   async logout(redirectUrl?: string): Promise<boolean> {
-    const user = await this.currentUser$.toPromise();
+    const user = await firstValueFrom(this.currentUser$);
     if (!user) {
       return false;
     }
@@ -220,7 +220,7 @@ export class AuthService {
    * @returns {boolean} false when the user is authenticated, true otherwise
    */
   async purge(options: PurgeOptions = {}): Promise<boolean> {
-    const user = await this.currentUser$.toPromise();
+    const user = await firstValueFrom(this.currentUser$);
     if (!user) {
       return false;
     }
